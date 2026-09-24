@@ -1,0 +1,423 @@
+/* ==========================================
+   MEDICORE APPLICATION SHELL
+   ========================================== */
+
+:root {
+    --mc-primary: #0d6efd;
+    --mc-primary-dark: #0a58ca;
+    --mc-bg: #f5f7fb;
+    --mc-surface: #ffffff;
+    --mc-border: #e5e7eb;
+    --mc-text: #1f2937;
+    --mc-muted: #6b7280;
+    --mc-sidebar: #111827;
+    --mc-sidebar-text: #d1d5db;
+    --mc-sidebar-hover: #1f2937;
+    --mc-sidebar-active: #0d6efd;
+    --mc-sidebar-width: 260px;
+    --mc-header-height: 70px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--mc-bg);
+    color: var(--mc-text);
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+/* ==========================================
+   APP SHELL
+   ========================================== */
+
+.mc-app {
+    min-height: 100vh;
+}
+
+/* ==========================================
+   SIDEBAR
+   ========================================== */
+
+.mc-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--mc-sidebar-width);
+    height: 100vh;
+    background: var(--mc-sidebar);
+    color: var(--mc-sidebar-text);
+    display: flex;
+    flex-direction: column;
+    z-index: 1050;
+    transition: transform .25s ease, width .25s ease;
+}
+
+.mc-brand {
+    height: var(--mc-header-height);
+    padding: 0 22px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.mc-brand-name {
+    color: #fff;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.mc-brand-subtitle {
+    font-size: 10px;
+    color: #9ca3af;
+    margin-left: 9px;
+}
+
+/* ==========================================
+   HOSPITAL SELECTOR
+   ========================================== */
+
+.mc-hospital-selector {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.mc-hospital-button {
+    width: 100%;
+    border: 1px solid rgba(255,255,255,.1);
+    background: rgba(255,255,255,.04);
+    color: #fff;
+    border-radius: 10px;
+    padding: 11px;
+    text-align: left;
+}
+
+.mc-hospital-name {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.mc-hospital-type {
+    display: block;
+    color: #9ca3af;
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+
+.mc-sidebar-nav {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 12px;
+}
+
+.mc-nav-section {
+    margin-bottom: 18px;
+}
+
+.mc-nav-label {
+    padding: 0 11px;
+    margin-bottom: 7px;
+    color: #6b7280;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+.mc-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    width: 100%;
+    padding: 10px 11px;
+    margin-bottom: 3px;
+    border-radius: 8px;
+    color: var(--mc-sidebar-text);
+    text-decoration: none;
+    font-size: 13px;
+    transition: .15s ease;
+}
+
+.mc-nav-link:hover {
+    color: #fff;
+    background: var(--mc-sidebar-hover);
+}
+
+.mc-nav-link.active {
+    color: #fff;
+    background: var(--mc-sidebar-active);
+}
+
+.mc-nav-icon {
+    width: 18px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* ==========================================
+   SIDEBAR FOOTER
+   ========================================== */
+
+.mc-sidebar-footer {
+    padding: 14px;
+    border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.mc-user-mini {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.mc-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mc-primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.mc-user-info {
+    min-width: 0;
+}
+
+.mc-user-name {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.mc-user-role {
+    color: #9ca3af;
+    font-size: 10px;
+}
+
+/* ==========================================
+   MAIN AREA
+   ========================================== */
+
+.mc-main {
+    margin-left: var(--mc-sidebar-width);
+    min-height: 100vh;
+    transition: margin-left .25s ease;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.mc-header {
+    position: sticky;
+    top: 0;
+    height: var(--mc-header-height);
+    background: var(--mc-surface);
+    border-bottom: 1px solid var(--mc-border);
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    z-index: 1000;
+}
+
+.mc-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.mc-menu-button {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--mc-border);
+    background: #fff;
+    border-radius: 8px;
+    color: var(--mc-text);
+}
+
+.mc-breadcrumb {
+    font-size: 13px;
+    color: var(--mc-muted);
+}
+
+.mc-breadcrumb strong {
+    color: var(--mc-text);
+}
+
+/* ==========================================
+   SEARCH
+   ========================================== */
+
+.mc-search {
+    flex: 1;
+    max-width: 430px;
+    margin: 0 auto;
+}
+
+.mc-search-wrapper {
+    position: relative;
+}
+
+.mc-search-input {
+    width: 100%;
+    height: 40px;
+    padding: 0 42px 0 15px;
+    border: 1px solid var(--mc-border);
+    border-radius: 9px;
+    outline: none;
+    font-size: 13px;
+    background: #f9fafb;
+}
+
+.mc-search-input:focus {
+    border-color: var(--mc-primary);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(13,110,253,.1);
+}
+
+.mc-search-shortcut {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    padding: 2px 6px;
+    border: 1px solid var(--mc-border);
+    border-radius: 5px;
+    color: var(--mc-muted);
+    font-size: 10px;
+}
+
+/* ==========================================
+   HEADER ACTIONS
+   ========================================== */
+
+.mc-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.mc-header-action {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    background: transparent;
+    border-radius: 8px;
+    color: var(--mc-muted);
+    position: relative;
+}
+
+.mc-header-action:hover {
+    background: #f3f4f6;
+    color: var(--mc-text);
+}
+
+.mc-notification-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 7px;
+    height: 7px;
+    background: #dc3545;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+/* ==========================================
+   CONTENT
+   ========================================== */
+
+.mc-content {
+    padding: 28px;
+}
+
+.mc-page-header {
+    margin-bottom: 24px;
+}
+
+.mc-page-title {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.mc-page-description {
+    margin: 5px 0 0;
+    color: var(--mc-muted);
+    font-size: 13px;
+}
+
+/* ==========================================
+   SIDEBAR COLLAPSED
+   ========================================== */
+
+body.sidebar-collapsed .mc-sidebar {
+    transform: translateX(-100%);
+}
+
+body.sidebar-collapsed .mc-main {
+    margin-left: 0;
+}
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 991.98px) {
+
+    .mc-sidebar {
+        transform: translateX(-100%);
+        box-shadow: 8px 0 30px rgba(0,0,0,.12);
+    }
+
+    body.sidebar-mobile-open .mc-sidebar {
+        transform: translateX(0);
+    }
+
+    .mc-main {
+        margin-left: 0;
+    }
+
+    .mc-search {
+        display: none;
+    }
+
+    .mc-content {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 575.98px) {
+
+    .mc-header {
+        padding: 0 14px;
+    }
+
+    .mc-breadcrumb {
+        display: none;
+    }
+
+    .mc-content {
+        padding: 16px;
+    }
+
+    .mc-page-title {
+        font-size: 21px;
+    }
+}

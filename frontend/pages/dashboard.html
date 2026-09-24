@@ -1,0 +1,663 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCore | Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+
+<div class="mc-app">
+
+    <div class="mc-sidebar-overlay" id="sidebarOverlay"></div>
+
+    <aside class="mc-sidebar" id="mcSidebar">
+
+        <div class="mc-brand">
+            <span class="mc-brand-name">MEDICORE</span>
+            <span class="mc-brand-subtitle">HEALTHCARE</span>
+        </div>
+
+        <div class="mc-hospital-selector mc-hospital-wrapper">
+            <button class="mc-hospital-button" id="hospitalSwitcher" type="button"
+                    aria-expanded="false">
+                <span class="mc-hospital-name" id="hospitalName">MediCore Hospital</span>
+                <span class="mc-hospital-type" id="hospitalType">Hospital Workspace</span>
+            </button>
+
+            <div class="mc-shell-dropdown" id="hospitalMenu">
+                <div class="mc-hospital-meta">Hospital workspace</div>
+
+                <button class="mc-dropdown-item" type="button" data-hospital="MediCore Hospital">
+                    <span class="mc-hospital-logo">MC</span>
+                    <span class="mc-hospital-option">
+                        <span>
+                            <strong>MediCore Hospital</strong><br>
+                            <small class="text-muted">Current workspace Â· Pakistan</small>
+                        </span>
+                        <span class="mc-status"></span>
+                    </span>
+                </button>
+
+                <div class="mc-dropdown-divider"></div>
+
+                <button class="mc-dropdown-item" type="button" id="hospitalSetupButton">
+                    <span class="item-icon">ï¼‹</span>
+                    Hospital settings
+                </button>
+            </div>
+        </div>
+
+        <nav class="mc-sidebar-nav">
+
+            <div class="mc-nav-section">
+                <div class="mc-nav-label">Overview</div>
+                <div class="mc-nav-items">
+                    <a href="dashboard.html" class="mc-nav-link active" aria-current="page">
+                        <span class="mc-nav-icon">â–¦</span>
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mc-nav-section" data-nav-group>
+                <button class="mc-nav-group-button" type="button">
+                    <span>Management</span><span class="mc-nav-chevron">âŒ„</span>
+                </button>
+                <div class="mc-nav-items">
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â™™</span><span>Patients</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">âš•</span><span>Doctors</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â–¤</span><span>Departments</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â™Ÿ</span><span>Staff</span></a>
+                </div>
+            </div>
+
+            <div class="mc-nav-section" data-nav-group>
+                <button class="mc-nav-group-button" type="button">
+                    <span>Clinical</span><span class="mc-nav-chevron">âŒ„</span>
+                </button>
+                <div class="mc-nav-items">
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â—·</span><span>Appointments</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â–£</span><span>Medical Records</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">âœš</span><span>Prescriptions</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â–¥</span><span>Admissions</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â–¢</span><span>Beds</span></a>
+                </div>
+            </div>
+
+            <div class="mc-nav-section" data-nav-group>
+                <button class="mc-nav-group-button" type="button">
+                    <span>Operations</span><span class="mc-nav-chevron">âŒ„</span>
+                </button>
+                <div class="mc-nav-items">
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â–¤</span><span>Pharmacy</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â—ˆ</span><span>Laboratory</span></a>
+                </div>
+            </div>
+
+            <div class="mc-nav-section" data-nav-group>
+                <button class="mc-nav-group-button" type="button">
+                    <span>Finance</span><span class="mc-nav-chevron">âŒ„</span>
+                </button>
+                <div class="mc-nav-items">
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â—‰</span><span>Billing</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â–£</span><span>Payments</span></a>
+                </div>
+            </div>
+
+            <div class="mc-nav-section" data-nav-group>
+                <button class="mc-nav-group-button" type="button">
+                    <span>Insights</span><span class="mc-nav-chevron">âŒ„</span>
+                </button>
+                <div class="mc-nav-items">
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â–¥</span><span>Analytics</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â–¤</span><span>Reports</span></a>
+                </div>
+            </div>
+
+            <div class="mc-nav-section" data-nav-group>
+                <button class="mc-nav-group-button" type="button">
+                    <span>Administration</span><span class="mc-nav-chevron">âŒ„</span>
+                </button>
+                <div class="mc-nav-items">
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">â—</span><span>Notifications</span></a>
+                    <a href="#" class="mc-nav-link"><span class="mc-nav-icon">âš™</span><span>Settings</span></a>
+                </div>
+            </div>
+
+        </nav>
+
+        <div class="mc-sidebar-footer">
+            <div class="mc-user-mini">
+                <div class="mc-avatar" id="userAvatar">U</div>
+                <div class="mc-user-info">
+                    <div class="mc-user-name" id="userName">User</div>
+                    <div class="mc-user-role" id="userRole">Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="mc-main">
+
+        <header class="mc-header">
+
+            <div class="mc-header-left">
+                <button type="button" class="mc-menu-button" id="sidebarToggle"
+                        aria-label="Toggle sidebar">â˜°</button>
+
+                <div class="mc-breadcrumb">
+                    MediCore <span class="mx-2">/</span>
+                    <strong>Dashboard</strong>
+                </div>
+            </div>
+
+            <div class="mc-search">
+                <div class="mc-search-wrapper">
+                    <input id="globalSearch" type="search" class="mc-search-input"
+                           placeholder="Search patients, doctors, appointments..."
+                           aria-label="Global search" autocomplete="off">
+                    <span class="mc-search-shortcut">Ctrl K</span>
+                    <div class="mc-search-results" id="searchResults"></div>
+                </div>
+            </div>
+
+            <div class="mc-header-actions">
+
+                <button class="mc-header-action" id="helpButton" title="Help" aria-label="Help">?</button>
+
+                <button class="mc-header-action" id="notificationButton"
+                        title="Notifications" aria-label="Notifications">
+                    â™¢
+                    <span class="mc-notification-dot"></span>
+                </button>
+
+                <button class="mc-header-action" id="themeButton"
+                        title="Theme" aria-label="Theme">â—</button>
+
+                <div class="mc-profile-wrapper">
+                    <button class="mc-profile-button" id="profileButton"
+                            type="button" aria-expanded="false" aria-label="Open profile menu">
+                        <span class="mc-avatar" id="headerAvatar">U</span>
+                        <span class="mc-profile-name" id="headerUserName">User</span>
+                        <span class="mc-profile-arrow">âŒ„</span>
+                    </button>
+
+                    <div class="mc-shell-dropdown mc-profile-menu" id="profileMenu">
+                        <div class="mc-profile-heading">
+                            <strong id="profileFullName">User</strong>
+                            <small id="profileEmail">user@medicore.local</small>
+                            <small id="profileRole">Administrator</small>
+                        </div>
+
+                        <div class="mc-dropdown-divider"></div>
+
+                        <button class="mc-dropdown-item" type="button"><span class="item-icon">â—‰</span>My Profile</button>
+                        <button class="mc-dropdown-item" type="button"><span class="item-icon">âš™</span>Preferences</button>
+                        <button class="mc-dropdown-item" type="button"><span class="item-icon">â—†</span>Security</button>
+                        <button class="mc-dropdown-item" type="button" id="profileHelpButton"><span class="item-icon">?</span>Help</button>
+
+                        <div class="mc-dropdown-divider"></div>
+
+                        <button class="mc-dropdown-item" type="button" id="logoutButton">
+                            <span class="item-icon">â‡¥</span>Logout
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+ <section class="mc-content">
+
+    <!-- PAGE HEADER -->
+    <div class="mc-page-header d-flex flex-wrap justify-content-between align-items-start gap-3">
+
+        <div>
+            <h1 class="mc-page-title mb-1">
+                Good morning, <span id="dashboardUserName">User</span>
+            </h1>
+
+            <p class="mc-page-description mb-0">
+                Here's today's operational overview.
+            </p>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+
+            <button class="btn btn-primary">
+                + Add Patient
+            </button>
+
+            <button class="btn btn-outline-primary">
+                + Book Appointment
+            </button>
+
+            <button class="btn btn-outline-secondary">
+                + Create Invoice
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- TIME FILTER -->
+    <div class="d-flex justify-content-end mb-4">
+
+        <div class="btn-group" role="group">
+
+            <button class="btn btn-sm btn-primary dashboard-filter active">
+                Today
+            </button>
+
+            <button class="btn btn-sm btn-outline-secondary dashboard-filter">
+                7 Days
+            </button>
+
+            <button class="btn btn-sm btn-outline-secondary dashboard-filter">
+                30 Days
+            </button>
+
+            <button class="btn btn-sm btn-outline-secondary dashboard-filter">
+                90 Days
+            </button>
+
+            <button class="btn btn-sm btn-outline-secondary dashboard-filter">
+                12 Months
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRIMARY KPI ROW -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+                            <div class="text-muted small">
+                                Total Patients
+                            </div>
+
+                           <div class="fs-3 fw-semibold mt-1 mc-dashboard-kpi-value">
+                                12,540
+                            </div>
+
+                            <div class="small text-success mt-2">
+                                â†‘ 8.2% vs previous period
+                            </div>
+                        </div>
+
+                        <div class="fs-3">
+                            ðŸ‘¥
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+                            <div class="text-muted small">
+                                Doctors
+                            </div>
+
+                            <div class="fs-3 fw-semibold mt-1 mc-dashboard-kpi-value">
+                                184
+                            </div>
+
+                            <div class="small text-success mt-2">
+                                â†‘ 4.1% vs previous period
+                            </div>
+                        </div>
+
+                        <div class="fs-3">
+                            ðŸ©º
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+                            <div class="text-muted small">
+                                Appointments
+                            </div>
+
+                            <div class="fs-3 fw-semibold mt-1 mc-dashboard-kpi-value">
+                                326
+                            </div>
+
+                            <div class="small text-success mt-2">
+                                â†‘ 6.7% vs previous period
+                            </div>
+                        </div>
+
+                        <div class="fs-3">
+                            ðŸ“…
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+                            <div class="text-muted small">
+                                Revenue
+                            </div>
+
+                            <div class="fs-3 fw-semibold mt-1 mc-dashboard-kpi-value">
+                                PKR 2.48M
+                            </div>
+
+                            <div class="small text-success mt-2">
+                                â†‘ 9.4% vs previous period
+                            </div>
+                        </div>
+
+                        <div class="fs-3">
+                            ðŸ’°
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- OPERATIONAL KPI ROW -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Admissions</div>
+                    <div class="fs-4 fw-semibold mt-1">48</div>
+                    <div class="small text-muted mt-2">
+                        Current period
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Discharges</div>
+                    <div class="fs-4 fw-semibold mt-1">39</div>
+                    <div class="small text-muted mt-2">
+                        Current period
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Bed Occupancy</div>
+                    <div class="fs-4 fw-semibold mt-1">78%</div>
+                    <div class="small text-warning mt-2">
+                        Monitor capacity
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="text-muted small">Pending Lab Tests</div>
+                    <div class="fs-4 fw-semibold mt-1">27</div>
+                    <div class="small text-warning mt-2">
+                        Requires attention
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- CHARTS -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-12 col-xl-8">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <div>
+                            <h5 class="mb-1">
+                                Patient Growth
+                            </h5>
+
+                            <small class="text-muted">
+                                Patient registrations over time
+                            </small>
+                        </div>
+
+                    </div>
+
+                    <div style="height: 300px;">
+                        <canvas id="patientGrowthChart"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-xl-4">
+
+            <div class="card border-0 shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h5 class="mb-1">
+                        Payment Methods
+                    </h5>
+
+                    <small class="text-muted">
+                        Current revenue distribution
+                    </small>
+
+                    <div style="height: 300px;" class="mt-3">
+                        <canvas id="paymentMethodsChart"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RECENT PATIENTS -->
+<div class="card border-0 shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+
+            <div>
+                <h5 class="mb-1">
+                    Recent Patients
+                </h5>
+
+                <small class="text-muted">
+                    Latest patient activity
+                </small>
+            </div>
+
+            <button
+                class="btn btn-sm btn-outline-primary"
+                type="button"
+            >
+                View all
+            </button>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table align-middle mb-0">
+
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>ID</th>
+                        <th>Department</th>
+                        <th>Doctor</th>
+                        <th>Last Visit</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="recentPatientsTableBody">
+
+                    <tr>
+                        <td
+                            colspan="7"
+                            class="text-center text-muted py-4"
+                        >
+                            Loading patients...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- APPOINTMENT TIMELINE -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-body">
+
+            <h5 class="mb-1">
+                Today's Appointment Timeline
+            </h5>
+
+            <small class="text-muted">
+                Scheduled appointments across the hospital
+            </small>
+
+
+            <div
+
+
+    class="mt-4"
+    id="appointmentTimeline"
+>
+    <div class="text-muted py-3">
+        Loading appointments...
+    </div>
+</div>
+
+            
+
+</section>
+
+    </main>
+</div>
+
+<div class="mc-help-panel" id="helpPanel">
+    <div class="mc-help-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <h5 class="mb-1">MediCore Help</h5>
+                <p class="text-muted small mb-0">Application shell shortcuts</p>
+            </div>
+            <button class="btn btn-sm btn-light" id="closeHelpButton">âœ•</button>
+        </div>
+
+        <div class="mc-help-shortcut">
+            <span>Open global search</span>
+            <span><span class="mc-key">Ctrl</span> + <span class="mc-key">K</span></span>
+        </div>
+        <div class="mc-help-shortcut">
+            <span>Navigate search results</span>
+            <span><span class="mc-key">â†‘</span> <span class="mc-key">â†“</span></span>
+        </div>
+        <div class="mc-help-shortcut">
+            <span>Select result</span>
+            <span><span class="mc-key">Enter</span></span>
+        </div>
+        <div class="mc-help-shortcut">
+            <span>Close search/menu</span>
+            <span><span class="mc-key">Esc</span></span>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+
+
+<script type="module" src="../js/dashboard.js"></script>
+
+</body>
+</html>
+

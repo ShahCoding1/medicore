@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Staff Setup | MediCore</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+        body {
+            background: #f5f7fb;
+            min-height: 100vh;
+        }
+
+        .brand {
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: #0d6efd;
+        }
+
+        .setup-card {
+            max-width: 1100px;
+            margin: 40px auto;
+            border: 0;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(0,0,0,.08);
+        }
+
+        .step {
+            padding: 10px 16px;
+            border-radius: 30px;
+            background: #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .step.active {
+            background: #0d6efd;
+            color: #fff;
+        }
+
+        .staff-row {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+
+        .remove-btn {
+            margin-top: 31px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container py-4">
+
+    <div class="text-center mb-4">
+        <div class="brand fs-3">MEDICORE</div>
+        <div class="text-muted">
+            Connected Healthcare. Smarter Operations.
+        </div>
+    </div>
+
+    <div class="card setup-card">
+
+        <div class="card-body p-4 p-md-5">
+
+            <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
+                <span class="step">01 Hospital</span>
+                <span class="step">02 Departments</span>
+                <span class="step active">03 Staff</span>
+                <span class="step">04 Preferences</span>
+                <span class="step">05 Complete</span>
+            </div>
+
+            <div class="mb-4">
+                <h2 class="fw-bold mb-1">Staff Setup</h2>
+                <p class="text-muted mb-0">
+                    Add the initial staff members for your hospital.
+                </p>
+            </div>
+
+            <div id="alertBox"></div>
+
+            <form id="staffForm">
+
+                <div id="staffContainer"></div>
+
+                <button
+                    type="button"
+                    id="addStaffButton"
+                    class="btn btn-outline-primary mb-4"
+                >
+                    + Add Staff Member
+                </button>
+
+                <hr>
+
+                <div class="d-flex flex-wrap gap-2 justify-content-between mt-4">
+
+                    <button
+                        type="button"
+                        id="backButton"
+                        class="btn btn-outline-secondary"
+                    >
+                        Back
+                    </button>
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="button"
+                            id="saveExitButton"
+                            class="btn btn-light border"
+                        >
+                            Save & Exit
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="continueButton"
+                            class="btn btn-primary px-4"
+                        >
+                            Continue
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+
+<script>
+
+if (!window.mediCoreAuth.requireAuth()) {
+    // Redirect handled by requireAuth()
+}
+
+const staffContainer =
+    document.getElementById("staffContainer");
+
+const alertBox =
+    document.getElementById("alertBox");
+
+let departments = [];
+
+function showAlert(message, type = "danger") {
+    alertBox.innerHTML = `
+        <div class="alert alert-${type}">
+            ${message}
+        </div>
+    `;
+}
+
+function departmentOptions() {
+    return `
+        <option value="">Select department</option>
+        ${departments.map(department => `
+            <option value="${department._id}">
+                ${department.name}
+            </option>
+        `).join("")}
+    `;
+}
+
+function addStaffRow() {
+
+    const row = document.createElement("div");
+
+    row.className = "staff-row";
+
+    row.innerHTML = `
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label class="form-label">
+                    First Name *
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control first-name"
+                    required
+                >
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">
+                    Last Name *
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control last-name"
+                    required
+                >
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    class="form-control email"
+                >
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">
+                    Phone
+                </label>
+
+                <input
+                    type="text"
+                    class="form-control phone"
+                >
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">
+                    Role *
+                </label>
+
+                <select
+                    class="form-select role"
+                    required
+                >
+                    <option value="">
+                        Select role
+                    </option>
+
+                    <option value="doctor">
+                        Doctor
+                    </option>
+
+                    <option value="nurse">
+                        Nurse
+                    </option>
+
+                    <option value="receptionist">
+                        Receptionist
+                    </option>
+
+                    <option value="pharmacist">
+                        Pharmacist
+                    </option>
+
+                    <option value="lab_technician">
+                        Lab Technician
+                    </option>
+
+                    <option value="accountant">
+                        Accountant
+                    </option>
+
+                    <option value="hospital_admin">
+                        Hospital Admin
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-5">
+                <label class="form-label">
+                    Department
+                </label>
+
+                <select class="form-select department">
+                    ${departmentOptions()}
+                </select>
+            </div>
+
+            <div class="col-md-1">
+                <button
+                    type="button"
+                    class="btn btn-outline-danger remove-btn remove-staff"
+                >
+                    ×
+                </button>
+            </div>
+
+        </div>
+    `;
+
+    row.querySelector(".remove-staff")
+        .addEventListener("click", () => {
+
+            if (staffContainer.children.length === 1) {
+                showAlert(
+                    "At least one staff member is required."
+                );
+                return;
+            }
+
+            row.remove();
+        });
+
+    staffContainer.appendChild(row);
+}
+
+async function loadDepartments() {
+
+    try {
+
+        const response =
+            await window.mediCoreAPI.get(
+                "/staff/onboarding"
+            );
+
+        departments =
+            response.data?.data?.departments || [];
+
+        addStaffRow();
+
+    } catch (error) {
+
+        showAlert(
+            error.response?.data?.message ||
+            "Unable to load departments."
+        );
+    }
+}
+
+document
+    .getElementById("addStaffButton")
+    .addEventListener(
+        "click",
+        addStaffRow
+    );
+
+document
+    .getElementById("backButton")
+    .addEventListener(
+        "click",
+        () => {
+            window.location.href =
+                "onboarding-departments.html";
+        }
+    );
+
+document
+    .getElementById("saveExitButton")
+    .addEventListener(
+        "click",
+        () => {
+            window.location.href = "login.html";
+        }
+    );
+
+document
+    .getElementById("staffForm")
+    .addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+            const rows =
+                [...staffContainer.children];
+
+            const staff = rows.map(row => ({
+                firstName:
+                    row.querySelector(".first-name").value,
+
+                lastName:
+                    row.querySelector(".last-name").value,
+
+                email:
+                    row.querySelector(".email").value,
+
+                phone:
+                    row.querySelector(".phone").value,
+
+                role:
+                    row.querySelector(".role").value,
+
+                department:
+                    row.querySelector(".department").value
+            }));
+
+            const continueButton =
+                document.getElementById(
+                    "continueButton"
+                );
+
+            continueButton.disabled = true;
+            continueButton.textContent = "Saving...";
+
+            try {
+
+                const response =
+                    await window.mediCoreAPI.post(
+                        "/staff/onboarding",
+                        { staff }
+                    );
+
+                if (response.data?.success) {
+
+                    showAlert(
+                        "Staff saved successfully.",
+                        "success"
+                    );
+
+                    setTimeout(() => {
+                        window.location.href =
+                            "onboarding-preferences.html";
+                    }, 500);
+
+                    return;
+                }
+
+                showAlert(
+                    response.data?.message ||
+                    "Unable to save staff."
+                );
+
+            } catch (error) {
+
+                showAlert(
+                    error.response?.data?.message ||
+                    "Unable to save staff."
+                );
+
+            } finally {
+
+                continueButton.disabled = false;
+                continueButton.textContent = "Continue";
+            }
+        }
+    );
+
+loadDepartments();
+
+</script>
+
+</body>
+</html>

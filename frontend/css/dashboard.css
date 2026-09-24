@@ -1,0 +1,385 @@
+﻿/* ==========================================
+           PHASE 4 â€” APPLICATION SHELL INTERACTIONS
+           ========================================== */
+
+        .mc-sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, .45);
+            z-index: 1040;
+        }
+
+        .mc-hospital-wrapper,
+        .mc-profile-wrapper {
+            position: relative;
+        }
+
+        .mc-shell-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 260px;
+            background: #fff;
+            border: 1px solid var(--mc-border);
+            border-radius: 12px;
+            box-shadow: 0 14px 35px rgba(15, 23, 42, .14);
+            padding: 8px;
+            display: none;
+            z-index: 1200;
+        }
+
+        .mc-profile-menu {
+            left: auto;
+            right: 0;
+            min-width: 245px;
+        }
+
+        .mc-shell-dropdown.show {
+            display: block;
+        }
+
+        .mc-dropdown-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 0;
+            background: transparent;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: left;
+            color: var(--mc-text);
+            font-size: 13px;
+        }
+
+        .mc-dropdown-item:hover,
+        .mc-dropdown-item:focus {
+            background: #f3f6fa;
+            outline: none;
+        }
+
+        .mc-dropdown-item .item-icon {
+            width: 25px;
+            text-align: center;
+        }
+
+        .mc-dropdown-divider {
+            height: 1px;
+            background: var(--mc-border);
+            margin: 7px 4px;
+        }
+
+        .mc-hospital-meta {
+            padding: 8px 10px 10px;
+            font-size: 11px;
+            color: var(--mc-muted);
+        }
+
+        .mc-hospital-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mc-hospital-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef4ff;
+            color: var(--mc-primary);
+            font-weight: 800;
+        }
+
+        .mc-status {
+            margin-left: auto;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #198754;
+        }
+
+        .mc-nav-group-button {
+            border: 0;
+            background: transparent;
+            color: #6b7280;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 11px 7px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+        }
+
+        .mc-nav-group-button:hover {
+            color: #9ca3af;
+        }
+
+        .mc-nav-chevron {
+            transition: transform .18s ease;
+        }
+
+        .mc-nav-section.collapsed .mc-nav-chevron {
+            transform: rotate(-90deg);
+        }
+
+        .mc-nav-section.collapsed .mc-nav-items {
+            display: none;
+        }
+
+        .mc-sidebar.collapsed-state {
+            width: 76px;
+        }
+
+        body.shell-sidebar-collapsed .mc-sidebar {
+            width: 76px;
+        }
+
+        body.shell-sidebar-collapsed .mc-main {
+            margin-left: 76px;
+        }
+
+        body.shell-sidebar-collapsed .mc-brand {
+            justify-content: center;
+            padding: 0;
+        }
+
+        body.shell-sidebar-collapsed .mc-brand-subtitle,
+        body.shell-sidebar-collapsed .mc-hospital-name,
+        body.shell-sidebar-collapsed .mc-hospital-type,
+        body.shell-sidebar-collapsed .mc-nav-label,
+        body.shell-sidebar-collapsed .mc-nav-group-button span:first-child,
+        body.shell-sidebar-collapsed .mc-nav-link span:not(.mc-nav-icon),
+        body.shell-sidebar-collapsed .mc-user-info {
+            display: none;
+        }
+
+        body.shell-sidebar-collapsed .mc-hospital-selector {
+            padding: 12px;
+        }
+
+        body.shell-sidebar-collapsed .mc-hospital-button {
+            padding: 10px;
+            text-align: center;
+        }
+
+        body.shell-sidebar-collapsed .mc-nav-section {
+            margin-bottom: 8px;
+        }
+
+        body.shell-sidebar-collapsed .mc-nav-group-button {
+            justify-content: center;
+            padding: 0 0 5px;
+        }
+
+        body.shell-sidebar-collapsed .mc-nav-chevron {
+            display: none;
+        }
+
+        body.shell-sidebar-collapsed .mc-nav-link {
+            justify-content: center;
+            padding: 11px 0;
+        }
+
+        body.shell-sidebar-collapsed .mc-sidebar-footer {
+            padding: 12px;
+        }
+
+        body.shell-sidebar-collapsed .mc-user-mini {
+            justify-content: center;
+        }
+
+        .mc-profile-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 0;
+            background: transparent;
+            padding: 3px;
+            border-radius: 9px;
+        }
+
+        .mc-profile-button:hover {
+            background: #f3f4f6;
+        }
+
+        .mc-profile-button .mc-avatar {
+            width: 34px;
+            height: 34px;
+        }
+
+        .mc-profile-button .mc-profile-arrow {
+            font-size: 10px;
+            color: var(--mc-muted);
+        }
+
+        .mc-profile-heading {
+            padding: 9px 10px;
+        }
+
+        .mc-profile-heading strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .mc-profile-heading small {
+            display: block;
+            color: var(--mc-muted);
+            font-size: 11px;
+            margin-top: 2px;
+            overflow-wrap: anywhere;
+        }
+
+        .mc-search-results {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--mc-border);
+            border-radius: 12px;
+            box-shadow: 0 16px 35px rgba(15, 23, 42, .15);
+            max-height: 430px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1200;
+            padding: 8px;
+        }
+
+        .mc-search-results.show {
+            display: block;
+        }
+
+        .mc-search-category {
+            padding: 8px 10px 5px;
+            color: var(--mc-muted);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+        }
+
+        .mc-search-result {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            border: 0;
+            background: transparent;
+            border-radius: 8px;
+            padding: 9px 10px;
+            text-align: left;
+            font-size: 13px;
+            color: var(--mc-text);
+        }
+
+        .mc-search-result:hover,
+        .mc-search-result.selected {
+            background: #f1f5f9;
+        }
+
+        .mc-search-result-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef4ff;
+            color: var(--mc-primary);
+            font-size: 12px;
+        }
+
+        .mc-command-hint {
+            margin-left: auto;
+            color: var(--mc-muted);
+            font-size: 10px;
+        }
+
+        .mc-help-panel {
+            position: fixed;
+            inset: 0;
+            background: rgba(15,23,42,.4);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1300;
+            padding: 20px;
+        }
+
+        .mc-help-panel.show {
+            display: flex;
+        }
+
+        .mc-help-card {
+            width: min(520px, 100%);
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 20px 50px rgba(15,23,42,.2);
+            padding: 24px;
+        }
+
+        .mc-help-shortcut {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--mc-border);
+            font-size: 13px;
+        }
+
+        .mc-key {
+            border: 1px solid var(--mc-border);
+            background: #f8fafc;
+            border-radius: 5px;
+            padding: 2px 7px;
+            font-size: 11px;
+        }
+
+        @media (max-width: 991.98px) {
+            body.shell-sidebar-collapsed .mc-sidebar {
+                width: var(--mc-sidebar-width);
+            }
+
+            body.shell-sidebar-collapsed .mc-main {
+                margin-left: 0;
+            }
+
+            body.shell-sidebar-collapsed .mc-brand {
+                justify-content: flex-start;
+                padding: 0 22px;
+            }
+
+            body.shell-sidebar-collapsed .mc-brand-subtitle,
+            body.shell-sidebar-collapsed .mc-hospital-name,
+            body.shell-sidebar-collapsed .mc-hospital-type,
+            body.shell-sidebar-collapsed .mc-nav-label,
+            body.shell-sidebar-collapsed .mc-nav-group-button span:first-child,
+            body.shell-sidebar-collapsed .mc-nav-link span:not(.mc-nav-icon),
+            body.shell-sidebar-collapsed .mc-user-info {
+                display: block;
+            }
+
+            body.shell-sidebar-collapsed .mc-hospital-button {
+                padding: 11px;
+                text-align: left;
+            }
+
+            body.shell-sidebar-collapsed .mc-nav-link {
+                justify-content: flex-start;
+                padding: 10px 11px;
+            }
+
+            body.sidebar-mobile-open .mc-sidebar-overlay {
+                display: block;
+            }
+
+            .mc-profile-button .mc-profile-name {
+                display: none;
+            }
+        }

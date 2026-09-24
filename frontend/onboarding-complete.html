@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Setup Complete | MediCore</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            min-height: 100vh;
+        }
+
+        .brand {
+            color: #0d6efd;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .complete-card {
+            max-width: 700px;
+            margin: 70px auto;
+            border: 0;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.08);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #d1e7dd;
+            color: #198754;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            margin: 0 auto 25px;
+        }
+
+        .step {
+            padding: 10px 16px;
+            border-radius: 30px;
+            background: #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .step.active {
+            background: #198754;
+            color: #fff;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container py-4">
+
+    <div class="text-center mb-4">
+
+        <div class="brand fs-3">
+            MEDICORE
+        </div>
+
+        <div class="text-muted">
+            Connected Healthcare. Smarter Operations.
+        </div>
+
+    </div>
+
+
+    <div class="card complete-card">
+
+        <div class="card-body p-4 p-md-5 text-center">
+
+            <div class="d-flex flex-wrap gap-2 justify-content-center mb-5">
+
+                <span class="step">
+                    01 Hospital
+                </span>
+
+                <span class="step">
+                    02 Departments
+                </span>
+
+                <span class="step">
+                    03 Staff
+                </span>
+
+                <span class="step">
+                    04 Preferences
+                </span>
+
+                <span class="step active">
+                    05 Complete
+                </span>
+
+            </div>
+
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <h1 class="fw-bold mb-3">
+                Your MediCore Workspace Is Ready
+            </h1>
+
+
+            <p class="text-muted mb-4">
+                Your hospital setup has been completed successfully.
+                You can now access your MediCore workspace and begin
+                managing healthcare operations.
+            </p>
+
+
+            <div id="alertBox"></div>
+
+
+            <button
+                id="dashboardButton"
+                class="btn btn-primary btn-lg px-5"
+            >
+                Enter MediCore
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+
+
+<script>
+
+if (!window.mediCoreAuth.requireAuth()) {
+    // Authentication redirect handled by requireAuth()
+}
+
+
+const alertBox =
+    document.getElementById("alertBox");
+
+const dashboardButton =
+    document.getElementById(
+        "dashboardButton"
+    );
+
+
+async function completeOnboarding() {
+
+    try {
+
+        const response =
+            await window.mediCoreAPI.post(
+                "/hospitals/complete-onboarding"
+            );
+
+
+        if (response.data?.success) {
+
+            dashboardButton.disabled = false;
+
+            return;
+        }
+
+
+        dashboardButton.disabled = false;
+
+    } catch (error) {
+
+        alertBox.innerHTML = `
+            <div class="alert alert-danger">
+                ${
+                    error.response?.data?.message ||
+                    "Unable to complete onboarding."
+                }
+            </div>
+        `;
+
+        dashboardButton.disabled = false;
+    }
+
+}
+
+
+dashboardButton.disabled = true;
+
+completeOnboarding();
+
+
+dashboardButton.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "pages/dashboard.html";
+
+    }
+);
+
+</script>
+
+</body>
+</html>

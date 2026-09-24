@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Preferences | MediCore</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        body {
+            background: #f5f7fb;
+            min-height: 100vh;
+        }
+
+        .brand {
+            color: #0d6efd;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .setup-card {
+            max-width: 900px;
+            margin: 40px auto;
+            border: 0;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(0,0,0,.08);
+        }
+
+        .step {
+            padding: 10px 16px;
+            border-radius: 30px;
+            background: #e9ecef;
+            color: #6c757d;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .step.active {
+            background: #0d6efd;
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container py-4">
+
+    <div class="text-center mb-4">
+
+        <div class="brand fs-3">
+            MEDICORE
+        </div>
+
+        <div class="text-muted">
+            Connected Healthcare. Smarter Operations.
+        </div>
+
+    </div>
+
+
+    <div class="card setup-card">
+
+        <div class="card-body p-4 p-md-5">
+
+            <div class="d-flex flex-wrap gap-2 justify-content-center mb-4">
+
+                <span class="step">
+                    01 Hospital
+                </span>
+
+                <span class="step">
+                    02 Departments
+                </span>
+
+                <span class="step">
+                    03 Staff
+                </span>
+
+                <span class="step active">
+                    04 Preferences
+                </span>
+
+                <span class="step">
+                    05 Complete
+                </span>
+
+            </div>
+
+
+            <div class="mb-4">
+
+                <h2 class="fw-bold">
+                    Preferences
+                </h2>
+
+                <p class="text-muted">
+                    Configure the default settings for your hospital workspace.
+                </p>
+
+            </div>
+
+
+            <div id="alertBox"></div>
+
+
+            <form id="preferencesForm">
+
+                <div class="row g-4">
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Currency *
+                        </label>
+
+                        <select
+                            id="currency"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="PKR">
+                                PKR — Pakistani Rupee
+                            </option>
+
+                            <option value="USD">
+                                USD — US Dollar
+                            </option>
+
+                            <option value="EUR">
+                                EUR — Euro
+                            </option>
+
+                            <option value="GBP">
+                                GBP — British Pound
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Timezone *
+                        </label>
+
+                        <select
+                            id="timezone"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="Asia/Karachi">
+                                Asia/Karachi
+                            </option>
+
+                            <option value="Asia/Dubai">
+                                Asia/Dubai
+                            </option>
+
+                            <option value="Asia/Riyadh">
+                                Asia/Riyadh
+                            </option>
+
+                            <option value="Europe/London">
+                                Europe/London
+                            </option>
+
+                            <option value="Europe/Berlin">
+                                Europe/Berlin
+                            </option>
+
+                            <option value="America/New_York">
+                                America/New_York
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Date Format *
+                        </label>
+
+                        <select
+                            id="dateFormat"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="DD/MM/YYYY">
+                                DD/MM/YYYY
+                            </option>
+
+                            <option value="MM/DD/YYYY">
+                                MM/DD/YYYY
+                            </option>
+
+                            <option value="YYYY-MM-DD">
+                                YYYY-MM-DD
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Appointment Duration *
+                        </label>
+
+                        <select
+                            id="appointmentDuration"
+                            class="form-select"
+                            required
+                        >
+
+                            <option value="15">
+                                15 minutes
+                            </option>
+
+                            <option value="20">
+                                20 minutes
+                            </option>
+
+                            <option
+                                value="30"
+                                selected
+                            >
+                                30 minutes
+                            </option>
+
+                            <option value="45">
+                                45 minutes
+                            </option>
+
+                            <option value="60">
+                                60 minutes
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Working Hours — Start *
+                        </label>
+
+                        <input
+                            type="time"
+                            id="workingHoursStart"
+                            class="form-control"
+                            value="09:00"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="col-md-6">
+
+                        <label class="form-label">
+                            Working Hours — End *
+                        </label>
+
+                        <input
+                            type="time"
+                            id="workingHoursEnd"
+                            class="form-control"
+                            value="17:00"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <hr class="my-4">
+
+
+                <div class="d-flex flex-wrap justify-content-between gap-2">
+
+                    <button
+                        type="button"
+                        id="backButton"
+                        class="btn btn-outline-secondary"
+                    >
+                        Back
+                    </button>
+
+
+                    <div class="d-flex gap-2">
+
+                        <button
+                            type="button"
+                            id="saveExitButton"
+                            class="btn btn-light border"
+                        >
+                            Save & Exit
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="continueButton"
+                            class="btn btn-primary px-4"
+                        >
+                            Continue
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+
+
+<script>
+
+if (!window.mediCoreAuth.requireAuth()) {
+    // Authentication redirect handled by requireAuth()
+}
+
+
+const alertBox =
+    document.getElementById("alertBox");
+
+
+function showAlert(message, type = "danger") {
+
+    alertBox.innerHTML = `
+        <div class="alert alert-${type}">
+            ${message}
+        </div>
+    `;
+
+}
+
+
+document
+    .getElementById("backButton")
+    .addEventListener("click", () => {
+
+        window.location.href =
+            "onboarding-staff.html";
+
+    });
+
+
+document
+    .getElementById("saveExitButton")
+    .addEventListener("click", () => {
+
+        window.location.href =
+            "login.html";
+
+    });
+
+
+document
+    .getElementById("preferencesForm")
+    .addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        const continueButton =
+            document.getElementById(
+                "continueButton"
+            );
+
+        const workingHoursStart =
+            document.getElementById(
+                "workingHoursStart"
+            ).value;
+
+        const workingHoursEnd =
+            document.getElementById(
+                "workingHoursEnd"
+            ).value;
+
+
+        if (
+            workingHoursStart >=
+            workingHoursEnd
+        ) {
+
+            showAlert(
+                "Working hours end time must be after start time."
+            );
+
+            return;
+        }
+
+
+        const data = {
+
+            currency:
+                document.getElementById(
+                    "currency"
+                ).value,
+
+            timezone:
+                document.getElementById(
+                    "timezone"
+                ).value,
+
+            dateFormat:
+                document.getElementById(
+                    "dateFormat"
+                ).value,
+
+            workingHoursStart,
+
+            workingHoursEnd,
+
+            appointmentDuration:
+                Number(
+                    document.getElementById(
+                        "appointmentDuration"
+                    ).value
+                )
+
+        };
+
+
+        continueButton.disabled = true;
+
+        continueButton.textContent =
+            "Saving...";
+
+
+        try {
+
+            const response =
+                await window.mediCoreAPI.post(
+                    "/preferences/onboarding",
+                    data
+                );
+
+
+            if (response.data?.success) {
+
+                showAlert(
+                    "Preferences saved successfully.",
+                    "success"
+                );
+
+
+                setTimeout(() => {
+
+                    window.location.href =
+                        "onboarding-complete.html";
+
+                }, 500);
+
+                return;
+            }
+
+
+            showAlert(
+                response.data?.message ||
+                "Unable to save preferences."
+            );
+
+
+        } catch (error) {
+
+            showAlert(
+                error.response?.data?.message ||
+                "Unable to save preferences."
+            );
+
+        } finally {
+
+            continueButton.disabled = false;
+
+            continueButton.textContent =
+                "Continue";
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
