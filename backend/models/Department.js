@@ -15,21 +15,33 @@ const departmentSchema = new mongoose.Schema(
             maxlength: 100
         },
 
-        type: {
+        code: {
             type: String,
             required: true,
-            enum: [
-                "clinical",
-                "diagnostic",
-                "surgical",
-                "emergency",
-                "administrative",
-                "support",
-                "other"
-            ]
+            trim: true,
+            uppercase: true,
+            maxlength: 20
         },
 
-        head: {
+        description: {
+            type: String,
+            trim: true,
+            default: ""
+        },
+
+        headOfDepartment: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Doctor",
+            default: null
+        },
+
+        phone: {
+            type: String,
+            trim: true,
+            default: ""
+        },
+
+        location: {
             type: String,
             trim: true,
             default: ""
@@ -44,6 +56,11 @@ const departmentSchema = new mongoose.Schema(
     {
         timestamps: true
     }
+);
+
+departmentSchema.index(
+    { hospital: 1, code: 1 },
+    { unique: true }
 );
 
 departmentSchema.index(

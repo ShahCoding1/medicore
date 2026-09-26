@@ -1,7 +1,11 @@
 const express = require("express");
 
 const {
-    createDepartments
+    getDepartments,
+    getDepartmentById,
+    createDepartment,
+    updateDepartment,
+    deleteDepartment
 } = require("../controllers/departmentController");
 
 const {
@@ -10,10 +14,38 @@ const {
 
 const router = express.Router();
 
-router.post(
-    "/onboarding",
+// ==========================================
+// DEPARTMENT ROUTES
+// ==========================================
+
+router.get(
+    "/",
     protect,
-    createDepartments
+    getDepartments
+);
+
+router.get(
+    "/:id",
+    protect,
+    getDepartmentById
+);
+
+router.post(
+    "/",
+    protect,
+    createDepartment
+);
+
+router.put(
+    "/:id",
+    protect,
+    updateDepartment
+);
+
+router.delete(
+    "/:id",
+    protect,
+    deleteDepartment
 );
 
 module.exports = router;
