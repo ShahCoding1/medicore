@@ -1,0 +1,118 @@
+/* ==========================================
+   APPOINTMENTS PAGE
+========================================== */
+
+.appointment-filters {
+    background: #ffffff;
+    border: 1px solid #e7eaf0;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.appointment-table-wrapper {
+    background: #ffffff;
+    border: 1px solid #e7eaf0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.appointment-table thead th {
+    background: #f8f9fb;
+    color: #596273;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e7eaf0;
+}
+
+.appointment-table tbody td {
+    padding: 15px 16px;
+    border-bottom: 1px solid #eef0f4;
+    vertical-align: middle;
+}
+
+.appointment-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.appointment-table tbody tr:hover {
+    background: #fafbfd;
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.appointment-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.appointment-status.scheduled {
+    background: #e8f1ff;
+    color: #2563eb;
+}
+
+.appointment-status.completed {
+    background: #eaf8ef;
+    color: #198754;
+}
+
+.appointment-status.cancelled {
+    background: #fdecec;
+    color: #dc3545;
+}
+
+.appointment-status.no_show {
+    background: #fff4df;
+    color: #b7791f;
+}
+
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+.appointment-action-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid #e2e6ec;
+    background: #ffffff;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.appointment-action-btn:hover {
+    background: #f5f7fa;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 767.98px) {
+
+    .appointment-filters {
+        padding: 15px;
+    }
+
+    .appointment-table-wrapper {
+        border-radius: 10px;
+    }
+
+    .appointment-table {
+        min-width: 900px;
+    }
+}

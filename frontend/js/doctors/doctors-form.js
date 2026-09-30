@@ -31,7 +31,7 @@ async function loadDepartments(
 
     if (!departmentSelect) {
         console.error(
-            "Department select #doctorDepartment was not found."
+            "Doctor department select not found."
         );
         return;
     }
@@ -55,29 +55,15 @@ async function loadDepartments(
                 }
             );
 
-        console.log(
-            "Departments loaded:",
-            response.data
-        );
-
         const departments =
             response.data?.data || [];
 
-        departmentSelect.innerHTML = "";
+        departmentSelect.innerHTML = `
+            <option value="">
+                Unassigned
+            </option>
+        `;
 
-        // Unassigned option
-        const unassignedOption =
-            document.createElement("option");
-
-        unassignedOption.value = "";
-        unassignedOption.textContent =
-            "Unassigned";
-
-        departmentSelect.appendChild(
-            unassignedOption
-        );
-
-        // Department options
         departments.forEach(
             (department) => {
                 const option =
@@ -93,10 +79,15 @@ async function loadDepartments(
 
                 if (
                     selectedDepartmentId &&
-                    department._id ===
-                        selectedDepartmentId
+                    String(
+                        department._id
+                    ) ===
+                        String(
+                            selectedDepartmentId
+                        )
                 ) {
-                    option.selected = true;
+                    option.selected =
+                        true;
                 }
 
                 departmentSelect.appendChild(
@@ -122,6 +113,16 @@ async function loadDepartments(
                 Unable to load departments
             </option>
         `;
+
+        const message =
+            error.response?.data?.message ||
+            "Unable to load departments.";
+
+        console.error(
+            "Department API error:",
+            message
+        );
+
     } finally {
         departmentSelect.disabled = false;
     }
@@ -185,7 +186,8 @@ function getFormData() {
                 .trim(),
 
         department:
-            departmentSelect?.value || null,
+            departmentSelect?.value ||
+            null,
 
         gender:
             document
@@ -230,13 +232,13 @@ function resetDoctorForm() {
         getDepartmentSelect();
 
     if (departmentSelect) {
-        departmentSelect.disabled = false;
-
         departmentSelect.innerHTML = `
             <option value="">
-                Select department
+                Loading departments...
             </option>
         `;
+
+        departmentSelect.disabled = false;
     }
 }
 
@@ -251,14 +253,11 @@ async function handleSubmit(event) {
 
     try {
         if (editingDoctorId) {
-
             await updateDoctor(
                 editingDoctorId,
                 data
             );
-
         } else {
-
             const doctorId =
                 document
                     .getElementById(
@@ -325,18 +324,16 @@ async function editDoctor(id) {
 
         document.getElementById(
             "doctorModalTitle"
-        ).textContent =
-            "Edit Doctor";
+        ).textContent = "Edit Doctor";
 
-        const doctorIdInput =
-            document.getElementById(
-                "doctorId"
-            );
-
-        doctorIdInput.value =
+        document.getElementById(
+            "doctorId"
+        ).value =
             doctor.doctorId || "";
 
-        doctorIdInput.disabled = true;
+        document.getElementById(
+            "doctorId"
+        ).disabled = true;
 
         document.getElementById(
             "doctorFirstName"
@@ -408,14 +405,12 @@ async function editDoctor(id) {
 }
 
 // ==========================================
-// OPEN ADD DOCTOR
+// OPEN NEW DOCTOR
 // ==========================================
 
 async function openNewDoctorForm() {
-
     resetDoctorForm();
 
-    // Load departments BEFORE opening modal
     await loadDepartments();
 
     const modal =
@@ -442,16 +437,11 @@ function closeDoctorModal() {
 }
 
 // ==========================================
-// INITIALIZE FORM
+// INITIALIZE
 // ==========================================
 
 function initDoctorForm() {
-
     if (!form) {
-        console.error(
-            "Doctor form #doctorForm not found."
-        );
-
         return;
     }
 

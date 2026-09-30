@@ -1,0 +1,1159 @@
+/* =========================================================
+   MEDICORE REGISTRATION
+   Administrator Account — Step 1
+   ========================================================= */
+
+:root {
+    --medicore-primary: #0f766e;
+    --medicore-primary-dark: #115e59;
+    --medicore-primary-light: #ccfbf1;
+
+    --medicore-navy: #12304a;
+    --medicore-text: #243746;
+    --medicore-muted: #6b7c8f;
+
+    --medicore-border: #dbe5ea;
+    --medicore-background: #f7fafb;
+    --medicore-white: #ffffff;
+
+    --medicore-danger: #dc3545;
+    --medicore-success: #198754;
+
+    --shadow-soft: 0 20px 50px rgba(18, 48, 74, 0.10);
+}
+
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.register-page {
+    min-height: 100vh;
+    display: flex;
+    background: var(--medicore-background);
+}
+
+
+/* =========================================================
+   LEFT BRAND PANEL
+   ========================================================= */
+
+.register-brand-panel {
+    width: 42%;
+    min-height: 100vh;
+
+    position: relative;
+    overflow: hidden;
+
+    color: var(--medicore-white);
+
+    background:
+        radial-gradient(
+            circle at 85% 15%,
+            rgba(45, 212, 191, 0.16),
+            transparent 32%
+        ),
+        linear-gradient(
+            145deg,
+            #0c2f42 0%,
+            #123f55 48%,
+            #0f766e 100%
+        );
+}
+
+
+.register-brand-panel::before {
+    content: "";
+
+    position: absolute;
+
+    width: 480px;
+    height: 480px;
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+
+    border-radius: 50%;
+
+    right: -240px;
+    top: -170px;
+}
+
+
+.register-brand-panel::after {
+    content: "";
+
+    position: absolute;
+
+    width: 620px;
+    height: 620px;
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    border-radius: 50%;
+
+    left: -430px;
+    bottom: -330px;
+}
+
+
+.register-brand-content {
+    min-height: 100vh;
+
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 48px 10%;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.brand-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    width: fit-content;
+
+    color: inherit;
+
+    text-decoration: none;
+}
+
+
+.brand-logo:hover {
+    color: inherit;
+}
+
+
+.brand-logo-mark {
+    width: 42px;
+    height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.13);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    font-size: 19px;
+}
+
+
+.brand-logo-text {
+    font-size: 19px;
+    font-weight: 750;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   BRAND MESSAGE
+   ========================================================= */
+
+.register-brand-message {
+    max-width: 540px;
+
+    margin-top: auto;
+    margin-bottom: 38px;
+}
+
+
+.brand-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    color: #8ee5da;
+
+    font-size: 11px;
+    font-weight: 750;
+
+    letter-spacing: 1.8px;
+}
+
+
+.register-brand-message h1 {
+    margin: 0;
+
+    color: white;
+
+    font-size: clamp(35px, 3.4vw, 52px);
+    line-height: 1.08;
+
+    font-weight: 700;
+
+    letter-spacing: -1.5px;
+}
+
+
+.register-brand-message h1 span {
+    display: block;
+
+    color: #79dcd2;
+}
+
+
+.register-brand-message p {
+    max-width: 490px;
+
+    margin: 24px 0 0;
+
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   REGISTRATION PROGRESS
+   ========================================================= */
+
+.registration-progress {
+    max-width: 470px;
+
+    margin-bottom: 40px;
+}
+
+
+.progress-step {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    opacity: 0.43;
+}
+
+
+.progress-step.active {
+    opacity: 1;
+}
+
+
+.progress-number {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+
+    color: rgba(255, 255, 255, 0.75);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+
+.progress-step.active .progress-number {
+    background: rgba(255, 255, 255, 0.12);
+
+    border-color: rgba(255, 255, 255, 0.27);
+
+    color: #91e9df;
+}
+
+
+.progress-step strong,
+.progress-step small {
+    display: block;
+}
+
+
+.progress-step strong {
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+.progress-step small {
+    margin-top: 2px;
+
+    color: rgba(255, 255, 255, 0.50);
+
+    font-size: 10px;
+}
+
+
+.progress-line {
+    width: 1px;
+    height: 15px;
+
+    margin: 3px 0 3px 19px;
+
+    background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================================
+   BRAND FOOTER
+   ========================================================= */
+
+.brand-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.11);
+
+    color: rgba(255, 255, 255, 0.46);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FORM PANEL
+   ========================================================= */
+
+.register-form-panel {
+    width: 58%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 0;
+
+    background: var(--medicore-background);
+}
+
+
+.register-container {
+    width: min(520px, calc(100% - 48px));
+}
+
+
+/* =========================================================
+   MOBILE BRAND
+   ========================================================= */
+
+.mobile-brand {
+    display: none;
+
+    align-items: center;
+    gap: 12px;
+
+    width: fit-content;
+
+    margin-bottom: 30px;
+
+    color: var(--medicore-navy);
+
+    text-decoration: none;
+}
+
+
+.mobile-brand:hover {
+    color: var(--medicore-navy);
+}
+
+
+.mobile-brand .brand-logo-mark {
+    background: var(--medicore-primary-light);
+
+    border: none;
+
+    color: var(--medicore-primary);
+}
+
+
+/* =========================================================
+   STEP HEADER
+   ========================================================= */
+
+.step-header {
+    margin-bottom: 28px;
+}
+
+
+.step-indicator {
+    margin-bottom: 8px;
+
+    color: var(--medicore-primary);
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+}
+
+
+.step-track {
+    width: 100%;
+    height: 3px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #e6edef;
+}
+
+
+.step-track-active {
+    display: block;
+
+    width: 25%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background: var(--medicore-primary);
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.register-heading {
+    margin-bottom: 27px;
+}
+
+
+.register-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: var(--medicore-primary);
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 1.7px;
+}
+
+
+.register-heading h2 {
+    margin: 0;
+
+    color: var(--medicore-navy);
+
+    font-size: 31px;
+    line-height: 1.2;
+
+    font-weight: 720;
+
+    letter-spacing: -0.7px;
+}
+
+
+.register-heading p {
+    max-width: 470px;
+
+    margin: 9px 0 0;
+
+    color: var(--medicore-muted);
+
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+.register-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 18px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+.register-alert-error {
+    color: #842029;
+
+    background: #fff1f2;
+
+    border: 1px solid #fecdd3;
+}
+
+
+.register-alert-success {
+    color: #0f5132;
+
+    background: #ecfdf3;
+
+    border: 1px solid #bbf7d0;
+}
+
+
+/* =========================================================
+   FORM FIELDS
+   ========================================================= */
+
+.name-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+
+.register-field {
+    margin-bottom: 18px;
+}
+
+
+.register-field label,
+.field-label-row label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--medicore-text);
+
+    font-size: 12px;
+    font-weight: 650;
+}
+
+
+.field-label-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+}
+
+
+.field-label-row label {
+    margin-bottom: 0;
+}
+
+
+.optional-label {
+    margin-left: 5px;
+
+    color: #9aa8b2;
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.input-wrapper {
+    position: relative;
+}
+
+
+.input-icon {
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #91a2af;
+
+    font-size: 14px;
+
+    pointer-events: none;
+
+    transition: color 0.2s ease;
+}
+
+
+.input-wrapper input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 43px;
+
+    border: 1px solid var(--medicore-border);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: white;
+
+    color: var(--medicore-text);
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.input-wrapper input::placeholder {
+    color: #a6b2bb;
+}
+
+
+.input-wrapper input:focus {
+    border-color: var(--medicore-primary);
+
+    box-shadow:
+        0 0 0 3px rgba(15, 118, 110, 0.09);
+}
+
+
+.input-wrapper:focus-within .input-icon {
+    color: var(--medicore-primary);
+}
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+.password-toggle {
+    position: absolute;
+
+    right: 6px;
+    top: 50%;
+
+    width: 34px;
+    height: 34px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 7px;
+
+    background: transparent;
+
+    color: #82939f;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.password-toggle:hover {
+    background: #f1f5f7;
+
+    color: var(--medicore-primary);
+}
+
+
+/* =========================================================
+   VALIDATION
+   ========================================================= */
+
+.field-error {
+    display: block;
+
+    min-height: 16px;
+
+    margin-top: 4px;
+
+    color: var(--medicore-danger);
+
+    font-size: 10px;
+}
+
+
+.input-wrapper.input-error input {
+    border-color: var(--medicore-danger);
+
+    box-shadow:
+        0 0 0 3px rgba(220, 53, 69, 0.07);
+}
+
+
+.input-wrapper.input-success input {
+    border-color: var(--medicore-success);
+}
+
+
+/* =========================================================
+   PASSWORD STRENGTH
+   ========================================================= */
+
+.password-strength {
+    margin-top: 8px;
+}
+
+
+.strength-bars {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 4px;
+
+    margin-bottom: 6px;
+}
+
+
+.strength-bars span {
+    height: 3px;
+
+    border-radius: 10px;
+
+    background: #e4eaed;
+
+    transition: background 0.2s ease;
+}
+
+
+.password-strength p {
+    margin: 0;
+
+    color: #8998a3;
+
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+
+.password-strength-label {
+    color: #8998a3;
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.password-strength.weak
+.strength-bars span:nth-child(1) {
+    background: #dc3545;
+}
+
+
+.password-strength.fair
+.strength-bars span:nth-child(-n+2) {
+    background: #e9a23b;
+}
+
+
+.password-strength.good
+.strength-bars span:nth-child(-n+3) {
+    background: #0d9488;
+}
+
+
+.password-strength.strong
+.strength-bars span {
+    background: #198754;
+}
+
+
+.password-strength.weak
+.password-strength-label {
+    color: #dc3545;
+}
+
+
+/* =========================================================
+   TERMS
+   ========================================================= */
+
+.terms-option {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin-top: 2px;
+
+    color: var(--medicore-muted);
+
+    font-size: 10.5px;
+
+    line-height: 1.5;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+
+.terms-option input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.custom-checkbox {
+    width: 17px;
+    height: 17px;
+
+    flex: 0 0 17px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 1px;
+
+    border: 1px solid #cbd7de;
+
+    border-radius: 4px;
+
+    background: white;
+
+    color: white;
+
+    font-size: 10px;
+
+    transition: 0.2s ease;
+}
+
+
+.terms-option input:checked + .custom-checkbox {
+    background: var(--medicore-primary);
+
+    border-color: var(--medicore-primary);
+}
+
+
+.terms-option a {
+    color: var(--medicore-primary);
+
+    font-weight: 650;
+
+    text-decoration: none;
+}
+
+
+.terms-option a:hover {
+    text-decoration: underline;
+}
+
+
+.terms-error {
+    margin-left: 26px;
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.register-submit {
+    width: 100%;
+    height: 49px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 18px;
+
+    border: 0;
+
+    border-radius: 8px;
+
+    background: var(--medicore-primary);
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px rgba(15, 118, 110, 0.15);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.register-submit:hover:not(:disabled) {
+    background: var(--medicore-primary-dark);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 22px rgba(15, 118, 110, 0.20);
+}
+
+
+.register-submit:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+
+.register-submit:disabled {
+    opacity: 0.72;
+
+    cursor: not-allowed;
+}
+
+
+.register-submit i {
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.register-spinner {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.spinner {
+    width: 14px;
+    height: 14px;
+
+    border: 2px solid rgba(255, 255, 255, 0.4);
+
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation: registerSpin 0.7s linear infinite;
+}
+
+
+@keyframes registerSpin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   LOGIN PROMPT
+   ========================================================= */
+
+.login-prompt {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 20px;
+
+    color: var(--medicore-muted);
+
+    font-size: 11px;
+}
+
+
+.login-prompt a {
+    color: var(--medicore-primary);
+
+    font-weight: 650;
+
+    text-decoration: none;
+}
+
+
+.login-prompt a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   SECURITY
+   ========================================================= */
+
+.security-note {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 21px;
+
+    color: #81919d;
+
+    font-size: 9.5px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+.security-note i {
+    color: var(--medicore-primary);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   COPYRIGHT
+   ========================================================= */
+
+.register-copyright {
+    display: none;
+
+    margin-top: 28px;
+
+    color: #9aa8b2;
+
+    font-size: 9.5px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .register-page {
+        display: block;
+    }
+
+
+    .register-brand-panel {
+        display: none;
+    }
+
+
+    .register-form-panel {
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 38px 0;
+    }
+
+
+    .register-container {
+        width: min(
+            520px,
+            calc(100% - 40px)
+        );
+    }
+
+
+    .mobile-brand {
+        display: inline-flex;
+    }
+
+
+    .register-copyright {
+        display: block;
+    }
+
+}
+
+
+@media (max-width: 575.98px) {
+
+    .register-form-panel {
+        padding: 27px 0;
+    }
+
+
+    .register-container {
+        width: calc(100% - 32px);
+    }
+
+
+    .mobile-brand {
+        margin-bottom: 28px;
+    }
+
+
+    .register-heading h2 {
+        font-size: 28px;
+    }
+
+
+    .register-heading p {
+        font-size: 12px;
+    }
+
+
+    .name-grid {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .input-wrapper input {
+        height: 47px;
+    }
+
+
+    .register-submit {
+        height: 49px;
+    }
+
+
+    .login-prompt {
+        flex-wrap: wrap;
+
+        text-align: center;
+    }
+
+}

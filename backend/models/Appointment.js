@@ -16,7 +16,7 @@ const appointmentSchema = new mongoose.Schema(
 
         doctor: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
+            ref: "Doctor",
             required: true
         },
 
@@ -28,6 +28,7 @@ const appointmentSchema = new mongoose.Schema(
         reason: {
             type: String,
             trim: true,
+            maxlength: 500,
             default: ""
         },
 
@@ -47,10 +48,26 @@ const appointmentSchema = new mongoose.Schema(
     }
 );
 
+// ==========================================
+// INDEXES
+// ==========================================
+
 appointmentSchema.index({
     hospital: 1,
     appointmentDate: 1
 });
 
-module.exports =
-    mongoose.model("Appointment", appointmentSchema);
+appointmentSchema.index({
+    hospital: 1,
+    patient: 1
+});
+
+appointmentSchema.index({
+    hospital: 1,
+    doctor: 1
+});
+
+module.exports = mongoose.model(
+    "Appointment",
+    appointmentSchema
+);

@@ -243,14 +243,13 @@ const updateDepartment = async (req, res, next) => {
         }
 
         const allowedFields = [
-            "name",
-            "code",
-            "description",
-            "headOfDepartment",
-            "phone",
-            "location",
-            "status"
-        ];
+    "name",
+    "description",
+    "headOfDepartment",
+    "phone",
+    "location",
+    "status"
+];
 
         allowedFields.forEach((field) => {
             if (
