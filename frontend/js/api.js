@@ -7,31 +7,75 @@ const api = axios.create({
     }
 });
 
-// Attach JWT automatically to authenticated requests
+
+// =========================================================
+// GET STORED AUTH TOKEN
+// =========================================================
+
+function getAuthToken() {
+
+    return (
+        localStorage.getItem("medicore_token") ||
+        sessionStorage.getItem("medicore_token")
+    );
+
+}
+
+
+// =========================================================
+// ATTACH JWT TO REQUESTS
+// =========================================================
+
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem("medicore_token");
+
+        const token = getAuthToken();
 
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+
+            config.headers = config.headers || {};
+
+            config.headers.Authorization =
+                `Bearer ${token}`;
+
         }
 
         return config;
+
     },
     (error) => Promise.reject(error)
 );
 
-// Handle authentication errors globally
+
+// =========================================================
+// GLOBAL AUTH ERROR HANDLING
+// =========================================================
+
 api.interceptors.response.use(
     (response) => response,
+
     (error) => {
+
         if (error.response?.status === 401) {
-            localStorage.removeItem("medicore_token");
-            localStorage.removeItem("medicore_user");
+
+            console.warn(
+                "MediCore API authentication failed:",
+                error.config?.url
+            );
+
+            /*
+             * Do not immediately delete the token here.
+             *
+             * Individual pages can decide how to handle
+             * an expired/invalid session.
+             */
+
         }
 
         return Promise.reject(error);
+
     }
 );
+
 
 window.mediCoreAPI = api;

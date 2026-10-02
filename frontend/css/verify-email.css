@@ -1,0 +1,917 @@
+/* =========================================================
+   MEDICORE — EMAIL VERIFICATION
+   Enterprise Authentication Design System
+========================================================= */
+
+:root {
+    --verify-primary: #0f766e;
+    --verify-primary-dark: #115e59;
+    --verify-primary-light: #ccfbf1;
+
+    --verify-navy: #12304a;
+    --verify-text: #243746;
+    --verify-muted: #6b7c8f;
+
+    --verify-border: #dbe5ea;
+    --verify-background: #f7fafb;
+    --verify-white: #ffffff;
+
+    --verify-danger: #dc3545;
+    --verify-danger-bg: #fff5f5;
+
+    --verify-success: #15803d;
+    --verify-success-bg: #f0fdf4;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.verify-page {
+    min-height: 100vh;
+    display: flex;
+    background: var(--verify-background);
+}
+
+
+/* =========================================================
+   LEFT BRAND PANEL
+========================================================= */
+
+.verify-brand-panel {
+    width: 42%;
+    min-height: 100vh;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(45, 212, 191, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(20, 184, 166, 0.14),
+            transparent 35%
+        ),
+        linear-gradient(
+            145deg,
+            #0b4f4a 0%,
+            #0f766e 48%,
+            #12304a 100%
+        );
+
+    color: #ffffff;
+}
+
+
+.verify-brand-panel::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    right: -190px;
+    top: -170px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+
+.verify-brand-panel::after {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    left: -150px;
+    bottom: -130px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+
+.verify-brand-content {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 58px 70px;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.verify-brand-logo,
+.verify-mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.verify-brand-mark {
+    width: 42px;
+    height: 42px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.16);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.10);
+}
+
+
+.verify-brand-name {
+    color: #ffffff;
+
+    font-size: 19px;
+    font-weight: 800;
+
+    letter-spacing: 2.4px;
+}
+
+
+/* =========================================================
+   BRAND COPY
+========================================================= */
+
+.verify-brand-copy {
+    margin-top: auto;
+    margin-bottom: 55px;
+
+    max-width: 480px;
+}
+
+
+.verify-brand-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: rgba(255, 255, 255, 0.68);
+}
+
+
+.verify-brand-copy h1 {
+    margin: 0 0 20px;
+
+    color: #ffffff;
+
+    font-size: clamp(38px, 4vw, 58px);
+    line-height: 1.08;
+
+    font-weight: 700;
+
+    letter-spacing: -1.8px;
+}
+
+
+.verify-brand-copy p {
+    margin: 0;
+
+    max-width: 440px;
+
+    color: rgba(255, 255, 255, 0.76);
+
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   SECURITY LIST
+========================================================= */
+
+.verify-security-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+
+    margin-bottom: 50px;
+}
+
+
+.verify-security-item {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.verify-security-icon {
+    width: 39px;
+    height: 39px;
+
+    flex: 0 0 39px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    color: #99f6e4;
+
+    font-size: 17px;
+}
+
+
+.verify-security-item strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.verify-security-item small {
+    display: block;
+
+    color: rgba(255, 255, 255, 0.58);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   BRAND FOOTER
+========================================================= */
+
+.verify-brand-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    color: rgba(255, 255, 255, 0.48);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RIGHT FORM PANEL
+========================================================= */
+
+.verify-form-panel {
+    width: 58%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--verify-background);
+}
+
+
+.verify-form-wrapper {
+    width: min(520px, calc(100% - 80px));
+
+    padding: 60px 0;
+}
+
+
+/* =========================================================
+   MOBILE BRAND
+========================================================= */
+
+.verify-mobile-brand {
+    margin-bottom: 45px;
+}
+
+
+.verify-mobile-brand .verify-brand-mark {
+    background: var(--verify-primary);
+
+    border-color: var(--verify-primary);
+
+    box-shadow:
+        0 8px 20px rgba(15, 118, 110, 0.18);
+}
+
+
+.verify-mobile-brand .verify-brand-name {
+    color: var(--verify-navy);
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.verify-progress {
+    display: flex;
+
+    gap: 7px;
+
+    margin-bottom: 34px;
+}
+
+
+.verify-progress-line {
+    width: 44px;
+    height: 3px;
+
+    border-radius: 10px;
+
+    background: #dce6ea;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.verify-progress-line.active {
+    background: var(--verify-primary);
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.verify-heading {
+    margin-bottom: 28px;
+}
+
+
+.verify-eyebrow {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--verify-primary);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+}
+
+
+.verify-heading h2 {
+    margin: 0 0 9px;
+
+    color: var(--verify-navy);
+
+    font-size: 32px;
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    letter-spacing: -0.7px;
+}
+
+
+.verify-heading p {
+    margin: 0;
+
+    color: var(--verify-muted);
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.verify-alert {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    padding: 12px 14px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.verify-alert i {
+    margin-top: 1px;
+
+    font-size: 16px;
+}
+
+
+.verify-alert-error {
+    color: #b42318;
+
+    background: var(--verify-danger-bg);
+
+    border: 1px solid #fecaca;
+}
+
+
+.verify-alert-success {
+    color: var(--verify-success);
+
+    background: var(--verify-success-bg);
+
+    border: 1px solid #bbf7d0;
+}
+
+
+/* =========================================================
+   EMAIL CARD
+========================================================= */
+
+.verify-email-card {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 18px;
+
+    margin-bottom: 26px;
+
+    border: 1px solid var(--verify-border);
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 6px 20px rgba(18, 48, 74, 0.035);
+}
+
+
+.verify-envelope {
+    flex: 0 0 auto;
+}
+
+
+.verify-envelope-icon {
+    width: 52px;
+    height: 52px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: var(--verify-primary-light);
+
+    color: var(--verify-primary);
+
+    font-size: 24px;
+}
+
+
+.verify-email-card-content {
+    min-width: 0;
+}
+
+
+.verify-card-label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--verify-primary);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+}
+
+
+.verify-email-card-content strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    overflow: hidden;
+
+    color: var(--verify-navy);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.verify-email-card-content p {
+    margin: 0;
+
+    color: var(--verify-muted);
+
+    font-size: 11px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   RESEND SECTION
+========================================================= */
+
+.verify-resend-section {
+    text-align: center;
+}
+
+
+.verify-resend-question {
+    margin: 0 0 11px;
+
+    color: var(--verify-text);
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+.verify-resend-button {
+    width: 100%;
+    height: 49px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1px solid var(--verify-primary);
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: var(--verify-primary);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.verify-resend-button:hover {
+    background: var(--verify-primary);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 18px rgba(15, 118, 110, 0.14);
+}
+
+
+.verify-resend-button:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+#resendArrow {
+    font-size: 14px;
+}
+
+
+.verify-countdown {
+    min-height: 18px;
+
+    margin-top: 9px;
+
+    color: var(--verify-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   CHANGE EMAIL
+========================================================= */
+
+.verify-change-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    margin-top: 24px;
+
+    color: var(--verify-muted);
+
+    font-size: 11px;
+}
+
+
+.verify-change-email a {
+    color: var(--verify-primary);
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+.verify-change-email a:hover {
+    color: var(--verify-primary-dark);
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   BACK LINK
+========================================================= */
+
+.verify-back {
+    margin-top: 23px;
+
+    text-align: center;
+}
+
+
+.verify-back a {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 7px;
+
+    color: var(--verify-muted);
+
+    font-size: 12px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+
+.verify-back a:hover {
+    color: var(--verify-primary);
+}
+
+
+.verify-back i {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SECURITY NOTE
+========================================================= */
+
+.verify-security-note {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 11px;
+
+    margin-top: 28px;
+
+    padding: 13px 14px;
+
+    border: 1px solid #e1eaed;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+}
+
+
+.verify-security-note > i {
+    flex: 0 0 auto;
+
+    margin-top: 1px;
+
+    color: var(--verify-primary);
+
+    font-size: 17px;
+}
+
+
+.verify-security-note strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--verify-text);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.verify-security-note span {
+    display: block;
+
+    color: #8b9aa5;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   MOBILE FOOTER
+========================================================= */
+
+.verify-mobile-footer {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 30px;
+
+    color: #9aa8b2;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1199.98px) {
+
+    .verify-brand-content {
+        padding: 50px 48px;
+    }
+
+    .verify-form-wrapper {
+        width: min(500px, calc(100% - 70px));
+    }
+
+    .verify-brand-copy h1 {
+        font-size: 46px;
+    }
+}
+
+
+@media (max-width: 991.98px) {
+
+    .verify-page {
+        display: block;
+
+        min-height: 100vh;
+    }
+
+    .verify-form-panel {
+        width: 100%;
+
+        min-height: 100vh;
+
+        padding: 0 20px;
+    }
+
+    .verify-form-wrapper {
+        width: min(520px, 100%);
+
+        padding: 42px 0;
+    }
+}
+
+
+@media (max-width: 575.98px) {
+
+    .verify-form-panel {
+        padding: 0 18px;
+    }
+
+    .verify-form-wrapper {
+        padding: 30px 0;
+    }
+
+    .verify-mobile-brand {
+        margin-bottom: 34px;
+    }
+
+    .verify-heading h2 {
+        font-size: 27px;
+    }
+
+    .verify-heading p {
+        font-size: 13px;
+    }
+
+    .verify-progress {
+        margin-bottom: 28px;
+    }
+
+    .verify-progress-line {
+        width: 38px;
+    }
+
+    .verify-email-card {
+        align-items: flex-start;
+
+        padding: 15px;
+    }
+
+    .verify-envelope-icon {
+        width: 46px;
+        height: 46px;
+
+        font-size: 21px;
+    }
+
+    .verify-email-card-content strong {
+        font-size: 13px;
+    }
+
+    .verify-email-card-content p {
+        font-size: 10px;
+    }
+
+    .verify-mobile-footer {
+        flex-direction: column;
+
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.verify-resend-button:focus-visible,
+.verify-change-email a:focus-visible,
+.verify-back a:focus-visible {
+    outline: 2px solid var(--verify-primary);
+
+    outline-offset: 2px;
+}

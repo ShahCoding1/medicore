@@ -1,104 +1,394 @@
-let patientGrowthChart = null;
-let revenueChart = null;
+/* =========================================================
+   MEDICORE DASHBOARD UI
+   ========================================================= */
 
-export function initDashboardCharts() {
-    if (typeof Chart === "undefined") {
-        console.error(
-            "Chart.js is not available."
-        );
-    }
-}
+export function initDashboardUI() {
+    const user =
+        window.mediCoreAuth?.getCurrentUser();
 
-export function renderPatientGrowthChart(
-    data = []
-) {
-    const canvas =
-        document.getElementById(
-            "patientGrowthChart"
-        );
-
-    if (!canvas || typeof Chart === "undefined") {
+    if (!user) {
         return;
     }
 
-    const labels =
-        data.map(item => item._id);
+    const name =
+        user.name || "User";
 
-    const values =
-        data.map(item => item.total);
+    const firstName =
+        name.split(" ")[0];
 
-    if (patientGrowthChart) {
-        patientGrowthChart.destroy();
-    }
-
-    patientGrowthChart = new Chart(canvas, {
-        type: "line",
-
-        data: {
-            labels,
-
-            datasets: [
-                {
-                    label: "Patients",
-                    data: values,
-                    tension: 0.35,
-                    fill: true
-                }
-            ]
-        },
-
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        }
-    });
-}
-
-export function renderRevenueChart(
-    data = []
-) {
-    const canvas =
+    const greetingName =
         document.getElementById(
-            "revenueChart"
+            "dashboardUserName"
         );
 
-    if (!canvas || typeof Chart === "undefined") {
+    if (greetingName) {
+        greetingName.textContent =
+            firstName;
+    }
+
+
+    /* ==========================================
+       DASHBOARD PERIOD FILTER
+       ========================================== */
+
+    document
+        .querySelectorAll(".dashboard-filter")
+        .forEach((button) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .querySelectorAll(
+                            ".dashboard-filter"
+                        )
+                        .forEach((item) => {
+
+                            item.classList.remove(
+                                "active"
+                            );
+
+                        });
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                }
+            );
+
+        });
+}
+
+
+/* ==========================================
+   KPI RENDERING
+   ========================================== */
+
+export function renderDashboardKPIs(data) {
+
+    const values =
+        document.querySelectorAll(
+            ".mc-dashboard-kpi-value"
+        );
+
+    if (values.length < 4) {
         return;
     }
 
-    const labels =
-        data.map(item => item._id);
 
-    const values =
-        data.map(item => item.total);
+    values[0].textContent =
+        Number(
+            data.patients || 0
+        ).toLocaleString();
 
-    if (revenueChart) {
-        revenueChart.destroy();
+
+    values[1].textContent =
+        Number(
+            data.doctors || 0
+        ).toLocaleString();
+
+
+    values[2].textContent =
+        Number(
+            data.appointments || 0
+        ).toLocaleString();
+
+
+    values[3].textContent =
+        `PKR ${Number(
+            data.revenue || 0
+        ).toLocaleString()}`;
+}
+
+
+/* ==========================================
+   RECENT PATIENTS
+   ========================================== */
+
+export function renderRecentPatients(
+    patients = []
+) {
+
+    const tableBody =
+        document.getElementById(
+            "recentPatientsTableBody"
+        );
+
+    if (!tableBody) {
+        return;
     }
 
-    revenueChart = new Chart(canvas, {
-        type: "bar",
 
-        data: {
-            labels,
+    if (!patients.length) {
 
-            datasets: [
-                {
-                    label: "Revenue",
-                    data: values
-                }
-            ]
-        },
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7">
+                    <div class="dashboard-empty">
 
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+                        <div class="dashboard-empty-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                        <div class="dashboard-empty-title">
+                            No patients found
+                        </div>
+
+                        <div class="dashboard-empty-text">
+                            There is no recent patient activity
+                            to display right now.
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    tableBody.innerHTML =
+        patients
+            .map((patient) => {
+
+                const firstName =
+                    patient.firstName || "";
+
+                const lastName =
+                    patient.lastName || "";
+
+                const fullName =
+                    `${firstName} ${lastName}`.trim()
+                    || "Unknown Patient";
+
+
+                const initials =
+                    fullName
+                        .split(" ")
+                        .filter(Boolean)
+                        .slice(0, 2)
+                        .map(
+                            (part) =>
+                                part
+                                    .charAt(0)
+                                    .toUpperCase()
+                        )
+                        .join("");
+
+
+                const date =
+                    patient.createdAt
+                        ? new Date(
+                            patient.createdAt
+                        ).toLocaleDateString(
+                            "en-US",
+                            {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric"
+                            }
+                        )
+                        : "—";
+
+
+                const status =
+                    patient.status || "active";
+
+
+                return `
+                    <tr>
+
+                        <td>
+
+                            <div class="dashboard-patient">
+
+                                <div class="dashboard-patient-avatar">
+                                    ${initials || "P"}
+                                </div>
+
+                                <div>
+
+                                    <div class="dashboard-patient-name">
+                                        ${fullName}
+                                    </div>
+
+                                    <div class="dashboard-patient-id">
+                                        Patient
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            ${patient.patientId || "—"}
+                        </td>
+
+
+                        <td>
+                            ${patient.department?.name || "—"}
+                        </td>
+
+
+                        <td>
+                            —
+                        </td>
+
+
+                        <td>
+                            ${date}
+                        </td>
+
+
+                        <td>
+
+                            <span class="dashboard-status">
+                                ${status}
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <button
+                                class="dashboard-table-action"
+                                type="button"
+                                title="View patient"
+                                aria-label="View patient"
+                            >
+
+                                <i class="bi bi-arrow-up-right"></i>
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+                `;
+
+            })
+            .join("");
+}
+
+
+/* ==========================================
+   APPOINTMENT TIMELINE
+   ========================================== */
+
+export function renderAppointmentTimeline(
+    appointments = []
+) {
+
+    const timeline =
+        document.getElementById(
+            "appointmentTimeline"
+        );
+
+    if (!timeline) {
+        return;
+    }
+
+
+    if (!appointments.length) {
+
+        timeline.innerHTML = `
+            <div class="dashboard-empty">
+
+                <div class="dashboard-empty-icon">
+                    <i class="bi bi-calendar2-check"></i>
+                </div>
+
+                <div class="dashboard-empty-title">
+                    No appointments today
+                </div>
+
+                <div class="dashboard-empty-text">
+                    There are no appointments scheduled
+                    for today.
+                </div>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    timeline.innerHTML =
+        appointments
+            .map((appointment) => {
+
+                const time =
+                    appointment.appointmentDate
+                        ? new Date(
+                            appointment.appointmentDate
+                        ).toLocaleTimeString(
+                            [],
+                            {
+                                hour: "2-digit",
+                                minute: "2-digit"
+                            }
+                        )
+                        : "—";
+
+
+                const patient =
+                    appointment.patient
+                        ? `${appointment.patient.firstName || ""}
+                           ${appointment.patient.lastName || ""}`
+                              .trim()
+                        : "Patient";
+
+
+                const doctor =
+                    appointment.doctor?.name ||
+                    "Doctor";
+
+
+                const reason =
+                    appointment.reason ||
+                    "Consultation";
+
+
+                return `
+                    <div class="dashboard-appointment">
+
+                        <div class="dashboard-appointment-time">
+                            ${time}
+                        </div>
+
+
+                        <div class="dashboard-appointment-content">
+
+                            <div class="dashboard-appointment-patient">
+                                ${patient}
+                            </div>
+
+
+                            <div class="dashboard-appointment-details">
+                                ${reason}
+                                ·
+                                ${doctor}
+                            </div>
+
+
+                            <span class="dashboard-appointment-tag">
+                                Scheduled
+                            </span>
+
+                        </div>
+
+                    </div>
+                `;
+
+            })
+            .join("");
 }

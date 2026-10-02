@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>MediCore — Onboarding</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/onboarding.css">
+</head>
+
+<body>
+
+<div class="onboarding-page">
+
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+    <aside class="onboarding-sidebar">
+
+        <div class="onboarding-brand">
+            <div class="brand-mark">
+                <i class="bi bi-heart-pulse-fill"></i>
+            </div>
+
+            <div>
+                <div class="brand-name">MEDICORE</div>
+                <div class="brand-tagline">
+                    Connected Healthcare.
+                    Smarter Operations.
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-content">
+
+            <div class="sidebar-eyebrow">
+                WORKSPACE SETUP
+            </div>
+
+            <h1>
+                Let's build your
+                healthcare workspace.
+            </h1>
+
+            <p class="sidebar-description">
+                Complete these steps to configure your
+                MediCore hospital workspace.
+            </p>
+
+            <div class="onboarding-progress">
+
+                <!-- STEP 01 -->
+                <button
+                    type="button"
+                    class="progress-step active"
+                    data-step="1"
+                    id="stepNavigation1"
+                >
+                    <span class="step-number">01</span>
+
+                    <span class="step-content">
+                        <strong>Hospital</strong>
+                        <small>Hospital information</small>
+                    </span>
+
+                    <span class="step-state">
+                        <i class="bi bi-check2"></i>
+                    </span>
+                </button>
+
+                <!-- STEP 02 -->
+                <button
+                    type="button"
+                    class="progress-step"
+                    data-step="2"
+                    id="stepNavigation2"
+                >
+                    <span class="step-number">02</span>
+
+                    <span class="step-content">
+                        <strong>Departments</strong>
+                        <small>Hospital departments</small>
+                    </span>
+
+                    <span class="step-state">
+                        <i class="bi bi-circle"></i>
+                    </span>
+                </button>
+
+                <!-- STEP 03 -->
+                <button
+                    type="button"
+                    class="progress-step"
+                    data-step="3"
+                    id="stepNavigation3"
+                >
+                    <span class="step-number">03</span>
+
+                    <span class="step-content">
+                        <strong>Staff</strong>
+                        <small>Staff accounts</small>
+                    </span>
+
+                    <span class="step-state">
+                        <i class="bi bi-circle"></i>
+                    </span>
+                </button>
+
+                <!-- STEP 04 -->
+                <button
+                    type="button"
+                    class="progress-step"
+                    data-step="4"
+                    id="stepNavigation4"
+                >
+                    <span class="step-number">04</span>
+
+                    <span class="step-content">
+                        <strong>Preferences</strong>
+                        <small>Workspace preferences</small>
+                    </span>
+
+                    <span class="step-state">
+                        <i class="bi bi-circle"></i>
+                    </span>
+                </button>
+
+                <!-- STEP 05 -->
+                <button
+                    type="button"
+                    class="progress-step"
+                    data-step="5"
+                    id="stepNavigation5"
+                >
+                    <span class="step-number">05</span>
+
+                    <span class="step-content">
+                        <strong>Complete</strong>
+                        <small>Workspace ready</small>
+                    </span>
+
+                    <span class="step-state">
+                        <i class="bi bi-circle"></i>
+                    </span>
+                </button>
+
+            </div>
+
+            <div class="sidebar-security">
+
+                <div class="security-icon">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+
+                <div>
+                    <strong>Secure workspace setup</strong>
+
+                    <p>
+                        Your hospital information is protected
+                        using MediCore's secure access controls.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="sidebar-footer">
+            <span>
+                <i class="bi bi-lock-fill"></i>
+                Secure onboarding
+            </span>
+
+            <span>
+                © <span id="sidebarYear"></span> MediCore
+            </span>
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
+    <main class="onboarding-main">
+
+        <div class="onboarding-container">
+
+            <!-- TOP BAR -->
+            <div class="onboarding-topbar">
+
+                <div class="mobile-brand">
+                    <div class="mobile-brand-icon">
+                        <i class="bi bi-heart-pulse-fill"></i>
+                    </div>
+
+                    <strong>MEDICORE</strong>
+                </div>
+
+                <button
+                    type="button"
+                    class="save-exit-button"
+                    id="saveAndExitBtn"
+                >
+                    <i class="bi bi-box-arrow-right"></i>
+                    Save & Exit
+                </button>
+
+            </div>
+
+
+            <!-- GLOBAL ALERTS -->
+            <div
+                id="onboardingError"
+                class="onboarding-alert alert-error d-none"
+                role="alert"
+            >
+                <div class="alert-icon">
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </div>
+
+                <div>
+                    <strong>Something went wrong</strong>
+                    <div id="onboardingErrorText"></div>
+                </div>
+
+                <button
+                    type="button"
+                    class="alert-close"
+                    id="closeErrorAlert"
+                    aria-label="Close"
+                >
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div
+                id="onboardingSuccess"
+                class="onboarding-alert alert-success d-none"
+                role="alert"
+            >
+                <div class="alert-icon">
+                    <i class="bi bi-check-circle-fill"></i>
+                </div>
+
+                <div>
+                    <strong>Saved successfully</strong>
+                    <div id="onboardingSuccessText"></div>
+                </div>
+
+                <button
+                    type="button"
+                    class="alert-close"
+                    id="closeSuccessAlert"
+                    aria-label="Close"
+                >
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+
+            <!-- =====================================================
+                 STEP 1 — HOSPITAL
+            ====================================================== -->
+            <section
+                class="onboarding-step-panel"
+                id="stepPanel1"
+            >
+
+                <div class="page-intro">
+
+                    <div class="step-badge">
+                        <span>01</span>
+                        Hospital
+                    </div>
+
+                    <h2>Tell us about your hospital</h2>
+
+                    <p>
+                        Add the basic information for your healthcare
+                        organization. You can update these details later
+                        from hospital settings.
+                    </p>
+
+                </div>
+
+
+                <form
+                    id="hospitalOnboardingForm"
+                    novalidate
+                >
+
+                    <div class="form-section-card">
+
+                        <div class="section-card-header">
+
+                            <div class="section-icon">
+                                <i class="bi bi-building"></i>
+                            </div>
+
+                            <div>
+                                <h3>Hospital information</h3>
+                                <p>
+                                    Basic identification and contact
+                                    information.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="field-group field-span-2">
+
+                                <label for="hospitalName">
+                                    Hospital name
+                                    <span>*</span>
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="bi bi-building"></i>
+
+                                    <input
+                                        type="text"
+                                        id="hospitalName"
+                                        name="hospitalName"
+                                        placeholder="e.g. City General Hospital"
+                                        maxlength="150"
+                                        autocomplete="organization"
+                                    >
+                                </div>
+
+                                <small
+                                    class="field-error"
+                                    id="hospitalNameError"
+                                ></small>
+
+                            </div>
+
+
+                            <div class="field-group">
+
+                                <label for="hospitalType">
+                                    Hospital type
+                                    <span>*</span>
+                                </label>
+
+                                <div class="input-wrapper select-wrapper">
+                                    <i class="bi bi-hospital"></i>
+
+                                    <select
+                                        id="hospitalType"
+                                        name="hospitalType"
+                                    >
+                                        <option value="">
+                                            Select hospital type
+                                        </option>
+
+                                        <option value="general">
+                                            General Hospital
+                                        </option>
+
+                                        <option value="specialized">
+                                            Specialized Hospital
+                                        </option>
+
+                                        <option value="teaching">
+                                            Teaching Hospital
+                                        </option>
+
+                                        <option value="clinic">
+                                            Clinic
+                                        </option>
+
+                                        <option value="medical_center">
+                                            Medical Center
+                                        </option>
+
+                                        <option value="other">
+                                            Other
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <small
+                                    class="field-error"
+                                    id="hospitalTypeError"
+                                ></small>
+
+                            </div>
+
+
+                            <div class="field-group">
+
+                                <label for="registrationNumber">
+                                    Registration number
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="bi bi-card-text"></i>
+
+                                    <input
+                                        type="text"
+                                        id="registrationNumber"
+                                        name="registrationNumber"
+                                        placeholder="Hospital registration number"
+                                        maxlength="100"
+                                    >
+                                </div>
+
+                            </div>
+
+
+                            <div class="field-group">
+
+                                <label for="hospitalCountry">
+                                    Country
+                                    <span>*</span>
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="bi bi-globe2"></i>
+
+                                    <input
+                                        type="text"
+                                        id="hospitalCountry"
+                                        name="hospitalCountry"
+                                        value="Pakistan"
+                                        placeholder="Country"
+                                        maxlength="80"
+                                    >
+                                </div>
+
+                                <small
+                                    class="field-error"
+                                    id="hospitalCountryError"
+                                ></small>
+
+                            </div>
+
+
+                            <div class="field-group">
+
+                                <label for="hospitalCity">
+                                    City
+                                    <span>*</span>
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="bi bi-geo-alt"></i>
+
+                                    <input
+                                        type="text"
+                                        id="hospitalCity"
+                                        name="hospitalCity"
+                                        placeholder="e.g. Peshawar"
+                                        maxlength="80"
+                                    >
+                                </div>
+
+                                <small
+                                    class="field-error"
+                                    id="hospitalCityError"
+                                ></small>
+
+                            </div>
+
+
+                            <div class="field-group field-span-2">
+
+                                <label for="hospitalAddress">
+                                    Address
+                                    <span>*</span>
+                                </label>
+
+                                <div class="input-wrapper textarea-wrapper">
+                                    <i class="bi bi-pin-map"></i>
+
+                                    <textarea
+                                        id="hospitalAddress"
+                                        name="hospitalAddress"
+                                        rows="3"
+                                        placeholder="Complete hospital address"
+                                        maxlength="300"
+                                    ></textarea>
+                                </div>
+
+                                <small
+                                    class="field-error"
+                                    id="hospitalAddressError"
+                                ></small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-section-card">
+
+                        <div class="section-card-header">
+
+                            <div class="section-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+
+                            <div>
+                                <h3>Contact information</h3>
+                                <p>
+                                    How patients and partners can contact
+                                    your hospital.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-grid">
+
+                            <div class="field-group">
+
+                                <label for="hospitalPhone">
+                                    Phone
+                                    <span>*</span>
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="bi bi-telephone"></i>
+
+                                    <input
+                                        type="tel"
+                                        id="hospitalPhone"
+                                        name="hospitalPhone"
+                                        placeholder="+92 300 1234567"
+                                        maxlength="30"
+                                    >
+                                </div>
+
+                                <small
+                                    class="field-error"
+                                    id="hospitalPhoneError"
+                                ></small>
+
+                            </div>
+
+
+                            <div class="field-group">
+
+                                <label for="hospitalEmail">
+                                    Email
+                                    <span>*</span>
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="bi bi-envelope"></i>
+
+                                    <input
+                                        type="email"
+                                        id="hospitalEmail"
+                                        name="hospitalEmail"
+                                        placeholder="info@hospital.com"
+                                        maxlength="150"
+                                        autocomplete="email"
+                                    >
+                                </div>
+
+                                <small
+                                    class="field-error"
+                                    id="hospitalEmailError"
+                                ></small>
+
+                            </div>
+
+
+                            <div class="field-group field-span-2">
+
+                                <label for="hospitalWebsite">
+                                    Website
+                                </label>
+
+                                <div class="input-wrapper">
+                                    <i class="bi bi-globe"></i>
+
+                                    <input
+                                        type="url"
+                                        id="hospitalWebsite"
+                                        name="hospitalWebsite"
+                                        placeholder="https://www.example.com"
+                                        maxlength="200"
+                                    >
+                                </div>
+
+                                <small
+                                    class="field-error"
+                                    id="hospitalWebsiteError"
+                                ></small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="onboarding-actions">
+
+                        <button
+                            type="button"
+                            class="secondary-action"
+                            id="hospitalBackButton"
+                        >
+                            <i class="bi bi-arrow-left"></i>
+                            Back
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="primary-action"
+                            id="hospitalContinueButton"
+                        >
+                            <span id="hospitalContinueButtonText">
+                                Continue
+                            </span>
+
+                            <span
+                                id="hospitalContinueSpinner"
+                                class="spinner-border spinner-border-sm d-none"
+                                aria-hidden="true"
+                            ></span>
+
+                            <i
+                                id="hospitalContinueArrow"
+                                class="bi bi-arrow-right"
+                            ></i>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- =====================================================
+                 STEP 2 — DEPARTMENTS
+            ====================================================== -->
+            <section
+                class="onboarding-step-panel d-none"
+                id="stepPanel2"
+            >
+
+                <div class="page-intro">
+
+                    <div class="step-badge">
+                        <span>02</span>
+                        Departments
+                    </div>
+
+                    <h2>Set up your departments</h2>
+
+                    <p>
+                        Create the departments that will organize
+                        clinical and operational activities inside
+                        your hospital.
+                    </p>
+
+                </div>
+
+
+                <div class="management-card">
+
+                    <div class="management-header">
+
+                        <div>
+
+                            <div class="management-title-row">
+
+                                <div class="section-icon">
+                                    <i class="bi bi-diagram-3"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Hospital departments</h3>
+
+                                    <p>
+                                        Add the departments that your
+                                        hospital will use.
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="primary-action compact-action"
+                            id="addDepartmentButton"
+                        >
+                            <i class="bi bi-plus-lg"></i>
+                            Add Department
+                        </button>
+
+                    </div>
+
+
+                    <div class="management-toolbar">
+
+                        <div class="search-box">
+
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="search"
+                                id="departmentSearch"
+                                placeholder="Search departments..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <div class="filter-select">
+
+                            <i class="bi bi-funnel"></i>
+
+                            <select id="departmentStatusFilter">
+
+                                <option value="">
+                                    All statuses
+                                </option>
+
+                                <option value="active">
+                                    Active
+                                </option>
+
+                                <option value="inactive">
+                                    Inactive
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="department-summary">
+
+                        <div class="summary-item">
+                            <span class="summary-icon">
+                                <i class="bi bi-building"></i>
+                            </span>
+
+                            <span>
+                                <strong id="departmentCount">
+                                    0
+                                </strong>
+
+                                <small>departments</small>
+                            </span>
+                        </div>
+
+                        <div
+                            class="department-loading d-none"
+                            id="departmentLoading"
+                        >
+                            <span class="spinner-border spinner-border-sm"></span>
+                            Loading departments...
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="table-responsive department-table-wrapper"
+                    >
+
+                        <table class="department-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Department</th>
+                                    <th>Code</th>
+                                    <th>Phone</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th class="actions-column">
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="departmentTableBody"></tbody>
+
+                        </table>
+
+
+                        <div
+                            class="table-empty-state"
+                            id="departmentEmptyState"
+                        >
+
+                            <div class="empty-icon">
+                                <i class="bi bi-diagram-3"></i>
+                            </div>
+
+                            <h4>No departments yet</h4>
+
+                            <p>
+                                Start by adding your first hospital
+                                department.
+                            </p>
+
+                            <button
+                                type="button"
+                                class="secondary-action"
+                                id="emptyAddDepartmentButton"
+                            >
+                                <i class="bi bi-plus-lg"></i>
+                                Add Department
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="table-error-state d-none"
+                            id="departmentErrorState"
+                        >
+
+                            <div class="empty-icon error-empty-icon">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </div>
+
+                            <h4>Unable to load departments</h4>
+
+                            <p id="departmentErrorText">
+                                Please try again.
+                            </p>
+
+                            <button
+                                type="button"
+                                class="secondary-action"
+                                id="retryDepartmentsButton"
+                            >
+                                <i class="bi bi-arrow-clockwise"></i>
+                                Try Again
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="onboarding-info-card">
+
+                    <div class="info-card-icon">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+
+                    <div>
+                        <strong>Tip</strong>
+
+                        <p>
+                            Department codes should be short and unique,
+                            such as <strong>ER</strong> for Emergency
+                            Room or <strong>CAR</strong> for Cardiology.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="onboarding-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-action"
+                        id="departmentBackButton"
+                    >
+                        <i class="bi bi-arrow-left"></i>
+                        Back
+                    </button>
+
+                    <button
+                        type="button"
+                        class="primary-action"
+                        id="departmentContinueButton"
+                    >
+                        <span id="departmentContinueButtonText">
+                            Continue
+                        </span>
+
+                        <span
+                            id="departmentContinueSpinner"
+                            class="spinner-border spinner-border-sm d-none"
+                        ></span>
+
+                        <i
+                            id="departmentContinueArrow"
+                            class="bi bi-arrow-right"
+                        ></i>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 STEP 3 — PLACEHOLDER
+            ====================================================== -->
+            <section
+                class="onboarding-step-panel d-none"
+                id="stepPanel3"
+            >
+
+                <div class="future-step-card">
+
+                    <div class="future-step-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <span class="future-step-label">
+                        STEP 03
+                    </span>
+
+                    <h2>Staff setup</h2>
+
+                    <p>
+                        Staff configuration will be enabled in the
+                        next onboarding implementation phase.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="secondary-action"
+                        id="futureStep3BackButton"
+                    >
+                        <i class="bi bi-arrow-left"></i>
+                        Back to Departments
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 STEP 4 — PLACEHOLDER
+            ====================================================== -->
+            <section
+                class="onboarding-step-panel d-none"
+                id="stepPanel4"
+            >
+
+                <div class="future-step-card">
+
+                    <div class="future-step-icon">
+                        <i class="bi bi-sliders"></i>
+                    </div>
+
+                    <span class="future-step-label">
+                        STEP 04
+                    </span>
+
+                    <h2>Workspace preferences</h2>
+
+                    <p>
+                        Preference configuration will be enabled in
+                        the next onboarding implementation phase.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 STEP 5 — PLACEHOLDER
+            ====================================================== -->
+            <section
+                class="onboarding-step-panel d-none"
+                id="stepPanel5"
+            >
+
+                <div class="future-step-card">
+
+                    <div class="future-step-icon">
+                        <i class="bi bi-check2-circle"></i>
+                    </div>
+
+                    <span class="future-step-label">
+                        STEP 05
+                    </span>
+
+                    <h2>Workspace completion</h2>
+
+                    <p>
+                        Final workspace completion will be enabled
+                        after all onboarding sections are implemented.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <footer class="onboarding-footer">
+
+                <div>
+                    <i class="bi bi-shield-check"></i>
+                    Your information is securely handled by MediCore.
+                </div>
+
+                <div>
+                    © <span id="currentYear"></span> MediCore
+                </div>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =============================================================
+     DEPARTMENT MODAL
+============================================================== -->
+<div
+    class="modal fade"
+    id="departmentModal"
+    tabindex="-1"
+    aria-labelledby="departmentModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+
+        <div class="modal-content department-modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <div class="modal-eyebrow">
+                        DEPARTMENT SETUP
+                    </div>
+
+                    <h5
+                        class="modal-title"
+                        id="departmentModalLabel"
+                    >
+                        Add Department
+                    </h5>
+
+                    <p class="modal-subtitle">
+                        Configure a hospital department.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+
+            <form
+                id="departmentForm"
+                novalidate
+            >
+
+                <div class="modal-body">
+
+                    <div
+                        class="modal-form-alert d-none"
+                        id="departmentFormAlert"
+                    >
+                        <i class="bi bi-exclamation-circle"></i>
+
+                        <span id="departmentFormAlertText"></span>
+                    </div>
+
+
+                    <div class="form-grid">
+
+                        <div class="field-group">
+
+                            <label for="departmentName">
+                                Department name
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-building"></i>
+
+                                <input
+                                    type="text"
+                                    id="departmentName"
+                                    maxlength="100"
+                                    placeholder="e.g. Cardiology"
+                                >
+                            </div>
+
+                            <small
+                                class="field-error"
+                                id="departmentNameError"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="field-group">
+
+                            <label for="departmentCode">
+                                Department code
+                                <span>*</span>
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-upc-scan"></i>
+
+                                <input
+                                    type="text"
+                                    id="departmentCode"
+                                    maxlength="20"
+                                    placeholder="e.g. CARD"
+                                    style="text-transform: uppercase;"
+                                >
+                            </div>
+
+                            <small
+                                class="field-error"
+                                id="departmentCodeError"
+                            ></small>
+
+                        </div>
+
+
+                        <div class="field-group field-span-2">
+
+                            <label for="departmentDescription">
+                                Description
+                            </label>
+
+                            <div class="input-wrapper textarea-wrapper">
+                                <i class="bi bi-card-text"></i>
+
+                                <textarea
+                                    id="departmentDescription"
+                                    rows="3"
+                                    maxlength="500"
+                                    placeholder="Brief description of the department"
+                                ></textarea>
+                            </div>
+
+                        </div>
+
+
+                        <div class="field-group">
+
+                            <label for="departmentPhone">
+                                Phone
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-telephone"></i>
+
+                                <input
+                                    type="tel"
+                                    id="departmentPhone"
+                                    maxlength="30"
+                                    placeholder="+92 300 1234567"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <div class="field-group">
+
+                            <label for="departmentLocation">
+                                Location
+                            </label>
+
+                            <div class="input-wrapper">
+                                <i class="bi bi-geo-alt"></i>
+
+                                <input
+                                    type="text"
+                                    id="departmentLocation"
+                                    maxlength="150"
+                                    placeholder="e.g. Main Building, Floor 2"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <div class="field-group field-span-2">
+
+                            <label for="departmentStatus">
+                                Status
+                            </label>
+
+                            <div class="input-wrapper select-wrapper">
+                                <i class="bi bi-toggle-on"></i>
+
+                                <select id="departmentStatus">
+
+                                    <option value="active">
+                                        Active
+                                    </option>
+
+                                    <option value="inactive">
+                                        Inactive
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="secondary-action"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="primary-action"
+                        id="saveDepartmentButton"
+                    >
+
+                        <span id="saveDepartmentButtonText">
+                            Save Department
+                        </span>
+
+                        <span
+                            id="saveDepartmentSpinner"
+                            class="spinner-border spinner-border-sm d-none"
+                        ></span>
+
+                        <i
+                            id="saveDepartmentArrow"
+                            class="bi bi-check2"
+                        ></i>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/api.js"></script>
+
+<script
+    type="module"
+    src="../js/onboarding/onboarding.js"
+></script>
+
+</body>
+</html>

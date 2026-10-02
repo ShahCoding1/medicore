@@ -1,7 +1,12 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+
 const User = require("../models/User");
+
+const {
+    sendVerificationEmail
+} = require("../utils/emailService");
 
 const generateToken = (user) => {
     return jwt.sign(
@@ -107,7 +112,15 @@ const register = async (req, res, next) => {
         });
 
         const token = generateToken(user);
+            // Send verification email
+const verificationUrl =
+    `${process.env.FRONTEND_URL}/verify-email.html?token=${verificationToken}`;
 
+await sendVerificationEmail({
+    name: user.name,
+    email: user.email,
+    verificationUrl
+});
         const response = {
             success: true,
             message:
