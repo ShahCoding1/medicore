@@ -421,3 +421,555 @@ body.sidebar-collapsed .mc-main {
         font-size: 21px;
     }
 }
+
+/* =========================================================
+   MEDICORE PHASE 27 — DARK MODE
+   ========================================================= */
+
+:root {
+    --mc-primary: #2563eb;
+    --mc-primary-hover: #1d4ed8;
+
+    --mc-success: #16a34a;
+    --mc-warning: #d97706;
+    --mc-danger: #dc2626;
+    --mc-info: #0284c7;
+
+    --mc-background: #f8fafc;
+    --mc-surface: #ffffff;
+    --mc-surface-secondary: #f1f5f9;
+    --mc-surface-tertiary: #e2e8f0;
+
+    --mc-border: #e2e8f0;
+    --mc-border-strong: #cbd5e1;
+
+    --mc-text-primary: #0f172a;
+    --mc-text-secondary: #475569;
+    --mc-text-muted: #64748b;
+
+    --mc-input-background: #ffffff;
+
+    --mc-sidebar-background: #ffffff;
+    --mc-header-background: #ffffff;
+
+    --mc-overlay: rgba(15, 23, 42, 0.45);
+
+    --mc-radius-sm: 6px;
+    --mc-radius-md: 10px;
+    --mc-radius-lg: 14px;
+
+    --mc-shadow-sm:
+        0 1px 2px rgba(15, 23, 42, 0.05);
+
+    --mc-shadow-md:
+        0 8px 24px rgba(15, 23, 42, 0.08);
+
+    --mc-shadow-lg:
+        0 20px 45px rgba(15, 23, 42, 0.12);
+
+    color-scheme: light;
+}
+
+
+/* =========================================================
+   DARK THEME TOKENS
+   ========================================================= */
+
+[data-theme="dark"] {
+    --mc-background: #0f172a;
+    --mc-surface: #111827;
+    --mc-surface-secondary: #1e293b;
+    --mc-surface-tertiary: #334155;
+
+    --mc-border: #334155;
+    --mc-border-strong: #475569;
+
+    --mc-text-primary: #f8fafc;
+    --mc-text-secondary: #cbd5e1;
+    --mc-text-muted: #94a3b8;
+
+    --mc-input-background: #0f172a;
+
+    --mc-sidebar-background: #0b1220;
+    --mc-header-background: #111827;
+
+    --mc-overlay: rgba(0, 0, 0, 0.68);
+
+    --mc-shadow-sm:
+        0 1px 2px rgba(0, 0, 0, 0.35);
+
+    --mc-shadow-md:
+        0 8px 24px rgba(0, 0, 0, 0.35);
+
+    --mc-shadow-lg:
+        0 20px 45px rgba(0, 0, 0, 0.45);
+
+    color-scheme: dark;
+}
+
+
+/* =========================================================
+   GLOBAL
+   ========================================================= */
+
+html[data-theme="dark"],
+body.theme-dark {
+    background: var(--mc-background);
+    color: var(--mc-text-primary);
+}
+
+html[data-theme="light"],
+body.theme-light {
+    background: var(--mc-background);
+    color: var(--mc-text-primary);
+}
+
+body {
+    background-color: var(--mc-background);
+    color: var(--mc-text-primary);
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+[data-theme="dark"] .text-dark {
+    color: var(--mc-text-primary) !important;
+}
+
+[data-theme="dark"] .text-muted {
+    color: var(--mc-text-muted) !important;
+}
+
+[data-theme="dark"] small,
+[data-theme="dark"] .small {
+    color: var(--mc-text-secondary);
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .dashboard-card,
+[data-theme="dark"] .stat-card,
+[data-theme="dark"] .kpi-card,
+[data-theme="dark"] .panel,
+[data-theme="dark"] .content-card {
+    background-color: var(--mc-surface);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border);
+    box-shadow: var(--mc-shadow-sm);
+}
+
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+[data-theme="dark"] .table {
+    --bs-table-bg: var(--mc-surface);
+    --bs-table-color: var(--mc-text-primary);
+    --bs-table-border-color: var(--mc-border);
+    color: var(--mc-text-primary);
+}
+
+[data-theme="dark"] .table > :not(caption) > * > * {
+    background-color: var(--mc-surface);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border);
+}
+
+[data-theme="dark"] .table thead th {
+    background-color: var(--mc-surface-secondary);
+    color: var(--mc-text-secondary);
+}
+
+[data-theme="dark"] .table tbody tr:hover > * {
+    background-color: var(--mc-surface-secondary);
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] textarea,
+[data-theme="dark"] input {
+    background-color: var(--mc-input-background);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border-strong);
+}
+
+[data-theme="dark"] .form-control::placeholder,
+[data-theme="dark"] textarea::placeholder {
+    color: var(--mc-text-muted);
+}
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] input:focus {
+    background-color: var(--mc-input-background);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-primary);
+    box-shadow:
+        0 0 0 0.2rem rgba(37, 99, 235, 0.2);
+}
+
+[data-theme="dark"] .form-label {
+    color: var(--mc-text-secondary);
+}
+
+
+/* =========================================================
+   SELECT OPTIONS
+   ========================================================= */
+
+[data-theme="dark"] select option {
+    background-color: var(--mc-surface);
+    color: var(--mc-text-primary);
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+[data-theme="dark"] .btn-light {
+    background-color: var(--mc-surface-secondary);
+    border-color: var(--mc-border);
+    color: var(--mc-text-primary);
+}
+
+[data-theme="dark"] .btn-light:hover {
+    background-color: var(--mc-surface-tertiary);
+    color: var(--mc-text-primary);
+}
+
+[data-theme="dark"] .btn-outline-secondary {
+    color: var(--mc-text-secondary);
+    border-color: var(--mc-border-strong);
+}
+
+[data-theme="dark"] .btn-outline-secondary:hover {
+    background-color: var(--mc-surface-secondary);
+    color: var(--mc-text-primary);
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .app-sidebar,
+[data-theme="dark"] .main-sidebar {
+    background-color: var(--mc-sidebar-background);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border);
+}
+
+[data-theme="dark"] .sidebar a,
+[data-theme="dark"] .app-sidebar a,
+[data-theme="dark"] .main-sidebar a {
+    color: var(--mc-text-secondary);
+}
+
+[data-theme="dark"] .sidebar a:hover,
+[data-theme="dark"] .app-sidebar a:hover,
+[data-theme="dark"] .main-sidebar a:hover {
+    background-color: var(--mc-surface-secondary);
+    color: var(--mc-text-primary);
+}
+
+
+/* =========================================================
+   HEADER / TOPBAR
+   ========================================================= */
+
+[data-theme="dark"] .header,
+[data-theme="dark"] .app-header,
+[data-theme="dark"] .topbar,
+[data-theme="dark"] .navbar {
+    background-color: var(--mc-header-background);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border);
+}
+
+
+/* =========================================================
+   MODALS
+   ========================================================= */
+
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .patient-modal-content,
+[data-theme="dark"] .modal-dialog .modal-content {
+    background-color: var(--mc-surface);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border);
+    box-shadow: var(--mc-shadow-lg);
+}
+
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer {
+    border-color: var(--mc-border);
+}
+
+
+/* =========================================================
+   DROPDOWNS
+   ========================================================= */
+
+[data-theme="dark"] .dropdown-menu {
+    background-color: var(--mc-surface);
+    border-color: var(--mc-border);
+    box-shadow: var(--mc-shadow-md);
+}
+
+[data-theme="dark"] .dropdown-item {
+    color: var(--mc-text-secondary);
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+    background-color: var(--mc-surface-secondary);
+    color: var(--mc-text-primary);
+}
+
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+[data-theme="dark"] .badge {
+    border-color: var(--mc-border);
+}
+
+[data-theme="dark"] .bg-light {
+    background-color: var(--mc-surface-secondary) !important;
+    color: var(--mc-text-primary) !important;
+}
+
+
+/* =========================================================
+   ALERTS
+   ========================================================= */
+
+[data-theme="dark"] .alert {
+    border-color: var(--mc-border);
+}
+
+[data-theme="dark"] .alert-light {
+    background-color: var(--mc-surface-secondary);
+    color: var(--mc-text-primary);
+}
+
+
+/* =========================================================
+   BORDERS
+   ========================================================= */
+
+[data-theme="dark"] .border,
+[data-theme="dark"] .border-top,
+[data-theme="dark"] .border-end,
+[data-theme="dark"] .border-bottom,
+[data-theme="dark"] .border-start {
+    border-color: var(--mc-border) !important;
+}
+
+
+/* =========================================================
+   COMMAND PALETTE
+   ========================================================= */
+
+[data-theme="dark"] .command-palette,
+[data-theme="dark"] .command-palette-modal,
+[data-theme="dark"] .command-palette-container {
+    background-color: var(--mc-surface);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border);
+}
+
+[data-theme="dark"] .command-palette input {
+    background-color: var(--mc-input-background);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border);
+}
+
+
+/* =========================================================
+   TOASTS
+   ========================================================= */
+
+[data-theme="dark"] .toast,
+[data-theme="dark"] .toast-container .toast {
+    background-color: var(--mc-surface);
+    color: var(--mc-text-primary);
+    border-color: var(--mc-border);
+}
+
+
+/* =========================================================
+   TOOLTIP
+   ========================================================= */
+
+[data-theme="dark"] .tooltip-inner {
+    background-color: #020617;
+    color: #f8fafc;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+[data-theme="dark"] a {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] a:hover {
+    color: #93c5fd;
+}
+
+
+/* =========================================================
+   DIVIDERS
+   ========================================================= */
+
+[data-theme="dark"] hr {
+    border-color: var(--mc-border);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+[data-theme="dark"] ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: var(--mc-background);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--mc-surface-tertiary);
+    border-radius: 10px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--mc-border-strong);
+}
+
+
+/* =========================================================
+   THEME TOGGLE
+   ========================================================= */
+
+.medicore-theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    min-height: 38px;
+    padding: 7px 11px;
+
+    border: 1px solid var(--mc-border);
+    border-radius: var(--mc-radius-md);
+
+    background: var(--mc-surface);
+    color: var(--mc-text-secondary);
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.medicore-theme-toggle:hover {
+    background: var(--mc-surface-secondary);
+    color: var(--mc-text-primary);
+}
+
+.medicore-theme-toggle:active {
+    transform: scale(0.97);
+}
+
+.theme-toggle-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+.theme-toggle-sun {
+    display: inline-block;
+}
+
+.theme-toggle-moon {
+    display: none;
+}
+
+.medicore-theme-toggle.is-dark .theme-toggle-sun {
+    display: none;
+}
+
+.medicore-theme-toggle.is-dark .theme-toggle-moon {
+    display: inline-block;
+}
+
+.theme-toggle-label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FALLBACK POSITION
+   ========================================================= */
+
+body > .medicore-theme-toggle {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1050;
+
+    box-shadow: var(--mc-shadow-md);
+}
+
+
+/* =========================================================
+   DARK MODE TRANSITIONS
+   ========================================================= */
+
+body,
+.card,
+.table,
+.form-control,
+.form-select,
+.modal-content,
+.dropdown-menu,
+.sidebar,
+.app-sidebar,
+.header,
+.app-header,
+.topbar,
+.navbar {
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
