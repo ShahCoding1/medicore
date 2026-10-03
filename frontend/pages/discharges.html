@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discharges | MediCore</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/discharges.css">
+</head>
+
+<body>
+    <div class="app-shell">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-brand">
+                <div class="brand-mark">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                </div>
+
+                <div>
+                    <div class="brand-name">MediCore</div>
+                    <div class="brand-tagline">Connected Healthcare</div>
+                </div>
+            </div>
+
+            <div class="sidebar-hospital">
+                <div class="hospital-avatar">
+                    <i class="bi bi-hospital"></i>
+                </div>
+
+                <div class="hospital-info">
+                    <strong id="sidebarHospitalName">MediCore Hospital</strong>
+                    <span>Hospital Workspace</span>
+                </div>
+
+                <i class="bi bi-chevron-down"></i>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <div class="nav-section-title">MAIN</div>
+
+                <a href="dashboard.html" class="nav-item">
+                    <i class="bi bi-grid-1x2"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="patients.html" class="nav-item">
+                    <i class="bi bi-people"></i>
+                    <span>Patients</span>
+                </a>
+
+                <a href="doctors.html" class="nav-item">
+                    <i class="bi bi-person-badge"></i>
+                    <span>Doctors</span>
+                </a>
+
+                <a href="departments.html" class="nav-item">
+                    <i class="bi bi-diagram-3"></i>
+                    <span>Departments</span>
+                </a>
+
+                <a href="appointments.html" class="nav-item">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Appointments</span>
+                </a>
+
+                <div class="nav-section-title">CLINICAL</div>
+
+                <a href="medical-records.html" class="nav-item">
+                    <i class="bi bi-file-medical"></i>
+                    <span>Medical Records</span>
+                </a>
+
+                <a href="prescriptions.html" class="nav-item">
+                    <i class="bi bi-prescription2"></i>
+                    <span>Prescriptions</span>
+                </a>
+
+                <a href="pharmacy.html" class="nav-item">
+                    <i class="bi bi-capsule"></i>
+                    <span>Pharmacy</span>
+                </a>
+
+                <a href="laboratory-tests.html" class="nav-item">
+                    <i class="bi bi-eyedropper"></i>
+                    <span>Laboratory</span>
+                </a>
+
+                <a href="admissions.html" class="nav-item">
+                    <i class="bi bi-box-arrow-in-right"></i>
+                    <span>Admissions</span>
+                </a>
+
+                <a href="beds.html" class="nav-item">
+                    <i class="bi bi-hospital"></i>
+                    <span>Beds</span>
+                </a>
+
+                <a href="discharges.html" class="nav-item active">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Discharges</span>
+                </a>
+
+                <div class="nav-section-title">FINANCE</div>
+
+                <a href="billing.html" class="nav-item">
+                    <i class="bi bi-receipt"></i>
+                    <span>Billing</span>
+                </a>
+
+                <div class="nav-section-title">MANAGEMENT</div>
+
+                <a href="staff.html" class="nav-item">
+                    <i class="bi bi-person-lines-fill"></i>
+                    <span>Staff</span>
+                </a>
+
+                <a href="analytics.html" class="nav-item">
+                    <i class="bi bi-bar-chart"></i>
+                    <span>Analytics</span>
+                </a>
+
+                <a href="reports.html" class="nav-item">
+                    <i class="bi bi-file-earmark-bar-graph"></i>
+                    <span>Reports</span>
+                </a>
+
+                <a href="notifications.html" class="nav-item">
+                    <i class="bi bi-bell"></i>
+                    <span>Notifications</span>
+                </a>
+
+                <a href="settings.html" class="nav-item">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="user-avatar" id="sidebarUserAvatar">MS</div>
+
+                    <div class="user-info">
+                        <strong id="sidebarUserName">M Shah Khalid</strong>
+                        <span id="sidebarUserRole">Administrator</span>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="sidebar-user-menu"
+                        id="sidebarUserMenu"
+                    >
+                        <i class="bi bi-three-dots"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <div class="main-wrapper">
+
+            <!-- Header -->
+            <header class="topbar">
+
+                <div class="topbar-left">
+                    <button
+                        type="button"
+                        class="icon-button sidebar-toggle"
+                        id="sidebarToggle"
+                        aria-label="Toggle sidebar"
+                    >
+                        <i class="bi bi-list"></i>
+                    </button>
+
+                    <div class="breadcrumb-area">
+                        <span class="breadcrumb-muted">Clinical</span>
+                        <i class="bi bi-chevron-right"></i>
+                        <span>Discharges</span>
+                    </div>
+                </div>
+
+                <div class="topbar-right">
+
+                    <button
+                        type="button"
+                        class="global-search-trigger"
+                        id="globalSearchTrigger"
+                    >
+                        <i class="bi bi-search"></i>
+                        <span>Search</span>
+                        <kbd>Ctrl K</kbd>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="icon-button"
+                        id="themeToggle"
+                        aria-label="Toggle theme"
+                    >
+                        <i class="bi bi-moon"></i>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="icon-button notification-button"
+                        id="notificationButton"
+                        aria-label="Notifications"
+                    >
+                        <i class="bi bi-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+
+                    <div class="topbar-divider"></div>
+
+                    <div class="topbar-profile">
+                        <div class="profile-avatar" id="profileAvatar">MS</div>
+
+                        <div class="profile-info">
+                            <strong id="profileName">M Shah Khalid</strong>
+                            <span id="profileRole">Administrator</span>
+                        </div>
+
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+
+                </div>
+            </header>
+
+            <!-- Content -->
+            <main class="page-content">
+
+                <div class="page-header">
+
+                    <div>
+                        <div class="page-eyebrow">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Clinical Operations
+                        </div>
+
+                        <h1>Discharges</h1>
+
+                        <p>
+                            Manage patient discharge records, treatment summaries,
+                            instructions and follow-up information.
+                        </p>
+                    </div>
+
+                    <div class="page-header-actions">
+
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            id="refreshDischargesBtn"
+                        >
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Refresh
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="addDischargeBtn"
+                        >
+                            <i class="bi bi-plus-lg"></i>
+                            New Discharge
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Summary -->
+                <section class="discharge-summary-grid">
+
+                    <div class="discharge-summary-card">
+                        <div class="summary-icon">
+                            <i class="bi bi-file-earmark-medical"></i>
+                        </div>
+
+                        <div>
+                            <span>Total Discharges</span>
+                            <strong id="dischargesTotal">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="discharge-summary-card">
+                        <div class="summary-icon today">
+                            <i class="bi bi-calendar-day"></i>
+                        </div>
+
+                        <div>
+                            <span>Today</span>
+                            <strong id="dischargesToday">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="discharge-summary-card">
+                        <div class="summary-icon month">
+                            <i class="bi bi-calendar3"></i>
+                        </div>
+
+                        <div>
+                            <span>This Month</span>
+                            <strong id="dischargesMonth">0</strong>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- Filters -->
+                <section class="content-card discharge-filter-card">
+
+                    <div class="filter-header">
+                        <div>
+                            <h2>Discharge Records</h2>
+                            <p>Search and filter completed patient discharges.</p>
+                        </div>
+
+                        <span class="record-count" id="dischargeCount">
+                            0 records
+                        </span>
+                    </div>
+
+                    <div class="filter-grid">
+
+                        <div class="filter-field search-field">
+                            <label for="dischargeSearch">Search</label>
+
+                            <div class="input-with-icon">
+                                <i class="bi bi-search"></i>
+
+                                <input
+                                    type="text"
+                                    id="dischargeSearch"
+                                    class="form-control"
+                                    placeholder="Patient, diagnosis, treatment..."
+                                >
+                            </div>
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="dischargePatientFilter">Patient</label>
+
+                            <select
+                                id="dischargePatientFilter"
+                                class="form-select"
+                            >
+                                <option value="">All Patients</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="dischargeDoctorFilter">Doctor</label>
+
+                            <select
+                                id="dischargeDoctorFilter"
+                                class="form-select"
+                            >
+                                <option value="">All Doctors</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="dischargeDateFrom">From Date</label>
+
+                            <input
+                                type="date"
+                                id="dischargeDateFrom"
+                                class="form-control"
+                            >
+                        </div>
+
+                        <div class="filter-field">
+                            <label for="dischargeDateTo">To Date</label>
+
+                            <input
+                                type="date"
+                                id="dischargeDateTo"
+                                class="form-control"
+                            >
+                        </div>
+
+                        <div class="filter-actions">
+
+                            <button
+                                type="button"
+                                class="btn btn-primary"
+                                id="applyDischargeFilters"
+                            >
+                                <i class="bi bi-funnel"></i>
+                                Apply
+                            </button>
+
+                            <button
+                                type="button"
+                                class="btn btn-light"
+                                id="clearDischargeFilters"
+                            >
+                                Clear
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- Table -->
+                <section class="content-card discharge-table-card">
+
+                    <div
+                        class="table-loading"
+                        id="dischargesLoading"
+                        hidden
+                    >
+                        <div class="spinner-border" role="status"></div>
+                        <span>Loading discharge records...</span>
+                    </div>
+
+                    <div
+                        class="table-empty"
+                        id="dischargesEmpty"
+                        hidden
+                    >
+                        <div class="empty-icon">
+                            <i class="bi bi-file-earmark-medical"></i>
+                        </div>
+
+                        <h3>No discharge records found</h3>
+
+                        <p>
+                            Create a discharge record when a patient's hospital
+                            stay is completed.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="emptyCreateDischargeBtn"
+                        >
+                            <i class="bi bi-plus-lg"></i>
+                            New Discharge
+                        </button>
+                    </div>
+
+                    <div
+                        class="table-responsive"
+                        id="dischargesTableWrapper"
+                    >
+                        <table class="table align-middle discharge-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Admission</th>
+                                    <th>Doctor</th>
+                                    <th>Admission Date</th>
+                                    <th>Discharge Date</th>
+                                    <th>Diagnosis</th>
+                                    <th>Condition</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="dischargesTableBody"></tbody>
+
+                        </table>
+                    </div>
+
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- View Discharge Modal -->
+    <div
+        class="modal fade"
+        id="viewDischargeModal"
+        tabindex="-1"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <div>
+                        <span class="modal-eyebrow">Discharge Record</span>
+                        <h5 class="modal-title" id="viewDischargeModalLabel">
+                            Discharge Details
+                        </h5>
+
+                        <p
+                            class="modal-subtitle"
+                            id="viewDischargeSubtitle"
+                        >
+                            Patient discharge information
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+
+                <div class="modal-body" id="dischargeDetails">
+                    <!-- Populated dynamically -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Discharge Modal -->
+    <div
+        class="modal fade"
+        id="dischargeModal"
+        tabindex="-1"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <div>
+                        <span class="modal-eyebrow">Clinical Operations</span>
+
+                        <h5 class="modal-title" id="dischargeModalLabel">
+                            New Discharge
+                        </h5>
+
+                        <p class="modal-subtitle">
+                            Record the patient's discharge information.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+
+                <form id="dischargeForm">
+
+                    <div class="modal-body">
+
+                        <div
+                            class="form-alert alert alert-danger"
+                            id="dischargeFormAlert"
+                            hidden
+                        ></div>
+
+                        <!-- Patient & Admission -->
+                        <div class="form-section">
+
+                            <div class="form-section-heading">
+                                <div class="form-section-icon">
+                                    <i class="bi bi-person-vcard"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Patient & Admission</h3>
+                                    <p>Connect the discharge with the hospital admission.</p>
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label
+                                        for="dischargePatient"
+                                        class="form-label"
+                                    >
+                                        Patient <span>*</span>
+                                    </label>
+
+                                    <select
+                                        id="dischargePatient"
+                                        class="form-select"
+                                        required
+                                    >
+                                        <option value="">
+                                            Select patient
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label
+                                        for="dischargeAdmission"
+                                        class="form-label"
+                                    >
+                                        Admission <span>*</span>
+                                    </label>
+
+                                    <select
+                                        id="dischargeAdmission"
+                                        class="form-select"
+                                        required
+                                    >
+                                        <option value="">
+                                            Select admission
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label
+                                        for="dischargeDoctor"
+                                        class="form-label"
+                                    >
+                                        Doctor
+                                    </label>
+
+                                    <select
+                                        id="dischargeDoctor"
+                                        class="form-select"
+                                    >
+                                        <option value="">
+                                            Select doctor
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label
+                                        for="dischargeAdmissionDate"
+                                        class="form-label"
+                                    >
+                                        Admission Date <span>*</span>
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        id="dischargeAdmissionDate"
+                                        class="form-control"
+                                        required
+                                    >
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label
+                                        for="dischargeDate"
+                                        class="form-label"
+                                    >
+                                        Discharge Date <span>*</span>
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        id="dischargeDate"
+                                        class="form-control"
+                                        required
+                                    >
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Clinical Information -->
+                        <div class="form-section">
+
+                            <div class="form-section-heading">
+                                <div class="form-section-icon">
+                                    <i class="bi bi-clipboard2-pulse"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Clinical Information</h3>
+                                    <p>Document the patient's clinical course and condition.</p>
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label
+                                        for="dischargeDiagnosis"
+                                        class="form-label"
+                                    >
+                                        Diagnosis
+                                    </label>
+
+                                    <textarea
+                                        id="dischargeDiagnosis"
+                                        class="form-control"
+                                        rows="4"
+                                        placeholder="Enter final diagnosis..."
+                                    ></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label
+                                        for="dischargeTreatment"
+                                        class="form-label"
+                                    >
+                                        Treatment
+                                    </label>
+
+                                    <textarea
+                                        id="dischargeTreatment"
+                                        class="form-control"
+                                        rows="4"
+                                        placeholder="Describe treatment provided..."
+                                    ></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label
+                                        for="dischargeProcedures"
+                                        class="form-label"
+                                    >
+                                        Procedures
+                                    </label>
+
+                                    <textarea
+                                        id="dischargeProcedures"
+                                        class="form-control"
+                                        rows="4"
+                                        placeholder="Document procedures performed..."
+                                    ></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label
+                                        for="dischargeMedication"
+                                        class="form-label"
+                                    >
+                                        Medication
+                                    </label>
+
+                                    <textarea
+                                        id="dischargeMedication"
+                                        class="form-control"
+                                        rows="4"
+                                        placeholder="Enter discharge medications..."
+                                    ></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <label
+                                        for="dischargeCondition"
+                                        class="form-label"
+                                    >
+                                        Condition at Discharge
+                                    </label>
+
+                                    <textarea
+                                        id="dischargeCondition"
+                                        class="form-control"
+                                        rows="3"
+                                        placeholder="Describe the patient's condition at discharge..."
+                                    ></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Follow-up & Instructions -->
+                        <div class="form-section">
+
+                            <div class="form-section-heading">
+                                <div class="form-section-icon">
+                                    <i class="bi bi-calendar2-check"></i>
+                                </div>
+
+                                <div>
+                                    <h3>Follow-up & Instructions</h3>
+                                    <p>Provide ongoing care guidance for the patient.</p>
+                                </div>
+                            </div>
+
+                            <div class="row g-3">
+
+                                <div class="col-md-6">
+                                    <label
+                                        for="dischargeFollowUp"
+                                        class="form-label"
+                                    >
+                                        Follow-up
+                                    </label>
+
+                                    <textarea
+                                        id="dischargeFollowUp"
+                                        class="form-control"
+                                        rows="4"
+                                        placeholder="Enter follow-up plan..."
+                                    ></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label
+                                        for="dischargeInstructions"
+                                        class="form-label"
+                                    >
+                                        Instructions
+                                    </label>
+
+                                    <textarea
+                                        id="dischargeInstructions"
+                                        class="form-control"
+                                        rows="4"
+                                        placeholder="Enter patient discharge instructions..."
+                                    ></textarea>
+                                </div>
+
+                                <div class="col-12">
+                                    <label
+                                        for="dischargeSummary"
+                                        class="form-label"
+                                    >
+                                        Discharge Summary
+                                    </label>
+
+                                    <textarea
+                                        id="dischargeSummary"
+                                        class="form-control"
+                                        rows="5"
+                                        placeholder="Enter the complete discharge summary..."
+                                    ></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            data-bs-dismiss="modal"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            id="saveDischargeBtn"
+                        >
+                            <span
+                                class="spinner-border spinner-border-sm me-2"
+                                id="saveDischargeSpinner"
+                                hidden
+                            ></span>
+
+                            <i
+                                class="bi bi-check-lg"
+                                id="saveDischargeIcon"
+                            ></i>
+
+                            <span id="saveDischargeText">
+                                Save Discharge
+                            </span>
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div
+        class="toast-container position-fixed bottom-0 end-0 p-3"
+        id="dischargesToastContainer"
+    ></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.7.9/dist/axios.min.js"></script>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/app.js"></script>
+
+    <script src="../js/discharges/discharges-data.js"></script>
+    <script src="../js/discharges/discharges-ui.js"></script>
+    <script src="../js/discharges/discharges-form.js"></script>
+    <script src="../js/discharges/discharges.js"></script>
+</body>
+</html>

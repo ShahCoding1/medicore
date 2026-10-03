@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-
+const dischargeRoutes = require("./routes/dischargeRoutes");
 require("dotenv").config();
 
 // ==========================================
@@ -12,6 +12,8 @@ require("dotenv").config();
   const invoiceRoutes =
     require("./routes/invoiceRoutes");
 
+
+    
 const authRoutes =
     require("./routes/authRoutes");
 
@@ -64,6 +66,7 @@ const PORT =
 app.use(
     helmet()
 );
+app.use("/api/discharges", dischargeRoutes);
 
 app.use(
     cors({
