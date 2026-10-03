@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports | MediCore</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/reports.css">
+</head>
+
+<body>
+
+<div class="container-fluid reports-page py-4">
+
+    <div class="reports-header">
+        <div>
+            <div class="page-eyebrow">MEDICORE REPORT CENTER</div>
+            <h1>Reports</h1>
+            <p>Build, generate and manage healthcare reports.</p>
+        </div>
+
+        <button
+            type="button"
+            class="btn btn-primary"
+            id="openReportBuilder"
+        >
+            <i class="bi bi-plus-lg"></i>
+            Create Report
+        </button>
+    </div>
+
+    <!-- Categories -->
+    <section class="report-category-grid">
+
+        <button class="category-card active" data-category="">
+            <span>All</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="patient">
+            <span>Patient</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="clinical">
+            <span>Clinical</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="financial">
+            <span>Financial</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="pharmacy">
+            <span>Pharmacy</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="laboratory">
+            <span>Laboratory</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="appointment">
+            <span>Appointment</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="doctor">
+            <span>Doctor</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="department">
+            <span>Department</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="operations">
+            <span>Operations</span>
+            <strong>Reports</strong>
+        </button>
+
+        <button class="category-card" data-category="audit">
+            <span>Audit</span>
+            <strong>Reports</strong>
+        </button>
+
+    </section>
+
+    <!-- Toolbar -->
+    <section class="report-toolbar">
+
+        <div class="search-wrapper">
+            <i class="bi bi-search"></i>
+
+            <input
+                type="search"
+                id="reportSearch"
+                class="form-control"
+                placeholder="Search reports..."
+            >
+        </div>
+
+        <select id="reportStatus" class="form-select">
+            <option value="">All statuses</option>
+            <option value="generating">Generating</option>
+            <option value="ready">Ready</option>
+            <option value="failed">Failed</option>
+            <option value="expired">Expired</option>
+        </select>
+
+        <button
+            type="button"
+            class="btn btn-outline-secondary"
+            id="refreshReports"
+        >
+            <i class="bi bi-arrow-clockwise"></i>
+            Refresh
+        </button>
+
+    </section>
+
+    <!-- Reports table -->
+    <section class="reports-table-card">
+
+        <div class="table-responsive">
+
+            <table class="table align-middle mb-0">
+
+                <thead>
+                    <tr>
+                        <th>Report</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Date Range</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="reportsTableBody">
+                    <tr>
+                        <td colspan="7">
+                            <div class="table-state">
+                                <div class="spinner-border spinner-border-sm"></div>
+                                <span>Loading reports...</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Report Builder Modal -->
+<div
+    class="modal fade"
+    id="reportBuilderModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <div class="modal-eyebrow">
+                        REPORT BUILDER
+                    </div>
+
+                    <h5 class="modal-title">
+                        Create Report
+                    </h5>
+
+                    <p class="modal-subtitle">
+                        Configure the report and generate it.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+            <form id="reportBuilderForm">
+
+                <div class="modal-body">
+
+                    <div
+                        id="reportFormAlert"
+                        class="alert d-none"
+                    ></div>
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="reportName"
+                                class="form-label"
+                            >
+                                Report Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="reportName"
+                                class="form-control"
+                                placeholder="e.g. Monthly Patient Report"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="reportCategory"
+                                class="form-label"
+                            >
+                                Report Category
+                            </label>
+
+                            <select
+                                id="reportCategory"
+                                class="form-select"
+                                required
+                            >
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="patient">Patient</option>
+                                <option value="clinical">Clinical</option>
+                                <option value="financial">Financial</option>
+                                <option value="pharmacy">Pharmacy</option>
+                                <option value="laboratory">Laboratory</option>
+                                <option value="appointment">Appointment</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="department">Department</option>
+                                <option value="operations">Operations</option>
+                                <option value="audit">Audit</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="reportType"
+                                class="form-label"
+                            >
+                                Report Type
+                            </label>
+
+                            <select
+                                id="reportType"
+                                class="form-select"
+                                required
+                            >
+                                <option value="">
+                                    Select report type
+                                </option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label
+                                for="reportFrom"
+                                class="form-label"
+                            >
+                                From
+                            </label>
+
+                            <input
+                                type="date"
+                                id="reportFrom"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label
+                                for="reportTo"
+                                class="form-label"
+                            >
+                                To
+                            </label>
+
+                            <input
+                                type="date"
+                                id="reportTo"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="reportGrouping"
+                                class="form-label"
+                            >
+                                Grouping
+                            </label>
+
+                            <select
+                                id="reportGrouping"
+                                class="form-select"
+                            >
+                                <option value="">No grouping</option>
+                                <option value="date">Date</option>
+                                <option value="department">Department</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="status">Status</option>
+                                <option value="gender">Gender</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label
+                                for="reportSortField"
+                                class="form-label"
+                            >
+                                Sort Field
+                            </label>
+
+                            <input
+                                type="text"
+                                id="reportSortField"
+                                class="form-control"
+                                value="createdAt"
+                            >
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <label
+                                for="reportSortDirection"
+                                class="form-label"
+                            >
+                                Sort Direction
+                            </label>
+
+                            <select
+                                id="reportSortDirection"
+                                class="form-select"
+                            >
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label class="form-label">
+                                Columns
+                            </label>
+
+                            <div
+                                id="reportColumns"
+                                class="columns-grid"
+                            ></div>
+
+                        </div>
+
+                        <div class="col-12">
+
+                            <label
+                                for="reportFilters"
+                                class="form-label"
+                            >
+                                Filters
+                            </label>
+
+                            <textarea
+                                id="reportFilters"
+                                class="form-control"
+                                rows="4"
+                                placeholder='Optional JSON, e.g. {"status":"active"}'
+                            ></textarea>
+
+                            <div class="form-help">
+                                Optional advanced filters in JSON format.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="generateReport"
+                    >
+                        <i class="bi bi-file-earmark-bar-graph"></i>
+                        Generate Report
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/reports/reports-data.js"></script>
+<script src="../js/reports/reports-ui.js"></script>
+<script src="../js/reports/reports-form.js"></script>
+<script src="../js/reports/reports-export.js"></script>
+<script src="../js/reports/reports.js"></script>
+
+</body>
+</html>
