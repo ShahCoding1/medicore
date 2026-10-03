@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications | MediCore</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/notifications.css">
+</head>
+
+<body>
+
+<div class="mc-app">
+
+    <aside class="mc-sidebar" id="sidebar">
+
+        <div class="mc-sidebar-brand">
+            <div class="mc-brand-mark">M</div>
+            <div>
+                <div class="mc-brand-name">MEDICORE</div>
+                <div class="mc-brand-tagline">Connected Healthcare</div>
+            </div>
+        </div>
+
+        <div class="mc-sidebar-hospital">
+            <small>WORKSPACE</small>
+            <strong id="hospitalName">Hospital Workspace</strong>
+        </div>
+
+        <nav class="mc-sidebar-nav">
+
+            <a href="../dashboard.html" class="mc-nav-link">
+                <span>▦</span><span>Dashboard</span>
+            </a>
+
+            <a href="patients.html" class="mc-nav-link">
+                <span>♙</span><span>Patients</span>
+            </a>
+
+            <a href="doctors.html" class="mc-nav-link">
+                <span>⚕</span><span>Doctors</span>
+            </a>
+
+            <a href="appointments.html" class="mc-nav-link">
+                <span>◷</span><span>Appointments</span>
+            </a>
+
+            <a href="medical-records.html" class="mc-nav-link">
+                <span>▤</span><span>Medical Records</span>
+            </a>
+
+            <a href="prescriptions.html" class="mc-nav-link">
+                <span>Rx</span><span>Prescriptions</span>
+            </a>
+
+            <a href="pharmacy.html" class="mc-nav-link">
+                <span>▥</span><span>Pharmacy</span>
+            </a>
+
+            <a href="laboratory-tests.html" class="mc-nav-link">
+                <span>⌬</span><span>Laboratory</span>
+            </a>
+
+            <a href="billing.html" class="mc-nav-link">
+                <span>▣</span><span>Billing</span>
+            </a>
+
+            <a href="admissions.html" class="mc-nav-link">
+                <span>⇥</span><span>Admissions</span>
+            </a>
+
+            <a href="beds.html" class="mc-nav-link">
+                <span>▥</span><span>Beds</span>
+            </a>
+
+            <a href="discharges.html" class="mc-nav-link">
+                <span>⇤</span><span>Discharges</span>
+            </a>
+
+            <a href="staff.html" class="mc-nav-link">
+                <span>♟</span><span>Staff</span>
+            </a>
+
+            <a href="roles.html" class="mc-nav-link">
+                <span>♜</span><span>Roles</span>
+            </a>
+
+            <a href="notifications.html" class="mc-nav-link active">
+                <span>●</span>
+                <span>Notifications</span>
+                <span class="mc-nav-badge" id="sidebarUnreadBadge">0</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <main class="mc-main">
+
+        <header class="mc-header">
+
+            <div class="mc-header-left">
+                <button
+                    class="mc-menu-button"
+                    id="sidebarToggle"
+                    type="button"
+                    aria-label="Toggle sidebar">
+                    ☰
+                </button>
+
+                <div class="mc-breadcrumb">
+                    MediCore
+                    <span>/</span>
+                    <strong>Notifications</strong>
+                </div>
+            </div>
+
+            <div class="mc-header-actions">
+
+                <button
+                    class="mc-header-action"
+                    type="button"
+                    id="notificationButton"
+                    title="Notifications">
+                    ♢
+                    <span
+                        class="mc-notification-dot"
+                        id="headerNotificationDot">
+                    </span>
+                </button>
+
+                <button
+                    class="mc-header-action"
+                    type="button"
+                    id="profileButton">
+                    U
+                </button>
+
+            </div>
+
+        </header>
+
+        <section class="mc-page-content">
+
+            <div class="notification-page-header">
+
+                <div>
+                    <div class="mc-eyebrow">ADMINISTRATION</div>
+
+                    <h1>Notifications</h1>
+
+                    <p>
+                        Stay updated with important hospital activities,
+                        alerts and system events.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn mc-btn-primary"
+                    id="markAllReadButton">
+                    Mark all as read
+                </button>
+
+            </div>
+
+            <div class="notification-summary">
+
+                <div class="notification-summary-card">
+                    <span>Total</span>
+                    <strong id="totalCount">0</strong>
+                </div>
+
+                <div class="notification-summary-card unread">
+                    <span>Unread</span>
+                    <strong id="unreadCount">0</strong>
+                </div>
+
+                <div class="notification-summary-card">
+                    <span>Today</span>
+                    <strong id="todayCount">0</strong>
+                </div>
+
+            </div>
+
+            <div class="notification-panel">
+
+                <div class="notification-toolbar">
+
+                    <div class="notification-tabs">
+
+                        <button
+                            class="notification-tab active"
+                            data-filter="all">
+                            All
+                        </button>
+
+                        <button
+                            class="notification-tab"
+                            data-filter="unread">
+                            Unread
+                        </button>
+
+                        <button
+                            class="notification-tab"
+                            data-filter="appointment">
+                            Appointments
+                        </button>
+
+                        <button
+                            class="notification-tab"
+                            data-filter="lab">
+                            Lab
+                        </button>
+
+                        <button
+                            class="notification-tab"
+                            data-filter="pharmacy">
+                            Pharmacy
+                        </button>
+
+                        <button
+                            class="notification-tab"
+                            data-filter="billing">
+                            Billing
+                        </button>
+
+                        <button
+                            class="notification-tab"
+                            data-filter="system">
+                            System
+                        </button>
+
+                    </div>
+
+                    <button
+                        class="btn btn-light"
+                        id="refreshNotifications">
+                        ↻ Refresh
+                    </button>
+
+                </div>
+
+                <div
+                    id="notificationList"
+                    class="notification-list">
+                </div>
+
+                <div
+                    id="notificationEmpty"
+                    class="notification-empty d-none">
+                    <div class="notification-empty-icon">✓</div>
+                    <h3>You're all caught up</h3>
+                    <p>No notifications match this filter.</p>
+                </div>
+
+                <div
+                    id="notificationLoading"
+                    class="notification-loading d-none">
+                    Loading notifications...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/notifications/notifications-data.js"></script>
+<script src="../js/notifications/notifications-ui.js"></script>
+<script src="../js/notifications/notifications.js"></script>
+
+</body>
+</html>
