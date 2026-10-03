@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const roleRoutes = require("./routes/roleRoutes");
 const dischargeRoutes = require("./routes/dischargeRoutes");
 require("dotenv").config();
 
