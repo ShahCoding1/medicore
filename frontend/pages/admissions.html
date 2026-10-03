@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admissions | MediCore</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admissions.css">
+</head>
+
+<body>
+
+<div id="appShell">
+
+    <div class="page-content">
+
+        <div class="container-fluid py-4">
+
+            <!-- PAGE HEADER -->
+            <div class="page-header mb-4">
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="page-kicker">
+                            INPATIENT MANAGEMENT
+                        </span>
+                    </div>
+
+                    <h1 class="page-title mb-1">
+                        Admissions
+                    </h1>
+
+                    <p class="page-subtitle mb-0">
+                        Manage patient admissions, inpatient status,
+                        wards, rooms and admission activity.
+                    </p>
+                </div>
+
+                <div class="page-header-actions">
+                    <button
+                        type="button"
+                        class="btn btn-light border"
+                        id="refreshAdmissionsBtn"
+                    >
+                        <i class="bi bi-arrow-clockwise me-2"></i>
+                        Refresh
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="addAdmissionBtn"
+                    >
+                        <i class="bi bi-plus-lg me-2"></i>
+                        New Admission
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUMMARY -->
+            <div class="row g-3 mb-4">
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="admission-summary-card">
+                        <div class="summary-icon">
+                            <i class="bi bi-hospital"></i>
+                        </div>
+
+                        <div>
+                            <div class="summary-label">
+                                Total Admissions
+                            </div>
+
+                            <div
+                                class="summary-value"
+                                id="admissionsTotal"
+                            >
+                                0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="admission-summary-card">
+                        <div class="summary-icon">
+                            <i class="bi bi-person-check"></i>
+                        </div>
+
+                        <div>
+                            <div class="summary-label">
+                                Currently Admitted
+                            </div>
+
+                            <div
+                                class="summary-value"
+                                id="admissionsActive"
+                            >
+                                0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="admission-summary-card">
+                        <div class="summary-icon">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+
+                        <div>
+                            <div class="summary-label">
+                                Emergency
+                            </div>
+
+                            <div
+                                class="summary-value"
+                                id="admissionsEmergency"
+                            >
+                                0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="admission-summary-card">
+                        <div class="summary-icon critical">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+
+                        <div>
+                            <div class="summary-label">
+                                Critical Priority
+                            </div>
+
+                            <div
+                                class="summary-value"
+                                id="admissionsCritical"
+                            >
+                                0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TOOLBAR -->
+            <div class="card admission-card mb-4">
+                <div class="card-body">
+
+                    <div class="row g-3 align-items-end">
+
+                        <div class="col-xl-4 col-lg-4">
+                            <label
+                                for="admissionSearch"
+                                class="form-label"
+                            >
+                                Search
+                            </label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">
+                                    <i class="bi bi-search"></i>
+                                </span>
+
+                                <input
+                                    type="search"
+                                    class="form-control"
+                                    id="admissionSearch"
+                                    placeholder="Search admission, patient, room..."
+                                >
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <label
+                                for="admissionStatusFilter"
+                                class="form-label"
+                            >
+                                Status
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="admissionStatusFilter"
+                            >
+                                <option value="">All Statuses</option>
+                                <option value="admitted">Admitted</option>
+                                <option value="observation">Observation</option>
+                                <option value="discharged">Discharged</option>
+                                <option value="transferred">Transferred</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <label
+                                for="admissionTypeFilter"
+                                class="form-label"
+                            >
+                                Type
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="admissionTypeFilter"
+                            >
+                                <option value="">All Types</option>
+                                <option value="emergency">Emergency</option>
+                                <option value="routine">Routine</option>
+                                <option value="referral">Referral</option>
+                                <option value="transfer">Transfer</option>
+                            </select>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2 col-md-4">
+                            <label
+                                for="admissionPriorityFilter"
+                                class="form-label"
+                            >
+                                Priority
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="admissionPriorityFilter"
+                            >
+                                <option value="">All Priorities</option>
+                                <option value="low">Low</option>
+                                <option value="normal">Normal</option>
+                                <option value="high">High</option>
+                                <option value="critical">Critical</option>
+                            </select>
+                        </div>
+
+                        <div class="col-xl-2 col-lg-2">
+                            <button
+                                type="button"
+                                class="btn btn-outline-secondary w-100"
+                                id="clearAdmissionFilters"
+                            >
+                                <i class="bi bi-x-circle me-2"></i>
+                                Clear
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="row g-3 mt-1">
+
+                        <div class="col-lg-3">
+                            <label
+                                for="admissionDateFrom"
+                                class="form-label"
+                            >
+                                From Date
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="admissionDateFrom"
+                            >
+                        </div>
+
+                        <div class="col-lg-3">
+                            <label
+                                for="admissionDateTo"
+                                class="form-label"
+                            >
+                                To Date
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="admissionDateTo"
+                            >
+                        </div>
+
+                        <div class="col-lg-3 d-flex align-items-end">
+                            <button
+                                type="button"
+                                class="btn btn-outline-primary w-100"
+                                id="applyAdmissionDateFilter"
+                            >
+                                <i class="bi bi-funnel me-2"></i>
+                                Apply Date Filter
+                            </button>
+                        </div>
+
+                        <div class="col-lg-3 d-flex align-items-end justify-content-lg-end">
+                            <span class="admission-count-label">
+                                Showing
+                                <strong id="admissionCount">0</strong>
+                                admissions
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TABLE -->
+            <div class="card admission-card">
+
+                <div class="card-header">
+                    <div>
+                        <h5 class="mb-1">
+                            Admission Records
+                        </h5>
+
+                        <p class="text-muted mb-0 small">
+                            Current and historical inpatient admissions
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card-body p-0">
+
+                    <div
+                        id="admissionsLoading"
+                        class="admission-state"
+                    >
+                        <div
+                            class="spinner-border text-primary"
+                            role="status"
+                        ></div>
+
+                        <span>
+                            Loading admissions...
+                        </span>
+                    </div>
+
+                    <div
+                        id="admissionsEmpty"
+                        class="admission-state d-none"
+                    >
+                        <div class="empty-icon">
+                            <i class="bi bi-hospital"></i>
+                        </div>
+
+                        <h5>
+                            No admissions found
+                        </h5>
+
+                        <p>
+                            No admission records match the current filters.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="emptyCreateAdmissionBtn"
+                        >
+                            <i class="bi bi-plus-lg me-2"></i>
+                            Create Admission
+                        </button>
+                    </div>
+
+                    <div
+                        id="admissionsTableWrapper"
+                        class="table-responsive d-none"
+                    >
+                        <table class="table admission-table mb-0">
+
+                            <thead>
+                                <tr>
+                                    <th>Admission</th>
+                                    <th>Patient</th>
+                                    <th>Doctor</th>
+                                    <th>Department</th>
+                                    <th>Admission Date</th>
+                                    <th>Type</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Room / Bed</th>
+                                    <th class="text-end">Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="admissionsTableBody"></tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+     ADMISSION FORM MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="admissionModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div>
+                    <h5
+                        class="modal-title"
+                        id="admissionModalLabel"
+                    >
+                        New Admission
+                    </h5>
+
+                    <p class="text-muted small mb-0">
+                        Register a patient admission
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+            </div>
+
+            <form id="admissionForm">
+
+                <div class="modal-body">
+
+                    <div
+                        id="admissionFormAlert"
+                        class="alert d-none"
+                        role="alert"
+                    ></div>
+
+                    <!-- BASIC INFORMATION -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-person-vcard"></i>
+                            Admission Information
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionNumber"
+                                    class="form-label"
+                                >
+                                    Admission Number
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="admissionNumber"
+                                    placeholder="ADM-0001"
+                                    required
+                                >
+                            </div>
+
+                            <div class="col-md-8">
+                                <label
+                                    for="admissionPatient"
+                                    class="form-label"
+                                >
+                                    Patient
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="admissionPatient"
+                                    required
+                                >
+                                    <option value="">
+                                        Select patient
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionDoctor"
+                                    class="form-label"
+                                >
+                                    Attending Doctor
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="admissionDoctor"
+                                >
+                                    <option value="">
+                                        Select doctor
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionDepartment"
+                                    class="form-label"
+                                >
+                                    Department
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="admissionDepartment"
+                                >
+                                    <option value="">
+                                        Select department
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionDate"
+                                    class="form-label"
+                                >
+                                    Admission Date
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="datetime-local"
+                                    class="form-control"
+                                    id="admissionDate"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ADMISSION CLASSIFICATION -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-clipboard2-pulse"></i>
+                            Classification
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionType"
+                                    class="form-label"
+                                >
+                                    Admission Type
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="admissionType"
+                                >
+                                    <option value="routine">
+                                        Routine
+                                    </option>
+
+                                    <option value="emergency">
+                                        Emergency
+                                    </option>
+
+                                    <option value="referral">
+                                        Referral
+                                    </option>
+
+                                    <option value="transfer">
+                                        Transfer
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionPriority"
+                                    class="form-label"
+                                >
+                                    Priority
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="admissionPriority"
+                                >
+                                    <option value="normal">
+                                        Normal
+                                    </option>
+
+                                    <option value="low">
+                                        Low
+                                    </option>
+
+                                    <option value="high">
+                                        High
+                                    </option>
+
+                                    <option value="critical">
+                                        Critical
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label
+                                    for="expectedDischargeDate"
+                                    class="form-label"
+                                >
+                                    Expected Discharge
+                                </label>
+
+                                <input
+                                    type="datetime-local"
+                                    class="form-control"
+                                    id="expectedDischargeDate"
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="admissionReason"
+                                    class="form-label"
+                                >
+                                    Admission Reason
+                                    <span class="text-danger">*</span>
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="admissionReason"
+                                    rows="3"
+                                    maxlength="500"
+                                    placeholder="Reason for admission"
+                                    required
+                                ></textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="admissionDiagnosis"
+                                    class="form-label"
+                                >
+                                    Diagnosis
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="admissionDiagnosis"
+                                    rows="3"
+                                    maxlength="1000"
+                                    placeholder="Initial diagnosis"
+                                ></textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <label
+                                    for="admissionSymptoms"
+                                    class="form-label"
+                                >
+                                    Symptoms
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="admissionSymptoms"
+                                    rows="3"
+                                    maxlength="1000"
+                                    placeholder="Patient symptoms"
+                                ></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- LOCATION -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-door-open"></i>
+                            Bed & Ward Assignment
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionWard"
+                                    class="form-label"
+                                >
+                                    Ward
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="admissionWard"
+                                    placeholder="e.g. Medical Ward"
+                                >
+                            </div>
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionRoom"
+                                    class="form-label"
+                                >
+                                    Room Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="admissionRoom"
+                                    placeholder="e.g. 204"
+                                >
+                            </div>
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionBed"
+                                    class="form-label"
+                                >
+                                    Bed Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="admissionBed"
+                                    placeholder="e.g. B-12"
+                                >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- STATUS -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-activity"></i>
+                            Admission Status
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+                                <label
+                                    for="admissionStatus"
+                                    class="form-label"
+                                >
+                                    Status
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="admissionStatus"
+                                >
+                                    <option value="admitted">
+                                        Admitted
+                                    </option>
+
+                                    <option value="observation">
+                                        Observation
+                                    </option>
+
+                                    <option value="discharged">
+                                        Discharged
+                                    </option>
+
+                                    <option value="transferred">
+                                        Transferred
+                                    </option>
+
+                                    <option value="cancelled">
+                                        Cancelled
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label
+                                    for="admissionNotes"
+                                    class="form-label"
+                                >
+                                    Notes
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="admissionNotes"
+                                    rows="3"
+                                    maxlength="3000"
+                                    placeholder="Additional admission notes"
+                                ></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-light border"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="saveAdmissionBtn"
+                    >
+                        <span
+                            class="spinner-border spinner-border-sm d-none"
+                            id="saveAdmissionSpinner"
+                        ></span>
+
+                        <i
+                            class="bi bi-check-lg"
+                            id="saveAdmissionIcon"
+                        ></i>
+
+                        <span id="saveAdmissionText">
+                            Create Admission
+                        </span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- =========================================================
+     VIEW MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="viewAdmissionModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div>
+                    <h5 class="modal-title">
+                        Admission Details
+                    </h5>
+
+                    <p
+                        class="text-muted small mb-0"
+                        id="viewAdmissionSubtitle"
+                    ></p>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+            </div>
+
+            <div
+                class="modal-body"
+                id="admissionDetails"
+            ></div>
+
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div
+    id="admissionsToastContainer"
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+></div>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/axios@1.7.9/dist/axios.min.js"
+></script>
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/admissions/admissions-data.js"></script>
+<script src="../js/admissions/admissions-ui.js"></script>
+<script src="../js/admissions/admissions-form.js"></script>
+<script src="../js/admissions/admissions.js"></script>
+
+</body>
+</html>
