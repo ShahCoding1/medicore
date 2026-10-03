@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Beds | MediCore</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/beds.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <a href="../dashboard.html" class="brand-link">
+                <span class="brand-mark">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                </span>
+
+                <span class="brand-text">
+                    <strong>MediCore</strong>
+                    <small>Healthcare Platform</small>
+                </span>
+            </a>
+        </div>
+
+        <div class="hospital-selector">
+            <div class="hospital-icon">
+                <i class="bi bi-hospital"></i>
+            </div>
+
+            <div class="hospital-info">
+                <strong id="sidebarHospitalName">
+                    MediCore Hospital
+                </strong>
+                <span>Hospital Workspace</span>
+            </div>
+
+            <i class="bi bi-chevron-down"></i>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-label">MAIN</div>
+
+            <a href="../dashboard.html" class="nav-item">
+                <i class="bi bi-grid-1x2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="patients.html" class="nav-item">
+                <i class="bi bi-people"></i>
+                <span>Patients</span>
+            </a>
+
+            <a href="doctors.html" class="nav-item">
+                <i class="bi bi-person-badge"></i>
+                <span>Doctors</span>
+            </a>
+
+            <a href="departments.html" class="nav-item">
+                <i class="bi bi-diagram-3"></i>
+                <span>Departments</span>
+            </a>
+
+            <a href="appointments.html" class="nav-item">
+                <i class="bi bi-calendar2-check"></i>
+                <span>Appointments</span>
+            </a>
+
+            <a href="admissions.html" class="nav-item">
+                <i class="bi bi-hospital"></i>
+                <span>Admissions</span>
+            </a>
+
+            <div class="nav-section-label">CLINICAL</div>
+
+            <a href="medical-records.html" class="nav-item">
+                <i class="bi bi-file-medical"></i>
+                <span>Medical Records</span>
+            </a>
+
+            <a href="prescriptions.html" class="nav-item">
+                <i class="bi bi-prescription2"></i>
+                <span>Prescriptions</span>
+            </a>
+
+            <a href="pharmacy.html" class="nav-item">
+                <i class="bi bi-capsule"></i>
+                <span>Pharmacy</span>
+            </a>
+
+            <a href="laboratory-tests.html" class="nav-item">
+                <i class="bi bi-eyedropper"></i>
+                <span>Laboratory</span>
+            </a>
+
+            <div class="nav-section-label">OPERATIONS</div>
+
+            <a href="billing.html" class="nav-item">
+                <i class="bi bi-receipt"></i>
+                <span>Billing</span>
+            </a>
+
+            <a href="beds.html" class="nav-item active">
+                <i class="bi bi-grid-3x3-gap"></i>
+                <span>Beds</span>
+            </a>
+
+            <a href="staff.html" class="nav-item">
+                <i class="bi bi-person-workspace"></i>
+                <span>Staff</span>
+            </a>
+
+            <div class="nav-section-label">SYSTEM</div>
+
+            <a href="analytics.html" class="nav-item">
+                <i class="bi bi-bar-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="reports.html" class="nav-item">
+                <i class="bi bi-file-earmark-bar-graph"></i>
+                <span>Reports</span>
+            </a>
+
+            <a href="settings.html" class="nav-item">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-security">
+                <i class="bi bi-shield-check"></i>
+
+                <div>
+                    <strong>Secure Workspace</strong>
+                    <span>Protected by MediCore</span>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <div class="main-wrapper">
+
+        <!-- HEADER -->
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <button
+                    type="button"
+                    class="sidebar-toggle"
+                    id="sidebarToggle"
+                    aria-label="Toggle sidebar"
+                >
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="breadcrumb-area">
+                    <div class="breadcrumb-label">
+                        Operations
+                    </div>
+
+                    <div class="breadcrumb-current">
+                        Beds
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="header-right">
+
+                <button
+                    type="button"
+                    class="header-icon-btn"
+                    aria-label="Search"
+                >
+                    <i class="bi bi-search"></i>
+                </button>
+
+                <button
+                    type="button"
+                    class="header-icon-btn"
+                    aria-label="Help"
+                >
+                    <i class="bi bi-question-circle"></i>
+                </button>
+
+                <button
+                    type="button"
+                    class="header-icon-btn notification-btn"
+                    aria-label="Notifications"
+                >
+                    <i class="bi bi-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="header-divider"></div>
+
+                <div class="profile-menu">
+
+                    <div class="profile-avatar">
+                        MS
+                    </div>
+
+                    <div class="profile-info">
+                        <strong>M Shah Khalid</strong>
+                        <span>Administrator</span>
+                    </div>
+
+                    <i class="bi bi-chevron-down profile-chevron"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PAGE -->
+        <main class="page-content beds-page">
+
+            <div class="page-container">
+
+                <!-- PAGE HEADER -->
+                <div class="page-header beds-page-header">
+
+                    <div>
+
+                        <div class="page-eyebrow">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                            Inpatient Operations
+                        </div>
+
+                        <h1>Bed Management</h1>
+
+                        <p>
+                            Monitor bed availability, occupancy,
+                            assignments and hospital capacity.
+                        </p>
+
+                    </div>
+
+                    <div class="page-header-actions">
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            id="refreshBedsBtn"
+                        >
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Refresh
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="addBedBtn"
+                        >
+                            <i class="bi bi-plus-lg"></i>
+                            Add Bed
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUMMARY -->
+                <section class="bed-summary-grid">
+
+                    <div class="summary-card">
+                        <div class="summary-icon">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </div>
+
+                        <div>
+                            <span>Total Beds</span>
+                            <strong id="bedsTotal">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card available">
+                        <div class="summary-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+
+                        <div>
+                            <span>Available</span>
+                            <strong id="bedsAvailable">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card occupied">
+                        <div class="summary-icon">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+
+                        <div>
+                            <span>Occupied</span>
+                            <strong id="bedsOccupied">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card maintenance">
+                        <div class="summary-icon">
+                            <i class="bi bi-tools"></i>
+                        </div>
+
+                        <div>
+                            <span>Maintenance</span>
+                            <strong id="bedsMaintenance">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card blocked">
+                        <div class="summary-icon">
+                            <i class="bi bi-slash-circle"></i>
+                        </div>
+
+                        <div>
+                            <span>Blocked</span>
+                            <strong id="bedsBlocked">0</strong>
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <!-- FILTERS -->
+                <section class="beds-filter-card">
+
+                    <div class="filter-header">
+
+                        <div>
+                            <h2>Bed Inventory</h2>
+                            <p>
+                                Search and filter hospital beds.
+                            </p>
+                        </div>
+
+                        <div class="record-count">
+                            <span id="bedCount">0</span>
+                            beds
+                        </div>
+
+                    </div>
+
+
+                    <div class="filter-grid">
+
+                        <div class="filter-field search-field">
+
+                            <label for="bedSearch">
+                                Search
+                            </label>
+
+                            <div class="input-with-icon">
+
+                                <i class="bi bi-search"></i>
+
+                                <input
+                                    type="text"
+                                    id="bedSearch"
+                                    class="form-control"
+                                    placeholder="Bed number, ward, room..."
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="filter-field">
+
+                            <label for="bedStatusFilter">
+                                Status
+                            </label>
+
+                            <select
+                                id="bedStatusFilter"
+                                class="form-select"
+                            >
+                                <option value="">
+                                    All statuses
+                                </option>
+
+                                <option value="available">
+                                    Available
+                                </option>
+
+                                <option value="occupied">
+                                    Occupied
+                                </option>
+
+                                <option value="reserved">
+                                    Reserved
+                                </option>
+
+                                <option value="maintenance">
+                                    Maintenance
+                                </option>
+
+                                <option value="blocked">
+                                    Blocked
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="filter-field">
+
+                            <label for="bedTypeFilter">
+                                Bed Type
+                            </label>
+
+                            <select
+                                id="bedTypeFilter"
+                                class="form-select"
+                            >
+                                <option value="">
+                                    All types
+                                </option>
+
+                                <option value="general">
+                                    General
+                                </option>
+
+                                <option value="semi_private">
+                                    Semi Private
+                                </option>
+
+                                <option value="private">
+                                    Private
+                                </option>
+
+                                <option value="icu">
+                                    ICU
+                                </option>
+
+                                <option value="emergency">
+                                    Emergency
+                                </option>
+
+                                <option value="isolation">
+                                    Isolation
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="filter-field">
+
+                            <label for="bedWardFilter">
+                                Ward
+                            </label>
+
+                            <input
+                                type="text"
+                                id="bedWardFilter"
+                                class="form-control"
+                                placeholder="All wards"
+                            >
+
+                        </div>
+
+
+                        <div class="filter-field">
+
+                            <label for="bedFloorFilter">
+                                Floor
+                            </label>
+
+                            <input
+                                type="text"
+                                id="bedFloorFilter"
+                                class="form-control"
+                                placeholder="All floors"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="filter-actions">
+
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            id="clearBedFilters"
+                        >
+                            <i class="bi bi-x-circle"></i>
+                            Clear
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-primary"
+                            id="applyBedFilters"
+                        >
+                            <i class="bi bi-funnel"></i>
+                            Apply Filters
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <!-- TABLE -->
+                <section class="beds-table-card">
+
+                    <div
+                        class="table-loading"
+                        id="bedsLoading"
+                    >
+                        <div
+                            class="spinner-border"
+                            role="status"
+                        ></div>
+
+                        <span>
+                            Loading beds...
+                        </span>
+                    </div>
+
+
+                    <div
+                        class="table-empty"
+                        id="bedsEmpty"
+                        style="display: none;"
+                    >
+
+                        <div class="empty-icon">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                        </div>
+
+                        <h3>No beds found</h3>
+
+                        <p>
+                            No beds match the current filters.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="emptyCreateBedBtn"
+                        >
+                            <i class="bi bi-plus-lg"></i>
+                            Add First Bed
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        class="table-responsive"
+                        id="bedsTableWrapper"
+                    >
+
+                        <table class="table beds-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Bed</th>
+                                    <th>Ward</th>
+                                    <th>Room</th>
+                                    <th>Type</th>
+                                    <th>Patient</th>
+                                    <th>Status</th>
+                                    <th>Floor</th>
+                                    <th class="text-end">
+                                        Actions
+                                    </th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="bedsTableBody"></tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     BED MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="bedModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        Bed Management
+                    </span>
+
+                    <h5
+                        class="modal-title"
+                        id="bedModalLabel"
+                    >
+                        Add Bed
+                    </h5>
+
+                    <p>
+                        Configure hospital bed information.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+
+            <form id="bedForm" novalidate>
+
+                <div class="modal-body">
+
+                    <div
+                        id="bedFormAlert"
+                        class="alert d-none"
+                        role="alert"
+                    ></div>
+
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-grid-3x3-gap"></i>
+                            Bed Information
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="bedNumber"
+                                    class="form-label"
+                                >
+                                    Bed Number <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="bedNumber"
+                                    class="form-control"
+                                    placeholder="e.g. B-101"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="bedWard"
+                                    class="form-label"
+                                >
+                                    Ward <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="bedWard"
+                                    class="form-control"
+                                    placeholder="e.g. Medical Ward"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="bedRoom"
+                                    class="form-label"
+                                >
+                                    Room Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="bedRoom"
+                                    class="form-control"
+                                    placeholder="e.g. 204"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="bedFloor"
+                                    class="form-label"
+                                >
+                                    Floor
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="bedFloor"
+                                    class="form-control"
+                                    placeholder="e.g. 2nd Floor"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="bedType"
+                                    class="form-label"
+                                >
+                                    Bed Type
+                                </label>
+
+                                <select
+                                    id="bedType"
+                                    class="form-select"
+                                >
+
+                                    <option value="general">
+                                        General
+                                    </option>
+
+                                    <option value="semi_private">
+                                        Semi Private
+                                    </option>
+
+                                    <option value="private">
+                                        Private
+                                    </option>
+
+                                    <option value="icu">
+                                        ICU
+                                    </option>
+
+                                    <option value="emergency">
+                                        Emergency
+                                    </option>
+
+                                    <option value="isolation">
+                                        Isolation
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="bedStatus"
+                                    class="form-label"
+                                >
+                                    Status
+                                </label>
+
+                                <select
+                                    id="bedStatus"
+                                    class="form-select"
+                                >
+
+                                    <option value="available">
+                                        Available
+                                    </option>
+
+                                    <option value="reserved">
+                                        Reserved
+                                    </option>
+
+                                    <option value="maintenance">
+                                        Maintenance
+                                    </option>
+
+                                    <option value="blocked">
+                                        Blocked
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-person-plus"></i>
+                            Patient Assignment
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="bedPatient"
+                                    class="form-label"
+                                >
+                                    Patient
+                                </label>
+
+                                <select
+                                    id="bedPatient"
+                                    class="form-select"
+                                >
+                                    <option value="">
+                                        No patient assigned
+                                    </option>
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="bedAdmission"
+                                    class="form-label"
+                                >
+                                    Admission
+                                </label>
+
+                                <select
+                                    id="bedAdmission"
+                                    class="form-select"
+                                >
+                                    <option value="">
+                                        No admission assigned
+                                    </option>
+                                </select>
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <label
+                                    for="bedNotes"
+                                    class="form-label"
+                                >
+                                    Notes
+                                </label>
+
+                                <textarea
+                                    id="bedNotes"
+                                    class="form-control"
+                                    rows="3"
+                                    placeholder="Additional bed notes..."
+                                ></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="saveBedBtn"
+                    >
+
+                        <span
+                            class="spinner-border spinner-border-sm d-none"
+                            id="saveBedSpinner"
+                        ></span>
+
+                        <i
+                            class="bi bi-check2"
+                            id="saveBedIcon"
+                        ></i>
+
+                        <span id="saveBedText">
+                            Save Bed
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ASSIGN BED MODAL
+========================================================= -->
+
+<div
+    class="modal fade"
+    id="assignBedModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+
+    <div class="modal-dialog modal-md modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-eyebrow">
+                        Bed Assignment
+                    </span>
+
+                    <h5 class="modal-title">
+                        Assign Bed
+                    </h5>
+
+                    <p id="assignBedSubtitle">
+                        Assign a patient to this bed.
+                    </p>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+
+            <form id="assignBedForm">
+
+                <div class="modal-body">
+
+                    <div
+                        id="assignBedAlert"
+                        class="alert d-none"
+                    ></div>
+
+                    <input
+                        type="hidden"
+                        id="assignBedId"
+                    >
+
+                    <div class="mb-3">
+
+                        <label
+                            for="assignPatient"
+                            class="form-label"
+                        >
+                            Patient <span>*</span>
+                        </label>
+
+                        <select
+                            id="assignPatient"
+                            class="form-select"
+                            required
+                        >
+                            <option value="">
+                                Select patient
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="mb-3">
+
+                        <label
+                            for="assignAdmission"
+                            class="form-label"
+                        >
+                            Admission
+                        </label>
+
+                        <select
+                            id="assignAdmission"
+                            class="form-select"
+                        >
+                            <option value="">
+                                No admission
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-light"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="confirmAssignBedBtn"
+                    >
+                        <i class="bi bi-person-check"></i>
+                        Assign Bed
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+<div
+    id="bedsToastContainer"
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+></div>
+
+
+<!-- SCRIPTS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/beds/beds-data.js"></script>
+<script src="../js/beds/beds-ui.js"></script>
+<script src="../js/beds/beds-form.js"></script>
+<script src="../js/beds/beds.js"></script>
+
+</body>
+</html>
