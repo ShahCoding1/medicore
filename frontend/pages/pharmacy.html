@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="MediCore Pharmacy Management"
+    >
+
+    <title>Pharmacy | MediCore</title>
+
+    <!-- =====================================================
+         BOOTSTRAP
+         ===================================================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         MEDICORE GLOBAL STYLES
+         ===================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/pharmacy.css"
+    >
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         APPLICATION PAGE
+         ===================================================== -->
+
+    <main class="medicore-page pharmacy-page">
+
+        <!-- =================================================
+             PAGE HEADER
+             ================================================= -->
+
+        <section class="page-header pharmacy-page-header">
+
+            <div class="page-header-content">
+
+                <div class="page-header-copy">
+
+                    <div class="page-breadcrumb">
+                        <span>Pharmacy</span>
+
+                        <i class="bi bi-chevron-right"></i>
+
+                        <span>Inventory</span>
+                    </div>
+
+
+                    <h1 class="page-title">
+                        Pharmacy Inventory
+                    </h1>
+
+
+                    <p class="page-subtitle">
+                        Manage medicines, stock levels,
+                        batches, suppliers, and expiry dates.
+                    </p>
+
+                </div>
+
+
+                <div class="page-header-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-light border"
+                        id="refreshPharmacyBtn"
+                    >
+                        <i class="bi bi-arrow-clockwise"></i>
+
+                        <span>
+                            Refresh
+                        </span>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="addInventoryBtn"
+                    >
+                        <i class="bi bi-plus-lg"></i>
+
+                        <span>
+                            Add Medicine
+                        </span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             INVENTORY SUMMARY
+             ================================================= -->
+
+        <section class="pharmacy-summary-section">
+
+            <div class="row g-3">
+
+
+                <!-- Total Medicines -->
+
+                <div class="col-12 col-sm-6 col-xl-3">
+
+                    <div class="pharmacy-summary-card">
+
+                        <div class="summary-card-icon">
+                            <i class="bi bi-capsule"></i>
+                        </div>
+
+
+                        <div class="summary-card-content">
+
+                            <span class="summary-card-label">
+                                Total Medicines
+                            </span>
+
+
+                            <strong
+                                class="summary-card-value"
+                                id="pharmacyTotalMedicines"
+                            >
+                                0
+                            </strong>
+
+
+                            <span class="summary-card-meta">
+                                Inventory records
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Active Stock -->
+
+                <div class="col-12 col-sm-6 col-xl-3">
+
+                    <div class="pharmacy-summary-card">
+
+                        <div class="summary-card-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+
+
+                        <div class="summary-card-content">
+
+                            <span class="summary-card-label">
+                                Active Stock
+                            </span>
+
+
+                            <strong
+                                class="summary-card-value"
+                                id="pharmacyActiveMedicines"
+                            >
+                                0
+                            </strong>
+
+
+                            <span class="summary-card-meta">
+                                Available inventory
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Low Stock -->
+
+                <div class="col-12 col-sm-6 col-xl-3">
+
+                    <div class="pharmacy-summary-card">
+
+                        <div class="summary-card-icon">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+
+
+                        <div class="summary-card-content">
+
+                            <span class="summary-card-label">
+                                Low Stock
+                            </span>
+
+
+                            <strong
+                                class="summary-card-value"
+                                id="pharmacyLowStock"
+                            >
+                                0
+                            </strong>
+
+
+                            <span class="summary-card-meta">
+                                At or below reorder level
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Expiring Soon -->
+
+                <div class="col-12 col-sm-6 col-xl-3">
+
+                    <div class="pharmacy-summary-card">
+
+                        <div class="summary-card-icon">
+                            <i class="bi bi-calendar-x"></i>
+                        </div>
+
+
+                        <div class="summary-card-content">
+
+                            <span class="summary-card-label">
+                                Expiring Soon
+                            </span>
+
+
+                            <strong
+                                class="summary-card-value"
+                                id="pharmacyExpiringSoon"
+                            >
+                                0
+                            </strong>
+
+
+                            <span class="summary-card-meta">
+                                Within 30 days
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SEARCH & FILTERS
+             ================================================= -->
+
+        <section class="pharmacy-toolbar-section">
+
+            <div class="pharmacy-toolbar">
+
+
+                <!-- Search -->
+
+                <div class="pharmacy-search-wrapper">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="search"
+                        class="form-control"
+                        id="pharmacySearch"
+                        placeholder="Search medicine, batch, supplier..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <!-- Filters -->
+
+                <div class="pharmacy-filter-group">
+
+                    <select
+                        class="form-select"
+                        id="pharmacyCategoryFilter"
+                    >
+                        <option value="">
+                            All Categories
+                        </option>
+                    </select>
+
+
+                    <select
+                        class="form-select"
+                        id="pharmacyStatusFilter"
+                    >
+
+                        <option value="">
+                            All Status
+                        </option>
+
+                        <option value="active">
+                            Active
+                        </option>
+
+                        <option value="inactive">
+                            Inactive
+                        </option>
+
+                        <option value="out_of_stock">
+                            Out of Stock
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-light border"
+                        id="clearPharmacyFilters"
+                    >
+                        <i class="bi bi-x-circle"></i>
+
+                        <span>
+                            Clear
+                        </span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             INVENTORY TABLE
+             ================================================= -->
+
+        <section class="pharmacy-table-card">
+
+
+            <!-- Table Header -->
+
+            <div class="pharmacy-table-header">
+
+                <div>
+
+                    <h2 class="section-title">
+                        Medicine Inventory
+                    </h2>
+
+
+                    <p class="section-subtitle">
+
+                        <span
+                            id="pharmacyInventoryCount"
+                        >
+                            0
+                        </span>
+
+                        inventory records
+
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="pharmacy-table-header-actions"
+                >
+
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-light border"
+                        id="lowStockFilterBtn"
+                    >
+                        <i class="bi bi-exclamation-circle"></i>
+
+                        Low Stock
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-light border"
+                        id="expiringFilterBtn"
+                    >
+                        <i class="bi bi-calendar-event"></i>
+
+                        Expiring Soon
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Loading -->
+
+            <div
+                class="pharmacy-loading"
+                id="pharmacyLoading"
+                hidden
+            >
+
+                <div
+                    class="spinner-border"
+                    role="status"
+                    aria-hidden="true"
+                ></div>
+
+                <span>
+                    Loading pharmacy inventory...
+                </span>
+
+            </div>
+
+
+            <!-- Table -->
+
+            <div
+                class="table-responsive pharmacy-table-wrapper"
+                id="pharmacyTableWrapper"
+            >
+
+                <table
+                    class="table align-middle pharmacy-table"
+                >
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Medicine
+                            </th>
+
+                            <th>
+                                Batch
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Stock
+                            </th>
+
+                            <th>
+                                Expiry
+                            </th>
+
+                            <th>
+                                Supplier
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th class="text-end">
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="pharmacyTableBody"
+                    ></tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- Empty State -->
+
+            <div
+                class="pharmacy-empty-state"
+                id="pharmacyEmpty"
+                hidden
+            >
+
+                <div class="empty-state-icon">
+
+                    <i class="bi bi-capsule"></i>
+
+                </div>
+
+
+                <h3>
+                    No medicines found
+                </h3>
+
+
+                <p>
+                    Your pharmacy inventory is currently
+                    empty or no medicines match the selected
+                    filters.
+                </p>
+
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="emptyAddMedicineBtn"
+                >
+
+                    <i class="bi bi-plus-lg"></i>
+
+                    Add Medicine
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         ADD / EDIT MEDICINE MODAL
+         ===================================================== -->
+
+    <div
+        class="modal fade"
+        id="inventoryModal"
+        tabindex="-1"
+        aria-labelledby="inventoryModalLabel"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-dialog modal-xl modal-dialog-scrollable"
+        >
+
+            <div class="modal-content">
+
+
+                <!-- Modal Header -->
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="modal-eyebrow">
+                            Pharmacy
+                        </span>
+
+
+                        <h2
+                            class="modal-title"
+                            id="inventoryModalLabel"
+                        >
+                            Add Medicine
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+
+                </div>
+
+
+                <!-- Form -->
+
+                <form
+                    id="inventoryForm"
+                    novalidate
+                >
+
+                    <div class="modal-body">
+
+
+                        <!-- General Error -->
+
+                        <div
+                            class="alert alert-danger d-none"
+                            id="inventoryFormAlert"
+                            role="alert"
+                        ></div>
+
+
+                        <!-- =================================
+                             MEDICINE INFORMATION
+                             ================================= -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-heading">
+
+                                <div class="form-section-icon">
+                                    <i class="bi bi-capsule"></i>
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        Medicine Information
+                                    </h3>
+
+                                    <p>
+                                        Enter the basic medicine details.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+
+                                <!-- Medicine Name -->
+
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="inventoryMedicineName"
+                                        class="form-label"
+                                    >
+                                        Medicine Name
+                                        <span class="text-danger">
+                                            *
+                                        </span>
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventoryMedicineName"
+                                        name="medicineName"
+                                        maxlength="150"
+                                        required
+                                    >
+
+
+                                    <div
+                                        class="invalid-feedback"
+                                    >
+                                        Medicine name is required.
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Generic Name -->
+
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="inventoryGenericName"
+                                        class="form-label"
+                                    >
+                                        Generic Name
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventoryGenericName"
+                                        name="genericName"
+                                        maxlength="150"
+                                    >
+
+                                </div>
+
+
+                                <!-- Brand Name -->
+
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="inventoryBrandName"
+                                        class="form-label"
+                                    >
+                                        Brand Name
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventoryBrandName"
+                                        name="brandName"
+                                        maxlength="150"
+                                    >
+
+                                </div>
+
+
+                                <!-- Category -->
+
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="inventoryCategory"
+                                        class="form-label"
+                                    >
+                                        Category
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventoryCategory"
+                                        name="category"
+                                        maxlength="100"
+                                        placeholder="e.g. Antibiotic"
+                                    >
+
+                                </div>
+
+
+                                <!-- Dosage Form -->
+
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="inventoryDosageForm"
+                                        class="form-label"
+                                    >
+                                        Dosage Form
+                                    </label>
+
+
+                                    <select
+                                        class="form-select"
+                                        id="inventoryDosageForm"
+                                        name="dosageForm"
+                                    >
+
+                                        <option value="">
+                                            Select dosage form
+                                        </option>
+
+                                        <option value="Tablet">
+                                            Tablet
+                                        </option>
+
+                                        <option value="Capsule">
+                                            Capsule
+                                        </option>
+
+                                        <option value="Syrup">
+                                            Syrup
+                                        </option>
+
+                                        <option value="Injection">
+                                            Injection
+                                        </option>
+
+                                        <option value="Cream">
+                                            Cream
+                                        </option>
+
+                                        <option value="Ointment">
+                                            Ointment
+                                        </option>
+
+                                        <option value="Drops">
+                                            Drops
+                                        </option>
+
+                                        <option value="Inhaler">
+                                            Inhaler
+                                        </option>
+
+                                        <option value="Other">
+                                            Other
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Strength -->
+
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="inventoryStrength"
+                                        class="form-label"
+                                    >
+                                        Strength
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventoryStrength"
+                                        name="strength"
+                                        maxlength="100"
+                                        placeholder="e.g. 500 mg"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================
+                             BATCH & STOCK
+                             ================================= -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-heading">
+
+                                <div class="form-section-icon">
+                                    <i class="bi bi-box-seam"></i>
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        Batch & Stock
+                                    </h3>
+
+                                    <p>
+                                        Track quantity, batch and expiry.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+
+                                <!-- Batch -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventoryBatchNumber"
+                                        class="form-label"
+                                    >
+                                        Batch Number
+                                        <span class="text-danger">
+                                            *
+                                        </span>
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventoryBatchNumber"
+                                        name="batchNumber"
+                                        maxlength="100"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Expiry -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventoryExpiryDate"
+                                        class="form-label"
+                                    >
+                                        Expiry Date
+                                        <span class="text-danger">
+                                            *
+                                        </span>
+                                    </label>
+
+
+                                    <input
+                                        type="date"
+                                        class="form-control"
+                                        id="inventoryExpiryDate"
+                                        name="expiryDate"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Quantity -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventoryQuantity"
+                                        class="form-label"
+                                    >
+                                        Quantity
+                                        <span class="text-danger">
+                                            *
+                                        </span>
+                                    </label>
+
+
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="inventoryQuantity"
+                                        name="quantity"
+                                        min="0"
+                                        step="1"
+                                        value="0"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Reorder -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventoryReorderLevel"
+                                        class="form-label"
+                                    >
+                                        Reorder Level
+                                    </label>
+
+
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="inventoryReorderLevel"
+                                        name="reorderLevel"
+                                        min="0"
+                                        step="1"
+                                        value="10"
+                                    >
+
+                                </div>
+
+
+                                <!-- Unit -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventoryUnit"
+                                        class="form-label"
+                                    >
+                                        Stock Unit
+                                    </label>
+
+
+                                    <select
+                                        class="form-select"
+                                        id="inventoryUnit"
+                                        name="unit"
+                                    >
+
+                                        <option value="unit">
+                                            Unit
+                                        </option>
+
+                                        <option value="tablet">
+                                            Tablet
+                                        </option>
+
+                                        <option value="capsule">
+                                            Capsule
+                                        </option>
+
+                                        <option value="bottle">
+                                            Bottle
+                                        </option>
+
+                                        <option value="box">
+                                            Box
+                                        </option>
+
+                                        <option value="pack">
+                                            Pack
+                                        </option>
+
+                                        <option value="vial">
+                                            Vial
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Status -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventoryStatus"
+                                        class="form-label"
+                                    >
+                                        Status
+                                    </label>
+
+
+                                    <select
+                                        class="form-select"
+                                        id="inventoryStatus"
+                                        name="status"
+                                    >
+
+                                        <option value="active">
+                                            Active
+                                        </option>
+
+                                        <option value="inactive">
+                                            Inactive
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================
+                             PRICING & SUPPLIER
+                             ================================= -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-heading">
+
+                                <div class="form-section-icon">
+                                    <i class="bi bi-building"></i>
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        Pricing & Supplier
+                                    </h3>
+
+                                    <p>
+                                        Record supplier and pricing
+                                        information.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="row g-3">
+
+
+                                <!-- Purchase Price -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventoryPurchasePrice"
+                                        class="form-label"
+                                    >
+                                        Purchase Price
+                                    </label>
+
+
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="inventoryPurchasePrice"
+                                        name="purchasePrice"
+                                        min="0"
+                                        step="0.01"
+                                        value="0"
+                                    >
+
+                                </div>
+
+
+                                <!-- Selling Price -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventorySellingPrice"
+                                        class="form-label"
+                                    >
+                                        Selling Price
+                                    </label>
+
+
+                                    <input
+                                        type="number"
+                                        class="form-control"
+                                        id="inventorySellingPrice"
+                                        name="sellingPrice"
+                                        min="0"
+                                        step="0.01"
+                                        value="0"
+                                    >
+
+                                </div>
+
+
+                                <!-- Supplier -->
+
+                                <div class="col-md-4">
+
+                                    <label
+                                        for="inventorySupplier"
+                                        class="form-label"
+                                    >
+                                        Supplier
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventorySupplier"
+                                        name="supplier"
+                                        maxlength="150"
+                                    >
+
+                                </div>
+
+
+                                <!-- Supplier Contact -->
+
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="inventorySupplierContact"
+                                        class="form-label"
+                                    >
+                                        Supplier Contact
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventorySupplierContact"
+                                        name="supplierContact"
+                                        maxlength="100"
+                                    >
+
+                                </div>
+
+
+                                <!-- Location -->
+
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="inventoryLocation"
+                                        class="form-label"
+                                    >
+                                        Storage Location
+                                    </label>
+
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inventoryLocation"
+                                        name="location"
+                                        maxlength="100"
+                                        placeholder="e.g. Pharmacy Shelf A"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =================================
+                             NOTES
+                             ================================= -->
+
+                        <div class="form-section">
+
+                            <div class="form-section-heading">
+
+                                <div class="form-section-icon">
+                                    <i class="bi bi-journal-text"></i>
+                                </div>
+
+
+                                <div>
+
+                                    <h3>
+                                        Additional Information
+                                    </h3>
+
+                                    <p>
+                                        Add optional internal notes.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div>
+
+                                <label
+                                    for="inventoryNotes"
+                                    class="form-label"
+                                >
+                                    Notes
+                                </label>
+
+
+                                <textarea
+                                    class="form-control"
+                                    id="inventoryNotes"
+                                    name="notes"
+                                    rows="4"
+                                    maxlength="1000"
+                                    placeholder="Add any internal pharmacy notes..."
+                                ></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Modal Footer -->
+
+                    <div class="modal-footer">
+
+                        <button
+                            type="button"
+                            class="btn btn-light border"
+                            data-bs-dismiss="modal"
+                        >
+                            Cancel
+                        </button>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                            id="saveInventoryBtn"
+                        >
+
+                            <span
+                                class="spinner-border spinner-border-sm d-none"
+                                id="saveInventorySpinner"
+                                aria-hidden="true"
+                            ></span>
+
+
+                            <i
+                                class="bi bi-check2"
+                                id="saveInventoryIcon"
+                            ></i>
+
+
+                            <span id="saveInventoryText">
+                                Save Medicine
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         VIEW MEDICINE MODAL
+         ===================================================== -->
+
+    <div
+        class="modal fade"
+        id="viewInventoryModal"
+        tabindex="-1"
+        aria-labelledby="viewInventoryModalLabel"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-dialog modal-lg modal-dialog-scrollable"
+        >
+
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="modal-eyebrow">
+                            Pharmacy Inventory
+                        </span>
+
+
+                        <h2
+                            class="modal-title"
+                            id="viewInventoryModalLabel"
+                        >
+                            Medicine Details
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+
+                </div>
+
+
+                <div
+                    class="modal-body"
+                    id="inventoryDetails"
+                ></div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-light border"
+                        data-bs-dismiss="modal"
+                    >
+                        Close
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOAST CONTAINER
+         ===================================================== -->
+
+    <div
+        class="toast-container position-fixed bottom-0 end-0 p-3"
+        id="pharmacyToastContainer"
+    ></div>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/axios@1.7.9/dist/axios.min.js"
+    ></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/app.js"></script>
+
+
+    <script src="../js/pharmacy/pharmacy-data.js"></script>
+    <script src="../js/pharmacy/pharmacy-ui.js"></script>
+    <script src="../js/pharmacy/pharmacy-form.js"></script>
+    <script src="../js/pharmacy/pharmacy.js"></script>
+
+</body>
+</html>

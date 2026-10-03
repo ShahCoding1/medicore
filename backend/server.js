@@ -3,11 +3,14 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
+
 require("dotenv").config();
 
 // ==========================================
 // ROUTES
 // ==========================================
+  const invoiceRoutes =
+    require("./routes/invoiceRoutes");
 
 const authRoutes =
     require("./routes/authRoutes");
@@ -38,6 +41,12 @@ const appointmentRoutes =
 
 const medicalRecordRoutes =
     require("./routes/medicalRecordRoutes");
+
+const pharmacyRoutes =
+    require("./routes/pharmacyRoutes");
+
+const labTestRoutes =
+    require("./routes/labTestRoutes");
 
 // ==========================================
 // APP CONFIGURATION
@@ -112,6 +121,16 @@ app.get(
                 new Date().toISOString()
         });
     }
+);
+
+
+// ==========================================
+// BILLING ROUTES
+// ==========================================
+
+app.use(
+    "/api/billing",
+    invoiceRoutes
 );
 
 // ==========================================
@@ -225,6 +244,24 @@ app.use(
 );
 
 // ==========================================
+// PHARMACY ROUTES
+// ==========================================
+
+app.use(
+    "/api/pharmacy/inventory",
+    pharmacyRoutes
+);
+
+// ==========================================
+// LABORATORY ROUTES
+// ==========================================
+
+app.use(
+    "/api/laboratory/tests",
+    labTestRoutes
+);
+
+// ==========================================
 // FUTURE ROUTES
 // ==========================================
 //
@@ -310,55 +347,63 @@ const startServer = async () => {
                 );
 
                 console.log(
-                    `Server:       http://localhost:${PORT}`
+                    `Server:          http://localhost:${PORT}`
                 );
 
                 console.log(
-                    `API:          http://localhost:${PORT}/api`
+                    `API:             http://localhost:${PORT}/api`
                 );
 
                 console.log(
-                    `Health:       http://localhost:${PORT}/api/health`
+                    `Health:          http://localhost:${PORT}/api/health`
                 );
 
                 console.log(
-                    `Auth:         http://localhost:${PORT}/api/auth`
+                    `Auth:            http://localhost:${PORT}/api/auth`
                 );
 
                 console.log(
-                    `Hospital:     http://localhost:${PORT}/api/hospitals`
+                    `Hospital:        http://localhost:${PORT}/api/hospitals`
                 );
 
                 console.log(
-                    `Departments:  http://localhost:${PORT}/api/departments`
+                    `Departments:     http://localhost:${PORT}/api/departments`
                 );
 
                 console.log(
-                    `Dashboard:    http://localhost:${PORT}/api/dashboard`
+                    `Dashboard:       http://localhost:${PORT}/api/dashboard`
                 );
 
                 console.log(
-                    `Staff:        http://localhost:${PORT}/api/staff`
+                    `Staff:            http://localhost:${PORT}/api/staff`
                 );
 
                 console.log(
-                    `Preferences:  http://localhost:${PORT}/api/preferences`
+                    `Preferences:     http://localhost:${PORT}/api/preferences`
                 );
 
                 console.log(
-                    `Patients:      http://localhost:${PORT}/api/patients`
+                    `Patients:        http://localhost:${PORT}/api/patients`
                 );
 
                 console.log(
-                    `Doctors:       http://localhost:${PORT}/api/doctors`
+                    `Doctors:         http://localhost:${PORT}/api/doctors`
                 );
 
                 console.log(
-                    `Appointments: http://localhost:${PORT}/api/appointments`
+                    `Appointments:    http://localhost:${PORT}/api/appointments`
                 );
 
                 console.log(
                     `Medical Records: http://localhost:${PORT}/api/medical-records`
+                );
+
+                console.log(
+                    `Pharmacy:        http://localhost:${PORT}/api/pharmacy/inventory`
+                );
+
+                console.log(
+                    `Laboratory:      http://localhost:${PORT}/api/laboratory/tests`
                 );
 
                 console.log(
