@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Admissions | MediCore</title>
 
@@ -12,8 +15,8 @@
     >
 
     <link
-        rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+        rel="stylesheet"
     >
 
     <link rel="stylesheet" href="../css/style.css">
@@ -22,344 +25,581 @@
 
 <body>
 
-<div id="appShell">
+<div class="app-shell">
 
-    <div class="page-content">
+    <!-- =========================================================
+         SIDEBAR
+    ========================================================== -->
+    <aside class="sidebar" id="sidebar">
 
-        <div class="container-fluid py-4">
+        <div class="sidebar-brand">
+            <a href="../dashboard.html" class="brand-link">
+                <span class="brand-mark">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                </span>
 
-            <!-- PAGE HEADER -->
-            <div class="page-header mb-4">
+                <span class="brand-text">
+                    <strong>MediCore</strong>
+                    <small>Healthcare Platform</small>
+                </span>
+            </a>
+        </div>
+
+        <div class="hospital-selector">
+            <div class="hospital-icon">
+                <i class="bi bi-hospital"></i>
+            </div>
+
+            <div class="hospital-info">
+                <strong id="sidebarHospitalName">MediCore Hospital</strong>
+                <span>Hospital Workspace</span>
+            </div>
+
+            <i class="bi bi-chevron-down"></i>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <div class="nav-section-label">MAIN</div>
+
+            <a href="../dashboard.html" class="nav-item">
+                <i class="bi bi-grid-1x2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="patients.html" class="nav-item">
+                <i class="bi bi-people"></i>
+                <span>Patients</span>
+            </a>
+
+            <a href="doctors.html" class="nav-item">
+                <i class="bi bi-person-badge"></i>
+                <span>Doctors</span>
+            </a>
+
+            <a href="departments.html" class="nav-item">
+                <i class="bi bi-diagram-3"></i>
+                <span>Departments</span>
+            </a>
+
+            <a href="appointments.html" class="nav-item">
+                <i class="bi bi-calendar2-check"></i>
+                <span>Appointments</span>
+            </a>
+
+            <a href="admissions.html" class="nav-item active">
+                <i class="bi bi-hospital"></i>
+                <span>Admissions</span>
+            </a>
+
+            <div class="nav-section-label">CLINICAL</div>
+
+            <a href="medical-records.html" class="nav-item">
+                <i class="bi bi-file-medical"></i>
+                <span>Medical Records</span>
+            </a>
+
+            <a href="prescriptions.html" class="nav-item">
+                <i class="bi bi-prescription2"></i>
+                <span>Prescriptions</span>
+            </a>
+
+            <a href="pharmacy.html" class="nav-item">
+                <i class="bi bi-capsule"></i>
+                <span>Pharmacy</span>
+            </a>
+
+            <a href="laboratory-tests.html" class="nav-item">
+                <i class="bi bi-eyedropper"></i>
+                <span>Laboratory</span>
+            </a>
+
+            <div class="nav-section-label">OPERATIONS</div>
+
+            <a href="billing.html" class="nav-item">
+                <i class="bi bi-receipt"></i>
+                <span>Billing</span>
+            </a>
+
+            <a href="beds.html" class="nav-item">
+                <i class="bi bi-grid-3x3-gap"></i>
+                <span>Beds</span>
+            </a>
+
+            <a href="staff.html" class="nav-item">
+                <i class="bi bi-person-workspace"></i>
+                <span>Staff</span>
+            </a>
+
+            <div class="nav-section-label">SYSTEM</div>
+
+            <a href="analytics.html" class="nav-item">
+                <i class="bi bi-bar-chart-line"></i>
+                <span>Analytics</span>
+            </a>
+
+            <a href="reports.html" class="nav-item">
+                <i class="bi bi-file-earmark-bar-graph"></i>
+                <span>Reports</span>
+            </a>
+
+            <a href="settings.html" class="nav-item">
+                <i class="bi bi-gear"></i>
+                <span>Settings</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-security">
+                <i class="bi bi-shield-check"></i>
+
                 <div>
-                    <div class="d-flex align-items-center gap-2 mb-2">
-                        <span class="page-kicker">
-                            INPATIENT MANAGEMENT
-                        </span>
+                    <strong>Secure Workspace</strong>
+                    <span>Protected by MediCore</span>
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================================
+         MAIN AREA
+    ========================================================== -->
+    <div class="main-wrapper">
+
+        <!-- HEADER -->
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <button
+                    type="button"
+                    class="sidebar-toggle"
+                    id="sidebarToggle"
+                    aria-label="Toggle sidebar"
+                >
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="breadcrumb-area">
+
+                    <div class="breadcrumb-label">
+                        Operations
                     </div>
 
-                    <h1 class="page-title mb-1">
+                    <div class="breadcrumb-current">
                         Admissions
-                    </h1>
+                    </div>
 
-                    <p class="page-subtitle mb-0">
-                        Manage patient admissions, inpatient status,
-                        wards, rooms and admission activity.
-                    </p>
                 </div>
 
-                <div class="page-header-actions">
-                    <button
-                        type="button"
-                        class="btn btn-light border"
-                        id="refreshAdmissionsBtn"
-                    >
-                        <i class="bi bi-arrow-clockwise me-2"></i>
-                        Refresh
-                    </button>
-
-                    <button
-                        type="button"
-                        class="btn btn-primary"
-                        id="addAdmissionBtn"
-                    >
-                        <i class="bi bi-plus-lg me-2"></i>
-                        New Admission
-                    </button>
-                </div>
             </div>
 
-            <!-- SUMMARY -->
-            <div class="row g-3 mb-4">
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="admission-summary-card">
-                        <div class="summary-icon">
+            <div class="header-right">
+
+                <button
+                    type="button"
+                    class="header-icon-btn"
+                    title="Search"
+                    aria-label="Search"
+                >
+                    <i class="bi bi-search"></i>
+                </button>
+
+                <button
+                    type="button"
+                    class="header-icon-btn"
+                    title="Help"
+                    aria-label="Help"
+                >
+                    <i class="bi bi-question-circle"></i>
+                </button>
+
+                <button
+                    type="button"
+                    class="header-icon-btn notification-btn"
+                    title="Notifications"
+                    aria-label="Notifications"
+                >
+                    <i class="bi bi-bell"></i>
+                    <span class="notification-dot"></span>
+                </button>
+
+                <div class="header-divider"></div>
+
+                <div class="profile-menu">
+
+                    <div class="profile-avatar">
+                        MS
+                    </div>
+
+                    <div class="profile-info">
+                        <strong>M Shah Khalid</strong>
+                        <span>Administrator</span>
+                    </div>
+
+                    <i class="bi bi-chevron-down profile-chevron"></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             PAGE CONTENT
+        ====================================================== -->
+        <main class="page-content admissions-page">
+
+            <div class="page-container">
+
+                <!-- PAGE HEADER -->
+                <div class="page-header admissions-page-header">
+
+                    <div>
+
+                        <div class="page-eyebrow">
                             <i class="bi bi-hospital"></i>
+                            Inpatient Management
                         </div>
 
-                        <div>
-                            <div class="summary-label">
+                        <h1>Admissions</h1>
+
+                        <p>
+                            Manage patient admissions, inpatient status,
+                            priorities and clinical placement.
+                        </p>
+
+                    </div>
+
+                    <div class="page-header-actions">
+
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            id="refreshAdmissionsBtn"
+                        >
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Refresh
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-primary"
+                            id="addAdmissionBtn"
+                        >
+                            <i class="bi bi-plus-lg"></i>
+                            New Admission
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     SUMMARY CARDS
+                ================================================== -->
+                <section class="admission-summary-grid">
+
+                    <div class="summary-card">
+
+                        <div class="summary-card-top">
+                            <div class="summary-icon">
+                                <i class="bi bi-hospital"></i>
+                            </div>
+
+                            <span class="summary-label">
                                 Total Admissions
-                            </div>
-
-                            <div
-                                class="summary-value"
-                                id="admissionsTotal"
-                            >
-                                0
-                            </div>
+                            </span>
                         </div>
+
+                        <div class="summary-value" id="admissionsTotal">
+                            0
+                        </div>
+
+                        <div class="summary-footer">
+                            <span>
+                                All recorded admissions
+                            </span>
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="admission-summary-card">
-                        <div class="summary-icon">
-                            <i class="bi bi-person-check"></i>
-                        </div>
 
-                        <div>
-                            <div class="summary-label">
-                                Currently Admitted
+                    <div class="summary-card">
+
+                        <div class="summary-card-top">
+                            <div class="summary-icon success">
+                                <i class="bi bi-person-check"></i>
                             </div>
 
-                            <div
-                                class="summary-value"
-                                id="admissionsActive"
-                            >
-                                0
-                            </div>
+                            <span class="summary-label">
+                                Active
+                            </span>
                         </div>
+
+                        <div class="summary-value" id="admissionsActive">
+                            0
+                        </div>
+
+                        <div class="summary-footer">
+                            <span>
+                                Currently admitted
+                            </span>
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="admission-summary-card">
-                        <div class="summary-icon">
-                            <i class="bi bi-heart-pulse"></i>
-                        </div>
 
-                        <div>
-                            <div class="summary-label">
+                    <div class="summary-card">
+
+                        <div class="summary-card-top">
+                            <div class="summary-icon warning">
+                                <i class="bi bi-lightning-charge"></i>
+                            </div>
+
+                            <span class="summary-label">
                                 Emergency
-                            </div>
-
-                            <div
-                                class="summary-value"
-                                id="admissionsEmergency"
-                            >
-                                0
-                            </div>
+                            </span>
                         </div>
+
+                        <div class="summary-value" id="admissionsEmergency">
+                            0
+                        </div>
+
+                        <div class="summary-footer">
+                            <span>
+                                Emergency admissions
+                            </span>
+                        </div>
+
                     </div>
-                </div>
 
-                <div class="col-xl-3 col-md-6">
-                    <div class="admission-summary-card">
-                        <div class="summary-icon critical">
-                            <i class="bi bi-exclamation-triangle"></i>
+
+                    <div class="summary-card">
+
+                        <div class="summary-card-top">
+                            <div class="summary-icon danger">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </div>
+
+                            <span class="summary-label">
+                                Critical
+                            </span>
                         </div>
+
+                        <div class="summary-value" id="admissionsCritical">
+                            0
+                        </div>
+
+                        <div class="summary-footer">
+                            <span>
+                                Critical priority
+                            </span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     FILTER / SEARCH CARD
+                ================================================== -->
+                <section class="admissions-filter-card">
+
+                    <div class="filter-header">
 
                         <div>
-                            <div class="summary-label">
-                                Critical Priority
-                            </div>
-
-                            <div
-                                class="summary-value"
-                                id="admissionsCritical"
-                            >
-                                0
-                            </div>
+                            <h2>Admission Records</h2>
+                            <p>
+                                Search and filter inpatient records.
+                            </p>
                         </div>
+
+                        <div class="record-count">
+                            <span id="admissionCount">0</span>
+                            records
+                        </div>
+
                     </div>
-                </div>
 
-            </div>
 
-            <!-- TOOLBAR -->
-            <div class="card admission-card mb-4">
-                <div class="card-body">
+                    <div class="filter-grid">
 
-                    <div class="row g-3 align-items-end">
+                        <div class="filter-field search-field">
 
-                        <div class="col-xl-4 col-lg-4">
-                            <label
-                                for="admissionSearch"
-                                class="form-label"
-                            >
+                            <label for="admissionSearch">
                                 Search
                             </label>
 
-                            <div class="input-group">
-                                <span class="input-group-text">
-                                    <i class="bi bi-search"></i>
-                                </span>
+                            <div class="input-with-icon">
+                                <i class="bi bi-search"></i>
 
                                 <input
-                                    type="search"
-                                    class="form-control"
+                                    type="text"
                                     id="admissionSearch"
-                                    placeholder="Search admission, patient, room..."
+                                    class="form-control"
+                                    placeholder="Admission number, patient..."
                                 >
                             </div>
+
                         </div>
 
-                        <div class="col-xl-2 col-lg-2 col-md-4">
-                            <label
-                                for="admissionStatusFilter"
-                                class="form-label"
-                            >
+
+                        <div class="filter-field">
+
+                            <label for="admissionStatusFilter">
                                 Status
                             </label>
 
                             <select
-                                class="form-select"
                                 id="admissionStatusFilter"
+                                class="form-select"
                             >
-                                <option value="">All Statuses</option>
+                                <option value="">All statuses</option>
                                 <option value="admitted">Admitted</option>
                                 <option value="observation">Observation</option>
                                 <option value="discharged">Discharged</option>
                                 <option value="transferred">Transferred</option>
                                 <option value="cancelled">Cancelled</option>
                             </select>
+
                         </div>
 
-                        <div class="col-xl-2 col-lg-2 col-md-4">
-                            <label
-                                for="admissionTypeFilter"
-                                class="form-label"
-                            >
+
+                        <div class="filter-field">
+
+                            <label for="admissionTypeFilter">
                                 Type
                             </label>
 
                             <select
-                                class="form-select"
                                 id="admissionTypeFilter"
+                                class="form-select"
                             >
-                                <option value="">All Types</option>
+                                <option value="">All types</option>
                                 <option value="emergency">Emergency</option>
                                 <option value="routine">Routine</option>
                                 <option value="referral">Referral</option>
                                 <option value="transfer">Transfer</option>
                             </select>
+
                         </div>
 
-                        <div class="col-xl-2 col-lg-2 col-md-4">
-                            <label
-                                for="admissionPriorityFilter"
-                                class="form-label"
-                            >
+
+                        <div class="filter-field">
+
+                            <label for="admissionPriorityFilter">
                                 Priority
                             </label>
 
                             <select
-                                class="form-select"
                                 id="admissionPriorityFilter"
+                                class="form-select"
                             >
-                                <option value="">All Priorities</option>
+                                <option value="">All priorities</option>
                                 <option value="low">Low</option>
                                 <option value="normal">Normal</option>
                                 <option value="high">High</option>
                                 <option value="critical">Critical</option>
                             </select>
+
                         </div>
 
-                        <div class="col-xl-2 col-lg-2">
-                            <button
-                                type="button"
-                                class="btn btn-outline-secondary w-100"
-                                id="clearAdmissionFilters"
-                            >
-                                <i class="bi bi-x-circle me-2"></i>
-                                Clear
-                            </button>
-                        </div>
 
-                    </div>
+                        <div class="filter-field">
 
-                    <div class="row g-3 mt-1">
-
-                        <div class="col-lg-3">
-                            <label
-                                for="admissionDateFrom"
-                                class="form-label"
-                            >
-                                From Date
+                            <label for="admissionDateFrom">
+                                From
                             </label>
 
                             <input
                                 type="date"
-                                class="form-control"
                                 id="admissionDateFrom"
+                                class="form-control"
                             >
+
                         </div>
 
-                        <div class="col-lg-3">
-                            <label
-                                for="admissionDateTo"
-                                class="form-label"
-                            >
-                                To Date
+
+                        <div class="filter-field">
+
+                            <label for="admissionDateTo">
+                                To
                             </label>
 
                             <input
                                 type="date"
-                                class="form-control"
                                 id="admissionDateTo"
+                                class="form-control"
                             >
-                        </div>
 
-                        <div class="col-lg-3 d-flex align-items-end">
-                            <button
-                                type="button"
-                                class="btn btn-outline-primary w-100"
-                                id="applyAdmissionDateFilter"
-                            >
-                                <i class="bi bi-funnel me-2"></i>
-                                Apply Date Filter
-                            </button>
-                        </div>
-
-                        <div class="col-lg-3 d-flex align-items-end justify-content-lg-end">
-                            <span class="admission-count-label">
-                                Showing
-                                <strong id="admissionCount">0</strong>
-                                admissions
-                            </span>
                         </div>
 
                     </div>
 
-                </div>
-            </div>
 
-            <!-- TABLE -->
-            <div class="card admission-card">
+                    <div class="filter-actions">
 
-                <div class="card-header">
-                    <div>
-                        <h5 class="mb-1">
-                            Admission Records
-                        </h5>
+                        <button
+                            type="button"
+                            class="btn btn-light"
+                            id="clearAdmissionFilters"
+                        >
+                            <i class="bi bi-x-circle"></i>
+                            Clear Filters
+                        </button>
 
-                        <p class="text-muted mb-0 small">
-                            Current and historical inpatient admissions
-                        </p>
+                        <button
+                            type="button"
+                            class="btn btn-outline-primary"
+                            id="applyAdmissionDateFilter"
+                        >
+                            <i class="bi bi-funnel"></i>
+                            Apply Filters
+                        </button>
+
                     </div>
-                </div>
 
-                <div class="card-body p-0">
+                </section>
+
+
+                <!-- =================================================
+                     TABLE
+                ================================================== -->
+                <section class="admissions-table-card">
 
                     <div
+                        class="table-loading"
                         id="admissionsLoading"
-                        class="admission-state"
                     >
-                        <div
-                            class="spinner-border text-primary"
-                            role="status"
-                        ></div>
-
-                        <span>
-                            Loading admissions...
-                        </span>
+                        <div class="spinner-border" role="status"></div>
+                        <span>Loading admissions...</span>
                     </div>
 
+
                     <div
+                        class="table-empty"
                         id="admissionsEmpty"
-                        class="admission-state d-none"
+                        style="display: none;"
                     >
                         <div class="empty-icon">
                             <i class="bi bi-hospital"></i>
                         </div>
 
-                        <h5>
-                            No admissions found
-                        </h5>
+                        <h3>No admissions found</h3>
 
                         <p>
-                            No admission records match the current filters.
+                            There are no admission records matching
+                            your current filters.
                         </p>
 
                         <button
@@ -367,18 +607,22 @@
                             class="btn btn-primary"
                             id="emptyCreateAdmissionBtn"
                         >
-                            <i class="bi bi-plus-lg me-2"></i>
+                            <i class="bi bi-plus-lg"></i>
                             Create Admission
                         </button>
+
                     </div>
 
+
                     <div
+                        class="table-responsive"
                         id="admissionsTableWrapper"
-                        class="table-responsive d-none"
                     >
-                        <table class="table admission-table mb-0">
+
+                        <table class="table admissions-table">
 
                             <thead>
+
                                 <tr>
                                     <th>Admission</th>
                                     <th>Patient</th>
@@ -388,50 +632,55 @@
                                     <th>Type</th>
                                     <th>Priority</th>
                                     <th>Status</th>
-                                    <th>Room / Bed</th>
                                     <th class="text-end">Actions</th>
                                 </tr>
+
                             </thead>
 
                             <tbody id="admissionsTableBody"></tbody>
 
                         </table>
+
                     </div>
 
-                </div>
+                </section>
+
             </div>
 
-        </div>
+        </main>
 
     </div>
 
 </div>
 
-<!-- =========================================================
-     ADMISSION FORM MODAL
-========================================================= -->
 
+<!-- =============================================================
+     VIEW ADMISSION MODAL
+============================================================== -->
 <div
     class="modal fade"
-    id="admissionModal"
+    id="viewAdmissionModal"
     tabindex="-1"
     aria-hidden="true"
 >
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+
+    <div class="modal-dialog modal-xl modal-dialog-centered">
 
         <div class="modal-content">
 
             <div class="modal-header">
+
                 <div>
-                    <h5
-                        class="modal-title"
-                        id="admissionModalLabel"
-                    >
-                        New Admission
+                    <span class="modal-eyebrow">
+                        Admission Details
+                    </span>
+
+                    <h5 class="modal-title">
+                        Admission Information
                     </h5>
 
-                    <p class="text-muted small mb-0">
-                        Register a patient admission
+                    <p id="viewAdmissionSubtitle">
+                        Complete admission details
                     </p>
                 </div>
 
@@ -441,9 +690,66 @@
                     data-bs-dismiss="modal"
                     aria-label="Close"
                 ></button>
+
             </div>
 
-            <form id="admissionForm">
+            <div class="modal-body">
+
+                <div id="admissionDetails"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =============================================================
+     CREATE / EDIT ADMISSION MODAL
+============================================================== -->
+<div
+    class="modal fade"
+    id="admissionModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <span class="modal-eyebrow">
+                        Inpatient Management
+                    </span>
+
+                    <h5
+                        class="modal-title"
+                        id="admissionModalLabel"
+                    >
+                        New Admission
+                    </h5>
+
+                    <p>
+                        Record patient admission information.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+
+            <form id="admissionForm" novalidate>
 
                 <div class="modal-body">
 
@@ -453,55 +759,41 @@
                         role="alert"
                     ></div>
 
-                    <!-- BASIC INFORMATION -->
+
+                    <!-- Patient / Clinical -->
                     <div class="form-section">
 
                         <div class="form-section-title">
                             <i class="bi bi-person-vcard"></i>
-                            Admission Information
+                            Patient & Clinical Information
                         </div>
 
                         <div class="row g-3">
 
-                            <div class="col-md-4">
-                                <label
-                                    for="admissionNumber"
-                                    class="form-label"
-                                >
-                                    Admission Number
-                                    <span class="text-danger">*</span>
-                                </label>
+                            <div class="col-md-6">
 
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="admissionNumber"
-                                    placeholder="ADM-0001"
-                                    required
-                                >
-                            </div>
-
-                            <div class="col-md-8">
                                 <label
                                     for="admissionPatient"
                                     class="form-label"
                                 >
-                                    Patient
-                                    <span class="text-danger">*</span>
+                                    Patient <span>*</span>
                                 </label>
 
                                 <select
-                                    class="form-select"
                                     id="admissionPatient"
+                                    class="form-select"
                                     required
                                 >
                                     <option value="">
                                         Select patient
                                     </option>
                                 </select>
+
                             </div>
 
-                            <div class="col-md-4">
+
+                            <div class="col-md-6">
+
                                 <label
                                     for="admissionDoctor"
                                     class="form-label"
@@ -510,16 +802,19 @@
                                 </label>
 
                                 <select
-                                    class="form-select"
                                     id="admissionDoctor"
+                                    class="form-select"
                                 >
                                     <option value="">
                                         Select doctor
                                     </option>
                                 </select>
+
                             </div>
 
-                            <div class="col-md-4">
+
+                            <div class="col-md-6">
+
                                 <label
                                     for="admissionDepartment"
                                     class="form-label"
@@ -528,57 +823,100 @@
                                 </label>
 
                                 <select
-                                    class="form-select"
                                     id="admissionDepartment"
+                                    class="form-select"
                                 >
                                     <option value="">
                                         Select department
                                     </option>
                                 </select>
+
                             </div>
 
-                            <div class="col-md-4">
+
+                            <div class="col-md-6">
+
                                 <label
-                                    for="admissionDate"
+                                    for="admissionNumber"
                                     class="form-label"
                                 >
-                                    Admission Date
-                                    <span class="text-danger">*</span>
+                                    Admission Number
                                 </label>
 
                                 <input
-                                    type="datetime-local"
+                                    type="text"
+                                    id="admissionNumber"
                                     class="form-control"
-                                    id="admissionDate"
-                                    required
+                                    placeholder="Auto-generated if empty"
                                 >
+
                             </div>
 
                         </div>
 
                     </div>
 
-                    <!-- ADMISSION CLASSIFICATION -->
+
+                    <!-- Admission Details -->
                     <div class="form-section">
 
                         <div class="form-section-title">
-                            <i class="bi bi-clipboard2-pulse"></i>
-                            Classification
+                            <i class="bi bi-calendar2-plus"></i>
+                            Admission Details
                         </div>
 
                         <div class="row g-3">
 
                             <div class="col-md-4">
+
+                                <label
+                                    for="admissionDate"
+                                    class="form-label"
+                                >
+                                    Admission Date <span>*</span>
+                                </label>
+
+                                <input
+                                    type="datetime-local"
+                                    id="admissionDate"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
+                                <label
+                                    for="expectedDischargeDate"
+                                    class="form-label"
+                                >
+                                    Expected Discharge
+                                </label>
+
+                                <input
+                                    type="datetime-local"
+                                    id="expectedDischargeDate"
+                                    class="form-control"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
                                 <label
                                     for="admissionType"
                                     class="form-label"
                                 >
-                                    Admission Type
+                                    Admission Type <span>*</span>
                                 </label>
 
                                 <select
-                                    class="form-select"
                                     id="admissionType"
+                                    class="form-select"
+                                    required
                                 >
                                     <option value="routine">
                                         Routine
@@ -596,9 +934,12 @@
                                         Transfer
                                     </option>
                                 </select>
+
                             </div>
 
-                            <div class="col-md-4">
+
+                            <div class="col-md-6">
+
                                 <label
                                     for="admissionPriority"
                                     class="form-label"
@@ -607,8 +948,8 @@
                                 </label>
 
                                 <select
-                                    class="form-select"
                                     id="admissionPriority"
+                                    class="form-select"
                                 >
                                     <option value="normal">
                                         Normal
@@ -626,153 +967,12 @@
                                         Critical
                                     </option>
                                 </select>
+
                             </div>
 
-                            <div class="col-md-4">
-                                <label
-                                    for="expectedDischargeDate"
-                                    class="form-label"
-                                >
-                                    Expected Discharge
-                                </label>
-
-                                <input
-                                    type="datetime-local"
-                                    class="form-control"
-                                    id="expectedDischargeDate"
-                                >
-                            </div>
 
                             <div class="col-md-6">
-                                <label
-                                    for="admissionReason"
-                                    class="form-label"
-                                >
-                                    Admission Reason
-                                    <span class="text-danger">*</span>
-                                </label>
 
-                                <textarea
-                                    class="form-control"
-                                    id="admissionReason"
-                                    rows="3"
-                                    maxlength="500"
-                                    placeholder="Reason for admission"
-                                    required
-                                ></textarea>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label
-                                    for="admissionDiagnosis"
-                                    class="form-label"
-                                >
-                                    Diagnosis
-                                </label>
-
-                                <textarea
-                                    class="form-control"
-                                    id="admissionDiagnosis"
-                                    rows="3"
-                                    maxlength="1000"
-                                    placeholder="Initial diagnosis"
-                                ></textarea>
-                            </div>
-
-                            <div class="col-12">
-                                <label
-                                    for="admissionSymptoms"
-                                    class="form-label"
-                                >
-                                    Symptoms
-                                </label>
-
-                                <textarea
-                                    class="form-control"
-                                    id="admissionSymptoms"
-                                    rows="3"
-                                    maxlength="1000"
-                                    placeholder="Patient symptoms"
-                                ></textarea>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- LOCATION -->
-                    <div class="form-section">
-
-                        <div class="form-section-title">
-                            <i class="bi bi-door-open"></i>
-                            Bed & Ward Assignment
-                        </div>
-
-                        <div class="row g-3">
-
-                            <div class="col-md-4">
-                                <label
-                                    for="admissionWard"
-                                    class="form-label"
-                                >
-                                    Ward
-                                </label>
-
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="admissionWard"
-                                    placeholder="e.g. Medical Ward"
-                                >
-                            </div>
-
-                            <div class="col-md-4">
-                                <label
-                                    for="admissionRoom"
-                                    class="form-label"
-                                >
-                                    Room Number
-                                </label>
-
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="admissionRoom"
-                                    placeholder="e.g. 204"
-                                >
-                            </div>
-
-                            <div class="col-md-4">
-                                <label
-                                    for="admissionBed"
-                                    class="form-label"
-                                >
-                                    Bed Number
-                                </label>
-
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="admissionBed"
-                                    placeholder="e.g. B-12"
-                                >
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- STATUS -->
-                    <div class="form-section">
-
-                        <div class="form-section-title">
-                            <i class="bi bi-activity"></i>
-                            Admission Status
-                        </div>
-
-                        <div class="row g-3">
-
-                            <div class="col-md-4">
                                 <label
                                     for="admissionStatus"
                                     class="form-label"
@@ -781,8 +981,8 @@
                                 </label>
 
                                 <select
-                                    class="form-select"
                                     id="admissionStatus"
+                                    class="form-select"
                                 >
                                     <option value="admitted">
                                         Admitted
@@ -804,9 +1004,155 @@
                                         Cancelled
                                     </option>
                                 </select>
+
                             </div>
 
-                            <div class="col-md-8">
+                        </div>
+
+                    </div>
+
+
+                    <!-- Clinical Information -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-clipboard2-pulse"></i>
+                            Clinical Information
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-12">
+
+                                <label
+                                    for="admissionReason"
+                                    class="form-label"
+                                >
+                                    Admission Reason <span>*</span>
+                                </label>
+
+                                <textarea
+                                    id="admissionReason"
+                                    class="form-control"
+                                    rows="2"
+                                    placeholder="Enter reason for admission"
+                                    required
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="admissionDiagnosis"
+                                    class="form-label"
+                                >
+                                    Diagnosis
+                                </label>
+
+                                <textarea
+                                    id="admissionDiagnosis"
+                                    class="form-control"
+                                    rows="3"
+                                    placeholder="Enter diagnosis"
+                                ></textarea>
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label
+                                    for="admissionSymptoms"
+                                    class="form-label"
+                                >
+                                    Symptoms
+                                </label>
+
+                                <textarea
+                                    id="admissionSymptoms"
+                                    class="form-control"
+                                    rows="3"
+                                    placeholder="Enter presenting symptoms"
+                                ></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Location -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-geo-alt"></i>
+                            Inpatient Location
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+
+                                <label
+                                    for="admissionWard"
+                                    class="form-label"
+                                >
+                                    Ward
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="admissionWard"
+                                    class="form-control"
+                                    placeholder="e.g. Medical Ward"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
+                                <label
+                                    for="admissionRoom"
+                                    class="form-label"
+                                >
+                                    Room
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="admissionRoom"
+                                    class="form-control"
+                                    placeholder="e.g. 204"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-4">
+
+                                <label
+                                    for="admissionBed"
+                                    class="form-label"
+                                >
+                                    Bed
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="admissionBed"
+                                    class="form-control"
+                                    placeholder="e.g. B-12"
+                                >
+
+                            </div>
+
+
+                            <div class="col-12">
+
                                 <label
                                     for="admissionNotes"
                                     class="form-label"
@@ -815,12 +1161,12 @@
                                 </label>
 
                                 <textarea
-                                    class="form-control"
                                     id="admissionNotes"
+                                    class="form-control"
                                     rows="3"
-                                    maxlength="3000"
                                     placeholder="Additional admission notes"
                                 ></textarea>
+
                             </div>
 
                         </div>
@@ -829,11 +1175,12 @@
 
                 </div>
 
+
                 <div class="modal-footer">
 
                     <button
                         type="button"
-                        class="btn btn-light border"
+                        class="btn btn-light"
                         data-bs-dismiss="modal"
                     >
                         Cancel
@@ -844,19 +1191,22 @@
                         class="btn btn-primary"
                         id="saveAdmissionBtn"
                     >
+
                         <span
                             class="spinner-border spinner-border-sm d-none"
                             id="saveAdmissionSpinner"
+                            role="status"
                         ></span>
 
                         <i
-                            class="bi bi-check-lg"
+                            class="bi bi-check2"
                             id="saveAdmissionIcon"
                         ></i>
 
                         <span id="saveAdmissionText">
-                            Create Admission
+                            Save Admission
                         </span>
+
                     </button>
 
                 </div>
@@ -864,64 +1214,25 @@
             </form>
 
         </div>
+
     </div>
+
 </div>
 
-<!-- =========================================================
-     VIEW MODAL
-========================================================= -->
 
-<div
-    class="modal fade"
-    id="viewAdmissionModal"
-    tabindex="-1"
-    aria-hidden="true"
->
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-
-        <div class="modal-content">
-
-            <div class="modal-header">
-                <div>
-                    <h5 class="modal-title">
-                        Admission Details
-                    </h5>
-
-                    <p
-                        class="text-muted small mb-0"
-                        id="viewAdmissionSubtitle"
-                    ></p>
-                </div>
-
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                ></button>
-            </div>
-
-            <div
-                class="modal-body"
-                id="admissionDetails"
-            ></div>
-
-        </div>
-    </div>
-</div>
-
-<!-- TOAST -->
+<!-- =============================================================
+     TOAST CONTAINER
+============================================================== -->
 <div
     id="admissionsToastContainer"
     class="toast-container position-fixed bottom-0 end-0 p-3"
 ></div>
 
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-></script>
 
-<script
-    src="https://cdn.jsdelivr.net/npm/axios@1.7.9/dist/axios.min.js"
-></script>
+<!-- =============================================================
+     SCRIPTS
+============================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="../js/api.js"></script>
 <script src="../js/auth.js"></script>
