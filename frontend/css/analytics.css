@@ -1,0 +1,111 @@
+.analytics-header {
+    margin-bottom: 24px;
+}
+
+.analytics-header h1 {
+    margin: 5px 0 7px;
+    font-weight: 700;
+}
+
+.analytics-header p {
+    color: #667085;
+    margin: 0;
+}
+
+.analytics-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid #e8edf3;
+    padding: 16px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+}
+
+.analytics-filters select {
+    min-width: 150px;
+    border: 1px solid #dfe5eb;
+    border-radius: 9px;
+    padding: 9px 12px;
+    background: #fff;
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.analytics-kpi,
+.analytics-metric {
+    background: #fff;
+    border: 1px solid #e8edf3;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.analytics-kpi span,
+.analytics-metric span {
+    color: #667085;
+    font-size: 13px;
+}
+
+.analytics-kpi strong {
+    display: block;
+    font-size: 28px;
+    margin-top: 8px;
+    color: #172033;
+}
+
+.analytics-sections {
+    display: grid;
+    gap: 20px;
+}
+
+.analytics-section {
+    background: #fff;
+    border: 1px solid #e8edf3;
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.analytics-section h2 {
+    font-size: 17px;
+    margin: 0 0 16px;
+}
+
+.analytics-metric-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.analytics-metric strong {
+    display: block;
+    font-size: 22px;
+    margin-top: 7px;
+}
+
+@media (max-width: 1000px) {
+    .analytics-grid,
+    .analytics-metric-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .analytics-grid,
+    .analytics-metric-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-filters {
+        flex-direction: column;
+    }
+
+    .analytics-filters select {
+        width: 100%;
+    }
+}
