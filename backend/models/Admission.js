@@ -4,11 +4,9 @@ const admissionSchema = new mongoose.Schema(
     {
         admissionNumber: {
             type: String,
-            required: true,
             unique: true,
-            trim: true,
             uppercase: true,
-            index: true
+            trim: true
         },
 
         patient: {
@@ -20,95 +18,40 @@ const admissionSchema = new mongoose.Schema(
 
         attendingDoctor: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Doctor",
-            default: null,
-            index: true
+            ref: "Doctor"
         },
 
         department: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Department",
-            default: null,
-            index: true
+            ref: "Department"
         },
 
         admissionDate: {
             type: Date,
             required: true,
-            default: Date.now,
-            index: true
+            default: Date.now
         },
 
         expectedDischargeDate: {
-            type: Date,
-            default: null
+            type: Date
         },
 
         actualDischargeDate: {
-            type: Date,
-            default: null
+            type: Date
         },
 
         admissionType: {
             type: String,
-            enum: [
-                "emergency",
-                "routine",
-                "referral",
-                "transfer"
-            ],
+            enum: ["emergency", "routine", "referral", "transfer"],
             default: "routine",
-            required: true
+            index: true
         },
 
         priority: {
             type: String,
-            enum: [
-                "low",
-                "normal",
-                "high",
-                "critical"
-            ],
-            default: "normal"
-        },
-
-        reason: {
-            type: String,
-            required: true,
-            trim: true,
-            maxlength: 500
-        },
-
-        diagnosis: {
-            type: String,
-            trim: true,
-            maxlength: 1000,
-            default: ""
-        },
-
-        symptoms: {
-            type: String,
-            trim: true,
-            maxlength: 1000,
-            default: ""
-        },
-
-        roomNumber: {
-            type: String,
-            trim: true,
-            default: ""
-        },
-
-        bedNumber: {
-            type: String,
-            trim: true,
-            default: ""
-        },
-
-        ward: {
-            type: String,
-            trim: true,
-            default: ""
+            enum: ["low", "normal", "high", "critical"],
+            default: "normal",
+            index: true
         },
 
         status: {
@@ -124,30 +67,57 @@ const admissionSchema = new mongoose.Schema(
             index: true
         },
 
-        dischargeSummary: {
+        reason: {
             type: String,
             trim: true,
-            maxlength: 3000,
-            default: ""
+            maxlength: 1000
+        },
+
+        diagnosis: {
+            type: String,
+            trim: true,
+            maxlength: 2000
+        },
+
+        symptoms: {
+            type: String,
+            trim: true,
+            maxlength: 3000
+        },
+
+        ward: {
+            type: String,
+            trim: true,
+            maxlength: 200
+        },
+
+        roomNumber: {
+            type: String,
+            trim: true,
+            maxlength: 100
+        },
+
+        bedNumber: {
+            type: String,
+            trim: true,
+            maxlength: 100
         },
 
         notes: {
             type: String,
             trim: true,
-            maxlength: 3000,
-            default: ""
+            maxlength: 5000
+        },
+
+        dischargeSummary: {
+            type: String,
+            trim: true,
+            maxlength: 5000
         },
 
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            default: null
-        },
-
-        updatedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            default: null
+            ref: "User"
         }
     },
     {
@@ -155,57 +125,23 @@ const admissionSchema = new mongoose.Schema(
     }
 );
 
-/*
- * Automatically normalize the admission number.
- */
-admissionSchema.pre("validate", function (next) {
-    if (this.admissionNumber) {
-        this.admissionNumber =
-            this.admissionNumber.trim().toUpperCase();
-    }
+admissionSchema.pre("validate", async function (next) {
+    if (!this.admissionNumber) {
+        const datePart = new Date()
+            .toISOString()
+            .slice(0, 10)
+            .replace(/-/g, "");
 
-    if (this.roomNumber) {
-        this.roomNumber =
-            this.roomNumber.trim();
-    }
+        const randomPart = Math.floor(1000 + Math.random() * 9000);
 
-    if (this.bedNumber) {
-        this.bedNumber =
-            this.bedNumber.trim();
-    }
-
-    if (this.ward) {
-        this.ward =
-            this.ward.trim();
+        this.admissionNumber = `ADM-${datePart}-${randomPart}`;
     }
 
     next();
 });
 
-/*
- * Useful indexes for admissions management.
- */
-admissionSchema.index({
-    patient: 1,
-    admissionDate: -1
-});
+admissionSchema.index({ admissionDate: -1 });
+admissionSchema.index({ patient: 1, status: 1 });
+admissionSchema.index({ department: 1, status: 1 });
 
-admissionSchema.index({
-    status: 1,
-    admissionDate: -1
-});
-
-admissionSchema.index({
-    department: 1,
-    status: 1
-});
-
-admissionSchema.index({
-    attendingDoctor: 1,
-    status: 1
-});
-
-module.exports = mongoose.model(
-    "Admission",
-    admissionSchema
-);
+module.exports = mongoose.model("Admission", admissionSchema);

@@ -13,13 +13,19 @@ const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
+// Protect all admissions routes
 router.use(protect);
 
-/*
- * Keep summary before /:id
- * so "summary" is not treated as an admission ID.
- */
+// --------------------------------------------------------------------------
+// Admission Summary
+// IMPORTANT: Keep this BEFORE /:id
+// --------------------------------------------------------------------------
+
 router.get("/summary", getAdmissionSummary);
+
+// --------------------------------------------------------------------------
+// Admissions CRUD
+// --------------------------------------------------------------------------
 
 router.get("/", getAdmissions);
 

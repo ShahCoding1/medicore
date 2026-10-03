@@ -5,12 +5,26 @@ const Patient = require("../models/Patient");
 const Doctor = require("../models/Doctor");
 const Department = require("../models/Department");
 
+// --------------------------------------------------------------------------
+// Populate admission references
+// --------------------------------------------------------------------------
+
 const populateAdmission = (query) => {
     return query
-        .populate("patient", "firstName lastName patientId phone gender dateOfBirth")
-        .populate("attendingDoctor", "firstName lastName doctorId specialization")
+        .populate(
+            "patient",
+            "firstName lastName patientId phone gender dateOfBirth"
+        )
+        .populate(
+            "attendingDoctor",
+            "firstName lastName doctorId specialization"
+        )
         .populate("department", "name code");
 };
+
+// --------------------------------------------------------------------------
+// Normalize admission number
+// --------------------------------------------------------------------------
 
 const normalizeAdmissionNumber = (value) => {
     if (!value) return value;
@@ -19,6 +33,10 @@ const normalizeAdmissionNumber = (value) => {
         .trim()
         .toUpperCase();
 };
+
+// --------------------------------------------------------------------------
+// Validate MongoDB ObjectId
+// --------------------------------------------------------------------------
 
 const validateObjectId = (id) => {
     return mongoose.Types.ObjectId.isValid(id);
@@ -29,6 +47,7 @@ const validateObjectId = (id) => {
 | GET /api/admissions
 |--------------------------------------------------------------------------
 */
+
 const getAdmissions = async (req, res) => {
     try {
         const {
@@ -45,30 +64,37 @@ const getAdmissions = async (req, res) => {
 
         const filter = {};
 
+        // Status filter
         if (status) {
             filter.status = status;
         }
 
+        // Admission type filter
         if (admissionType) {
             filter.admissionType = admissionType;
         }
 
+        // Priority filter
         if (priority) {
             filter.priority = priority;
         }
 
+        // Patient filter
         if (patient && validateObjectId(patient)) {
             filter.patient = patient;
         }
 
+        // Doctor filter
         if (doctor && validateObjectId(doctor)) {
             filter.attendingDoctor = doctor;
         }
 
+        // Department filter
         if (department && validateObjectId(department)) {
             filter.department = department;
         }
 
+        // Date range filter
         if (dateFrom || dateTo) {
             filter.admissionDate = {};
 
@@ -101,15 +127,19 @@ const getAdmissions = async (req, res) => {
             }
         }
 
-        let query = Admission.find(filter)
-            .sort({ admissionDate: -1, createdAt: -1 });
+        let query = Admission.find(filter).sort({
+            admissionDate: -1,
+            createdAt: -1
+        });
 
+        // Search
         if (search) {
             const searchRegex = new RegExp(
                 String(search).trim(),
                 "i"
             );
 
+            // Search matching patients
             const matchingPatients = await Patient.find({
                 $or: [
                     { firstName: searchRegex },
@@ -119,6 +149,7 @@ const getAdmissions = async (req, res) => {
                 ]
             }).select("_id");
 
+            // Search matching doctors
             const matchingDoctors = await Doctor.find({
                 $or: [
                     { firstName: searchRegex },
@@ -137,6 +168,7 @@ const getAdmissions = async (req, res) => {
                 { ward: searchRegex }
             ];
 
+            // Add patient matches
             if (matchingPatients.length > 0) {
                 searchConditions.push({
                     patient: {
@@ -147,6 +179,7 @@ const getAdmissions = async (req, res) => {
                 });
             }
 
+            // Add doctor matches
             if (matchingDoctors.length > 0) {
                 searchConditions.push({
                     attendingDoctor: {
@@ -199,6 +232,7 @@ const getAdmissions = async (req, res) => {
 | GET /api/admissions/:id
 |--------------------------------------------------------------------------
 */
+
 const getAdmission = async (req, res) => {
     try {
         const { id } = req.params;
@@ -247,6 +281,7 @@ const getAdmission = async (req, res) => {
 | POST /api/admissions
 |--------------------------------------------------------------------------
 */
+
 const createAdmission = async (req, res) => {
     try {
         const {
@@ -268,6 +303,7 @@ const createAdmission = async (req, res) => {
             notes
         } = req.body;
 
+        // Required admission number
         if (!admissionNumber) {
             return res.status(400).json({
                 success: false,
@@ -275,6 +311,7 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Required patient
         if (!patient) {
             return res.status(400).json({
                 success: false,
@@ -282,6 +319,7 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Required reason
         if (!reason) {
             return res.status(400).json({
                 success: false,
@@ -289,6 +327,7 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Validate patient ID
         if (!validateObjectId(patient)) {
             return res.status(400).json({
                 success: false,
@@ -296,12 +335,14 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Check duplicate admission number
+        const normalizedAdmissionNumber =
+            normalizeAdmissionNumber(admissionNumber);
+
         const existingAdmission =
             await Admission.findOne({
                 admissionNumber:
-                    normalizeAdmissionNumber(
-                        admissionNumber
-                    )
+                    normalizedAdmissionNumber
             });
 
         if (existingAdmission) {
@@ -312,6 +353,7 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Verify patient
         const patientExists =
             await Patient.findById(patient);
 
@@ -322,6 +364,7 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Validate doctor
         if (
             attendingDoctor &&
             !validateObjectId(attendingDoctor)
@@ -332,6 +375,7 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Validate department
         if (
             department &&
             !validateObjectId(department)
@@ -342,6 +386,7 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Verify doctor
         if (attendingDoctor) {
             const doctorExists =
                 await Doctor.findById(attendingDoctor);
@@ -354,6 +399,7 @@ const createAdmission = async (req, res) => {
             }
         }
 
+        // Verify department
         if (department) {
             const departmentExists =
                 await Department.findById(department);
@@ -366,6 +412,7 @@ const createAdmission = async (req, res) => {
             }
         }
 
+        // Validate discharge date
         if (
             expectedDischargeDate &&
             admissionDate &&
@@ -379,42 +426,59 @@ const createAdmission = async (req, res) => {
             });
         }
 
+        // Create admission
         const admission =
             await Admission.create({
                 admissionNumber:
-                    normalizeAdmissionNumber(
-                        admissionNumber
-                    ),
+                    normalizedAdmissionNumber,
+
                 patient,
+
                 attendingDoctor:
                     attendingDoctor || null,
+
                 department:
                     department || null,
+
                 admissionDate:
                     admissionDate || new Date(),
+
                 expectedDischargeDate:
                     expectedDischargeDate || null,
+
                 admissionType:
                     admissionType || "routine",
+
                 priority:
                     priority || "normal",
-                reason: String(reason).trim(),
+
+                reason:
+                    String(reason).trim(),
+
                 diagnosis:
                     diagnosis || "",
+
                 symptoms:
                     symptoms || "",
+
                 roomNumber:
                     roomNumber || "",
+
                 bedNumber:
                     bedNumber || "",
+
                 ward:
                     ward || "",
+
                 status:
                     status || "admitted",
+
                 notes:
                     notes || "",
+
                 createdBy:
                     req.user?.id || null,
+
                 updatedBy:
                     req.user?.id || null
             });
@@ -459,6 +523,7 @@ const createAdmission = async (req, res) => {
 | PUT /api/admissions/:id
 |--------------------------------------------------------------------------
 */
+
 const updateAdmission = async (req, res) => {
     try {
         const { id } = req.params;
@@ -513,6 +578,7 @@ const updateAdmission = async (req, res) => {
             }
         });
 
+        // Normalize admission number
         if (admission.admissionNumber) {
             admission.admissionNumber =
                 normalizeAdmissionNumber(
@@ -520,6 +586,7 @@ const updateAdmission = async (req, res) => {
                 );
         }
 
+        // Validate patient
         if (
             admission.patient &&
             !validateObjectId(admission.patient)
@@ -542,6 +609,7 @@ const updateAdmission = async (req, res) => {
             });
         }
 
+        // Validate doctor
         if (
             admission.attendingDoctor &&
             !validateObjectId(
@@ -555,6 +623,7 @@ const updateAdmission = async (req, res) => {
             });
         }
 
+        // Verify doctor
         if (admission.attendingDoctor) {
             const doctorExists =
                 await Doctor.findById(
@@ -570,6 +639,7 @@ const updateAdmission = async (req, res) => {
             }
         }
 
+        // Validate department
         if (
             admission.department &&
             !validateObjectId(
@@ -582,6 +652,7 @@ const updateAdmission = async (req, res) => {
             });
         }
 
+        // Verify department
         if (admission.department) {
             const departmentExists =
                 await Department.findById(
@@ -597,6 +668,7 @@ const updateAdmission = async (req, res) => {
             }
         }
 
+        // Validate discharge date
         if (
             admission.expectedDischargeDate &&
             admission.admissionDate &&
@@ -614,6 +686,7 @@ const updateAdmission = async (req, res) => {
             });
         }
 
+        // Automatically set actual discharge date
         if (
             admission.status === "discharged" &&
             !admission.actualDischargeDate
@@ -656,7 +729,8 @@ const updateAdmission = async (req, res) => {
 
         return res.status(500).json({
             success: false,
-            message: "Failed to update admission.",
+            message:
+                "Failed to update admission.",
             error:
                 process.env.NODE_ENV === "development"
                     ? error.message
@@ -670,6 +744,7 @@ const updateAdmission = async (req, res) => {
 | DELETE /api/admissions/:id
 |--------------------------------------------------------------------------
 */
+
 const deleteAdmission = async (req, res) => {
     try {
         const { id } = req.params;
@@ -706,7 +781,8 @@ const deleteAdmission = async (req, res) => {
 
         return res.status(500).json({
             success: false,
-            message: "Failed to delete admission.",
+            message:
+                "Failed to delete admission.",
             error:
                 process.env.NODE_ENV === "development"
                     ? error.message
@@ -720,6 +796,7 @@ const deleteAdmission = async (req, res) => {
 | GET /api/admissions/summary
 |--------------------------------------------------------------------------
 */
+
 const getAdmissionSummary = async (req, res) => {
     try {
         const [
