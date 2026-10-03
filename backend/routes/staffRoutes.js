@@ -1,26 +1,29 @@
 const express = require("express");
 
 const {
+    getStaff,
+    getStaffMember,
     createStaff,
-    getOnboardingStaffData
+    updateStaff,
+    deleteStaff,
+    getStaffSummary
 } = require("../controllers/staffController");
 
-const {
-    protect
-} = require("../middleware/authMiddleware");
+const { protect } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.get(
-    "/onboarding",
-    protect,
-    getOnboardingStaffData
-);
+router.use(protect);
 
-router.post(
-    "/onboarding",
-    protect,
-    createStaff
-);
+// Summary
+router.get("/summary", getStaffSummary);
+
+// Staff CRUD
+router.get("/", getStaff);
+router.post("/", createStaff);
+
+router.get("/:id", getStaffMember);
+router.put("/:id", updateStaff);
+router.delete("/:id", deleteStaff);
 
 module.exports = router;

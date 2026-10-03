@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staff | MediCore</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/staff.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-brand">
+            <div class="brand-mark">
+                <i class="bi bi-heart-pulse-fill"></i>
+            </div>
+
+            <div>
+                <div class="brand-name">MediCore</div>
+                <div class="brand-tagline">Connected Healthcare</div>
+            </div>
+        </div>
+
+        <div class="sidebar-section-label">MAIN</div>
+
+        <nav class="sidebar-nav">
+
+            <a href="../dashboard.html" class="sidebar-link">
+                <i class="bi bi-grid-1x2"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="patients.html" class="sidebar-link">
+                <i class="bi bi-people"></i>
+                <span>Patients</span>
+            </a>
+
+            <a href="doctors.html" class="sidebar-link">
+                <i class="bi bi-person-badge"></i>
+                <span>Doctors</span>
+            </a>
+
+            <a href="departments.html" class="sidebar-link">
+                <i class="bi bi-diagram-3"></i>
+                <span>Departments</span>
+            </a>
+
+            <a href="appointments.html" class="sidebar-link">
+                <i class="bi bi-calendar-check"></i>
+                <span>Appointments</span>
+            </a>
+
+            <a href="medical-records.html" class="sidebar-link">
+                <i class="bi bi-file-medical"></i>
+                <span>Medical Records</span>
+            </a>
+
+            <a href="prescriptions.html" class="sidebar-link">
+                <i class="bi bi-prescription2"></i>
+                <span>Prescriptions</span>
+            </a>
+
+            <a href="pharmacy.html" class="sidebar-link">
+                <i class="bi bi-capsule"></i>
+                <span>Pharmacy</span>
+            </a>
+
+            <a href="laboratory-tests.html" class="sidebar-link">
+                <i class="bi bi-eyedropper"></i>
+                <span>Laboratory</span>
+            </a>
+
+            <div class="sidebar-section-label mt-3">OPERATIONS</div>
+
+            <a href="billing.html" class="sidebar-link">
+                <i class="bi bi-receipt"></i>
+                <span>Billing</span>
+            </a>
+
+            <a href="admissions.html" class="sidebar-link">
+                <i class="bi bi-hospital"></i>
+                <span>Admissions</span>
+            </a>
+
+            <a href="beds.html" class="sidebar-link">
+                <i class="bi bi-grid-3x3-gap"></i>
+                <span>Beds</span>
+            </a>
+
+            <a href="discharges.html" class="sidebar-link">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Discharges</span>
+            </a>
+
+            <a href="staff.html" class="sidebar-link active">
+                <i class="bi bi-person-lines-fill"></i>
+                <span>Staff</span>
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <header class="top-header">
+
+            <div class="header-left">
+
+                <button
+                    class="sidebar-toggle"
+                    id="sidebarToggle"
+                    type="button"
+                    aria-label="Toggle sidebar"
+                >
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="breadcrumb-area">
+                    <span class="breadcrumb-muted">MediCore</span>
+                    <i class="bi bi-chevron-right"></i>
+                    <span>Staff</span>
+                </div>
+
+            </div>
+
+            <div class="header-actions">
+
+                <button
+                    class="header-icon-btn"
+                    type="button"
+                    title="Search"
+                >
+                    <i class="bi bi-search"></i>
+                </button>
+
+                <button
+                    class="header-icon-btn"
+                    type="button"
+                    title="Notifications"
+                >
+                    <i class="bi bi-bell"></i>
+                </button>
+
+                <div class="header-avatar">
+                    <span>MS</span>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Page -->
+        <div class="page-container">
+
+            <div class="page-header">
+
+                <div>
+                    <div class="page-eyebrow">
+                        <i class="bi bi-people-fill"></i>
+                        Workforce Management
+                    </div>
+
+                    <h1>Staff</h1>
+
+                    <p>
+                        Manage hospital staff, professional information,
+                        schedules and activity.
+                    </p>
+                </div>
+
+                <div class="page-header-actions">
+
+                    <button
+                        type="button"
+                        class="btn btn-light border"
+                        id="refreshStaffBtn"
+                    >
+                        <i class="bi bi-arrow-clockwise"></i>
+                        Refresh
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="addStaffBtn"
+                    >
+                        <i class="bi bi-plus-lg"></i>
+                        Add Staff
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="row g-3 mb-4">
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="staff-kpi-card">
+                        <div class="staff-kpi-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                        <div>
+                            <span>Total Staff</span>
+                            <strong id="staffTotal">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="staff-kpi-card">
+                        <div class="staff-kpi-icon success">
+                            <i class="bi bi-person-check"></i>
+                        </div>
+
+                        <div>
+                            <span>Active</span>
+                            <strong id="staffActive">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="staff-kpi-card">
+                        <div class="staff-kpi-icon warning">
+                            <i class="bi bi-person-dash"></i>
+                        </div>
+
+                        <div>
+                            <span>On Leave</span>
+                            <strong id="staffOnLeave">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-md-6">
+                    <div class="staff-kpi-card">
+                        <div class="staff-kpi-icon danger">
+                            <i class="bi bi-person-x"></i>
+                        </div>
+
+                        <div>
+                            <span>Inactive / Suspended</span>
+                            <strong id="staffInactive">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Filters -->
+            <section class="staff-card mb-4">
+
+                <div class="staff-card-header">
+
+                    <div>
+                        <h2>Staff Directory</h2>
+                        <p>Search and filter hospital staff.</p>
+                    </div>
+
+                    <span class="staff-count" id="staffCount">
+                        0 staff
+                    </span>
+
+                </div>
+
+                <div class="staff-filter-grid">
+
+                    <div class="filter-field search-field">
+                        <label for="staffSearch">Search</label>
+
+                        <div class="input-icon">
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="text"
+                                id="staffSearch"
+                                class="form-control"
+                                placeholder="Name, employee ID, email, role..."
+                            >
+                        </div>
+                    </div>
+
+                    <div class="filter-field">
+                        <label for="staffRoleFilter">Role</label>
+
+                        <select id="staffRoleFilter" class="form-select">
+                            <option value="">All Roles</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label for="staffDepartmentFilter">Department</label>
+
+                        <select id="staffDepartmentFilter" class="form-select">
+                            <option value="">All Departments</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-field">
+                        <label for="staffStatusFilter">Status</label>
+
+                        <select id="staffStatusFilter" class="form-select">
+                            <option value="">All Statuses</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="on_leave">On Leave</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-field filter-actions">
+                        <button
+                            type="button"
+                            class="btn btn-outline-secondary"
+                            id="clearStaffFilters"
+                        >
+                            <i class="bi bi-x-circle"></i>
+                            Clear
+                        </button>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Table -->
+            <section class="staff-card">
+
+                <div
+                    class="staff-loading"
+                    id="staffLoading"
+                    hidden
+                >
+                    <div class="spinner-border text-primary"></div>
+                    <span>Loading staff...</span>
+                </div>
+
+                <div
+                    class="staff-empty"
+                    id="staffEmpty"
+                    hidden
+                >
+                    <div class="staff-empty-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <h3>No staff found</h3>
+
+                    <p>
+                        Add your first staff member to start building
+                        your hospital workforce directory.
+                    </p>
+
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        id="emptyCreateStaffBtn"
+                    >
+                        <i class="bi bi-plus-lg"></i>
+                        Add Staff
+                    </button>
+                </div>
+
+                <div
+                    class="table-responsive"
+                    id="staffTableWrapper"
+                >
+
+                    <table class="table staff-table align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Staff</th>
+                                <th>Employee ID</th>
+                                <th>Role</th>
+                                <th>Department</th>
+                                <th>Contact</th>
+                                <th>Status</th>
+                                <th>Last Active</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="staffTableBody"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- View Staff Modal -->
+<div
+    class="modal fade"
+    id="viewStaffModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <h5 class="modal-title" id="viewStaffModalLabel">
+                        Staff Profile
+                    </h5>
+
+                    <div
+                        class="modal-subtitle"
+                        id="viewStaffSubtitle"
+                    >
+                        Staff information
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+            <div
+                class="modal-body"
+                id="staffDetails"
+            ></div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Add/Edit Staff Modal -->
+<div
+    class="modal fade"
+    id="staffModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <div>
+                    <h5 class="modal-title" id="staffModalLabel">
+                        Add Staff
+                    </h5>
+
+                    <div class="modal-subtitle">
+                        Enter professional staff information
+                    </div>
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                ></button>
+
+            </div>
+
+            <form id="staffForm">
+
+                <div class="modal-body">
+
+                    <div
+                        class="alert alert-danger"
+                        id="staffFormAlert"
+                        hidden
+                    ></div>
+
+                    <!-- Personal -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-person"></i>
+                            Personal Information
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffFirstName"
+                                    class="form-label"
+                                >
+                                    First Name <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="staffFirstName"
+                                    required
+                                    maxlength="100"
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffLastName"
+                                    class="form-label"
+                                >
+                                    Last Name <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="staffLastName"
+                                    required
+                                    maxlength="100"
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffEmail"
+                                    class="form-label"
+                                >
+                                    Email <span>*</span>
+                                </label>
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="staffEmail"
+                                    required
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffPhone"
+                                    class="form-label"
+                                >
+                                    Phone
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="staffPhone"
+                                    maxlength="50"
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffPhoto"
+                                    class="form-label"
+                                >
+                                    Photo URL
+                                </label>
+
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    id="staffPhoto"
+                                    placeholder="https://..."
+                                >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Professional -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-briefcase"></i>
+                            Professional Information
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffRole"
+                                    class="form-label"
+                                >
+                                    Role <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="staffRole"
+                                    placeholder="e.g. Nurse, Receptionist"
+                                    required
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffProfessionalTitle"
+                                    class="form-label"
+                                >
+                                    Professional Title
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="staffProfessionalTitle"
+                                    placeholder="e.g. Senior Staff Nurse"
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffDepartment"
+                                    class="form-label"
+                                >
+                                    Department
+                                </label>
+
+                                <select
+                                    id="staffDepartment"
+                                    class="form-select"
+                                >
+                                    <option value="">
+                                        Select Department
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffEmploymentType"
+                                    class="form-label"
+                                >
+                                    Employment Type
+                                </label>
+
+                                <select
+                                    id="staffEmploymentType"
+                                    class="form-select"
+                                >
+                                    <option value="full_time">
+                                        Full Time
+                                    </option>
+                                    <option value="part_time">
+                                        Part Time
+                                    </option>
+                                    <option value="contract">
+                                        Contract
+                                    </option>
+                                    <option value="temporary">
+                                        Temporary
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffQualification"
+                                    class="form-label"
+                                >
+                                    Qualification
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="staffQualification"
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffSpecialization"
+                                    class="form-label"
+                                >
+                                    Specialization
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="staffSpecialization"
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffJoiningDate"
+                                    class="form-label"
+                                >
+                                    Joining Date
+                                </label>
+
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="staffJoiningDate"
+                                >
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffStatus"
+                                    class="form-label"
+                                >
+                                    Status
+                                </label>
+
+                                <select
+                                    id="staffStatus"
+                                    class="form-select"
+                                >
+                                    <option value="active">Active</option>
+                                    <option value="inactive">Inactive</option>
+                                    <option value="on_leave">On Leave</option>
+                                    <option value="suspended">Suspended</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Schedule & Security -->
+                    <div class="form-section">
+
+                        <div class="form-section-title">
+                            <i class="bi bi-calendar-week"></i>
+                            Schedule & Security
+                        </div>
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffSchedule"
+                                    class="form-label"
+                                >
+                                    Schedule
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="staffSchedule"
+                                    rows="4"
+                                    placeholder="Working days, shift hours..."
+                                ></textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffPermissions"
+                                    class="form-label"
+                                >
+                                    Permissions
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="staffPermissions"
+                                    rows="4"
+                                    placeholder="e.g. patients.read, appointments.manage"
+                                ></textarea>
+
+                                <div class="form-help">
+                                    Separate permissions with commas.
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffSecurityNotes"
+                                    class="form-label"
+                                >
+                                    Security Notes
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="staffSecurityNotes"
+                                    rows="3"
+                                ></textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label
+                                    for="staffActivity"
+                                    class="form-label"
+                                >
+                                    Activity
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="staffActivity"
+                                    rows="3"
+                                ></textarea>
+                            </div>
+
+                            <div class="col-12">
+                                <label
+                                    for="staffNotes"
+                                    class="form-label"
+                                >
+                                    Notes
+                                </label>
+
+                                <textarea
+                                    class="form-control"
+                                    id="staffNotes"
+                                    rows="3"
+                                ></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-light border"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="saveStaffBtn"
+                    >
+                        <span
+                            class="spinner-border spinner-border-sm me-2"
+                            id="saveStaffSpinner"
+                            hidden
+                        ></span>
+
+                        <i
+                            class="bi bi-check-lg"
+                            id="saveStaffIcon"
+                        ></i>
+
+                        <span id="saveStaffText">
+                            Save Staff
+                        </span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Toast -->
+<div
+    class="toast-container position-fixed bottom-0 end-0 p-3"
+    id="staffToastContainer"
+></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/staff/staff-data.js"></script>
+<script src="../js/staff/staff-ui.js"></script>
+<script src="../js/staff/staff-form.js"></script>
+<script src="../js/staff/staff.js"></script>
+
+</body>
+</html>
